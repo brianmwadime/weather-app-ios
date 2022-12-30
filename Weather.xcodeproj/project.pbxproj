@@ -19,6 +19,8 @@
 		7504276C295E1BCF00F04A5E /* current.json in Resources */ = {isa = PBXBuildFile; fileRef = 7504276B295E1BCF00F04A5E /* current.json */; };
 		7504276E295E1C0B00F04A5E /* forecast5.json in Resources */ = {isa = PBXBuildFile; fileRef = 7504276D295E1C0B00F04A5E /* forecast5.json */; };
 		754275F7295EBDB100358B16 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 754275F6295EBDB100358B16 /* Colors.xcassets */; };
+		754275FD295F7B2E00358B16 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754275FC295F7B2D00358B16 /* Loader.swift */; };
+		75427600295F7F1800358B16 /* CurrentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754275FF295F7F1800358B16 /* CurrentTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		7504276D295E1C0B00F04A5E /* forecast5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = forecast5.json; sourceTree = "<group>"; };
 		754275F6295EBDB100358B16 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		754275F8295ECA6800358B16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		754275FC295F7B2D00358B16 /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
+		754275FF295F7F1800358B16 /* CurrentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +132,9 @@
 		7504272E295DFDA300F04A5E /* WeatherTests */ = {
 			isa = PBXGroup;
 			children = (
+				754275FE295F7C9E00358B16 /* Models */,
+				754275FB295F7B1A00358B16 /* Tools */,
+				754275FA295F711400358B16 /* Fixtures */,
 				7504276A295E1B6900F04A5E /* Responses */,
 				7504272F295DFDA300F04A5E /* WeatherTests.swift */,
 			);
@@ -160,6 +167,29 @@
 				754275F6295EBDB100358B16 /* Colors.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		754275FA295F711400358B16 /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Fixtures;
+			sourceTree = "<group>";
+		};
+		754275FB295F7B1A00358B16 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				754275FC295F7B2D00358B16 /* Loader.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		754275FE295F7C9E00358B16 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				754275FF295F7F1800358B16 /* CurrentTests.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,6 +358,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75427600295F7F1800358B16 /* CurrentTests.swift in Sources */,
+				754275FD295F7B2E00358B16 /* Loader.swift in Sources */,
 				75042730295DFDA300F04A5E /* WeatherTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -550,7 +582,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SDHT5QWC78;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mwadime.WeatherTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -570,7 +602,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SDHT5QWC78;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mwadime.WeatherTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -589,6 +621,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SDHT5QWC78;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mwadime.WeatherUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -607,6 +640,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SDHT5QWC78;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mwadime.WeatherUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
