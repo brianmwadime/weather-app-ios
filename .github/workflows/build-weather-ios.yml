@@ -1,6 +1,6 @@
 name: build-weather-ios
 on:
-  push:
+  pull_request:
     branches:
       - "develop"
 jobs:
