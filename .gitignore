@@ -1,0 +1,75 @@
+# OS X
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# Xcode
+*/build/*
+*.pbxuser
+!default.pbxuser
+xcuserdata
+profile
+*.moved-aside
+DerivedData
+.idea/
+*.hmap
+*.xcscmblueprint
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Subversion
+.svn/
+
+# Project
+/Entitlements.plist
+Pods/
+
+Weather.xcworkspace/*.xcuserdata
+Weather.xcworkspace/project.xcworkspace
+Weather.xcworkspace/xcuserdata
+Weather.xcworkspace/xcshareddata/Weather.xccheckout
+Weather/Entitlements.plist
+Weather.xcodeproj/*.pbxuser
+Weather.xcodeproj/*.perspectivev3
+Weather.xcodeproj/project.xcworkspace
+Weather.xcodeproj/xcuserdata
+/build
+Weather/Derived Sources/
+# coverage.py
+*/CoverageData/*
+
+# Dependencies
+vendor
+
+# Fastlane
+fastlane/Preview.html
+fastlane/report.xml
+fastlane/README.md
+Preview.html
+fastlane/test_output/
+fastlane/google_cloud_keys.json
+fastlane/screenshots
+fastlane/promo_screenshots
+fastlane/metadata/review_information
+default.profraw
+derived-data/
+
+# CI Artifacts Location
+Artifacts
+
+# All encrypted secrets should be stored under .configure-files
+# Everything without a .enc extension is ignored
+.configure-files/*
+!.configure-files/*.enc
+
+# A file external contributors can have locally to provide their own credentials.
+# This file is created during the `rake init:oss` task, based on the Secrets-example.swift file.
+Weather/Credentials/Secrets.swift
