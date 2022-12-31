@@ -339,6 +339,7 @@
 			files = (
 			);
 			inputFileListPaths = (
+				"$(SRCROOT)/build/build_phases/Weather_swiftlint.xcfilelist",
 			);
 			inputPaths = (
 			);
@@ -346,6 +347,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(SRCROOT)/build/build_phases/Weather_swiftlint_static_output",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
