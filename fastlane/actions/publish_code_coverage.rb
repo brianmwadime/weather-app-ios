@@ -53,7 +53,7 @@ module Fastlane
       def self.publish_to_github(message, commit_sha)
         GithubApiAction.run(
           server_url: "https://api.github.com",
-          api_token: "ENV['GITHUB_API_TOKEN']",
+          api_token: ENV['GITHUB_API_TOKEN'],
           http_method: "POST",
           path: "/repos/brianmwadime/weather-app-ios/statuses/#{commit_sha}",
           raw_body:"{\"state\":\"success\", \"description\": \"#{message}\", \"context\": \"coverage\"}",
