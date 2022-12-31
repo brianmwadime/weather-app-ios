@@ -23,5 +23,6 @@ platform :ios do
       scheme: "Weather",
       skip_build: true
     )
+    publish_code_coverage
   end
 end
