@@ -15,4 +15,6 @@ jobs:
       - name: Run Tests & Generate code coverage
         env:
           GITHUB_API_TOKEN: ${{secrets.PERSONAL_API_TOKEN}}
-        run: bundle exec fastlane tests
+        run: |
+          bundle exec lock --add-platform x86_64-darwin-19
+          bundle exec fastlane tests
