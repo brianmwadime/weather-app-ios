@@ -7,6 +7,7 @@
 
 import XCTest
 import Foundation
+@testable import Weather
 
 class CurrentTests: XCTestCase {
 
@@ -18,14 +19,19 @@ class CurrentTests: XCTestCase {
     XCTAssertNotNil(current.coord)
   }
 
-  func test_currentCoord_has_lat_lon() {
-    XCTAssertNotNil(current.coord.lat)
-    XCTAssertNotNil(current.coord.lon)
+  func test_currentCoord_has_lat_lon() throws {
+
+    let coord = try XCTUnwrap(current.coord)
+
+    XCTAssertNotNil(coord.lat)
+    XCTAssertNotNil(coord.lon)
   }
 
-  func test_currentCoord_has_double_lat_lon() {
-    XCTAssertEqual(current.coord.lat, 44.34)
-    XCTAssertEqual(current.coord.lon, 10.99)
+  func test_currentCoord_has_double_lat_lon() throws {
+    let coord = try XCTUnwrap(current.coord)
+
+    XCTAssertEqual(coord.lat, 44.34)
+    XCTAssertEqual(coord.lon, 10.99)
 
   }
 
@@ -72,9 +78,10 @@ class CurrentTests: XCTestCase {
     XCTAssertNotNil(current.rain)
   }
 
-  func test_currentRain_has_props() {
-    XCTAssertNotNil(current.rain.last1h)
-    XCTAssertNil(current.rain.last3h)
+  func test_currentRain_has_props() throws {
+    let rain = try XCTUnwrap(current.rain)
+    XCTAssertNotNil(rain.last1h)
+    XCTAssertNil(rain.last3h)
   }
 
   func test_current_has_clouds() {
@@ -83,70 +90,6 @@ class CurrentTests: XCTestCase {
 
   func test_currentClouds_has_props() {
     XCTAssertNotNil(current.clouds.all)
-  }
-}
-
-struct Current: Decodable {
-  let coord: Coordinates
-  let weather: [Weather]
-  let main: Main
-  let rain: Rain
-  let wind: Wind
-  let clouds: Clouds
-}
-
-extension Current {
-  struct Coordinates: Decodable {
-    let lat: Double
-    let lon: Double
-  }
-}
-
-extension Current {
-  struct Weather: Decodable {
-    let id: Int
-    let main: String
-    let description: String
-    let icon: String
-  }
-}
-
-extension Current {
-  struct Rain: Decodable {
-    let last1h: Double?
-    let last3h: Double?
-
-    private enum CodingKeys: String, CodingKey {
-      case last1h = "1h"
-      case last3h = "3h"
-    }
-  }
-}
-
-extension Current {
-  struct Wind: Decodable {
-    let speed: Double
-    let deg: Int
-    let gust: Double
-  }
-}
-
-extension Current {
-  struct Clouds: Decodable {
-    let all: Int
-  }
-}
-
-extension Current {
-  struct Main: Decodable {
-    let temp: Double
-    let feels_like: Double
-    let temp_min: Double
-    let temp_max: Double
-    let pressure: Int
-    let humidity: Int
-    let sea_level: Int
-    let grnd_level: Int
   }
 }
 
