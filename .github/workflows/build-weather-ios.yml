@@ -8,4 +8,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - run: fastlane tests
+      - name: Run Tests & Generate code coverage
+        env:
+          GITHUB_API_TOKEN: ${{secrets.PERSONAL_API_TOKEN}}
+        run: bundle exec fastlane tests

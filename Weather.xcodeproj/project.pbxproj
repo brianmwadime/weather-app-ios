@@ -21,6 +21,7 @@
 		754275F7295EBDB100358B16 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 754275F6295EBDB100358B16 /* Colors.xcassets */; };
 		754275FD295F7B2E00358B16 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754275FC295F7B2D00358B16 /* Loader.swift */; };
 		75427600295F7F1800358B16 /* CurrentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754275FF295F7F1800358B16 /* CurrentTests.swift */; };
+		75427603295FA6A400358B16 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75427602295FA6A400358B16 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		754275F8295ECA6800358B16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		754275FC295F7B2D00358B16 /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		754275FF295F7F1800358B16 /* CurrentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTests.swift; sourceTree = "<group>"; };
+		75427602295FA6A400358B16 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 		75042718295DFD8B00F04A5E /* Weather */ = {
 			isa = PBXGroup;
 			children = (
+				75427601295FA69200358B16 /* Utility */,
 				754275F5295EBD8E00358B16 /* Resources */,
 				75042719295DFD8B00F04A5E /* WeatherApp.swift */,
 				7504271B295DFD8B00F04A5E /* ContentView.swift */,
@@ -190,6 +193,14 @@
 				754275FF295F7F1800358B16 /* CurrentTests.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		75427601295FA69200358B16 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				75427602295FA6A400358B16 /* Constants.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -347,6 +358,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75427603295FA6A400358B16 /* Constants.swift in Sources */,
 				75042726295DFDA100F04A5E /* Weather.xcdatamodeld in Sources */,
 				75042723295DFDA100F04A5E /* Persistence.swift in Sources */,
 				7504271C295DFD8B00F04A5E /* ContentView.swift in Sources */,

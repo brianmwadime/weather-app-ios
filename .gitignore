@@ -53,8 +53,10 @@ vendor
 fastlane/Preview.html
 fastlane/report.xml
 fastlane/README.md
+fastlane/.env
 Preview.html
 fastlane/test_output/
+fastlane/code_coverage/
 fastlane/google_cloud_keys.json
 fastlane/screenshots
 fastlane/promo_screenshots
