@@ -65,13 +65,17 @@
 
 ## Automation
 
-### Peril
+### Hound
 
-The weather-app-ios project uses [Peril](https://danger.systems/js/guides/peril.html) to enforce Pull Request guidelines.
+The weather-app-ios project uses [HoundCI](http://houndci.com/) to enforce style guidelines.
 
-### Github CI
+### Slather
 
-The weather-app-ios project uses [Github CI](https://github.com/brianmwadime/weather-app-ios) for continuous integration.
+The weather-app-ios project uses [Slather](https://github.com/SlatherOrg/slather) to generate test coverage reports.
+
+### Github Actions
+
+The weather-app-ios project uses [Github Actions](https://github.com/brianmwadime/weather-app-ios) for continuous integration.
 
 <p align="center">
     <br/><br/>

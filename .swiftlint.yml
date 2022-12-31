@@ -41,6 +41,18 @@ only_rules:
 
   - custom_rules
 
+  - force_try
+
+  - force_cast
+
+  - function_parameter_count
+
+  - line_length
+
+  - vertical_whitespace
+
+  - multiline_arguments
+
 # Rules configuration
 
 line_length:
