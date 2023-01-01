@@ -24,6 +24,7 @@
 		75427603295FA6A400358B16 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75427602295FA6A400358B16 /* Constants.swift */; };
 		754276062960838900358B16 /* Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754276052960838900358B16 /* Current.swift */; };
 		754276082960840500358B16 /* ForecastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754276072960840400358B16 /* ForecastTests.swift */; };
+		7542760B2960ADEE00358B16 /* CurrentViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7542760A2960ADEE00358B16 /* CurrentViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		75427602295FA6A400358B16 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		754276052960838900358B16 /* Current.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Current.swift; sourceTree = "<group>"; };
 		754276072960840400358B16 /* ForecastTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTests.swift; sourceTree = "<group>"; };
+		7542760A2960ADEE00358B16 /* CurrentViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 		7504272E295DFDA300F04A5E /* WeatherTests */ = {
 			isa = PBXGroup;
 			children = (
+				754276092960ADC400358B16 /* ViewModels */,
 				754275FE295F7C9E00358B16 /* Models */,
 				754275FB295F7B1A00358B16 /* Tools */,
 				754275FA295F711400358B16 /* Fixtures */,
@@ -215,6 +218,14 @@
 				754276052960838900358B16 /* Current.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		754276092960ADC400358B16 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7542760A2960ADEE00358B16 /* CurrentViewModelTests.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -389,6 +400,7 @@
 			files = (
 				75427600295F7F1800358B16 /* CurrentTests.swift in Sources */,
 				754275FD295F7B2E00358B16 /* Loader.swift in Sources */,
+				7542760B2960ADEE00358B16 /* CurrentViewModelTests.swift in Sources */,
 				754276082960840500358B16 /* ForecastTests.swift in Sources */,
 				75042730295DFDA300F04A5E /* WeatherTests.swift in Sources */,
 			);
