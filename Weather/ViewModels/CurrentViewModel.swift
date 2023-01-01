@@ -16,16 +16,17 @@ class CurrentViewModel: ObservableObject {
   }
 
   func fetchCurrent(for coordinates: Current.Coordinates) {
-
     weatherService.fetchCurrent(coordinates: coordinates) { result in
       switch result {
         case .success(let current):
-          self.current = current
+          DispatchQueue.main.async {
+            self.current = current
+          }
         case .failure(let error):
-          self.error = error
+          DispatchQueue.main.async {
+            self.error = error
+          }
       }
-
     }
   }
-
 }

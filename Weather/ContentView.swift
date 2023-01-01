@@ -10,6 +10,7 @@ import CoreData
 
 struct ContentView: View {
     @StateObject var viewModel: CurrentViewModel
+    @StateObject var forcastViewModel: ForecastViewModel
 //    @Environment(\.managedObjectContext) private var viewContext
 
 //    @FetchRequest(
@@ -19,12 +20,21 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-          CurrentView(current: viewModel.current!)
-          .toolbar {
-
+          ZStack {
+            if let current = viewModel.current {
+              VStack {
+                CurrentView(current: current)
+                Spacer()
+              }
+            } else {
+              ProgressView()
+            }
           }
-          .background(Color.clear)
+          .onAppear {
+            viewModel.fetchCurrent(for: Current.Coordinates(lat: 1.2921, lon: 36.8219))
+          }
         }
+
     }
 
 //    private func addItem() {

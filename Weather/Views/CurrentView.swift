@@ -46,6 +46,7 @@ struct CurrentView_Previews: PreviewProvider {
   static var previews: some View {
     CurrentView(
       current: Current(
+        dt: 1553709600,
         coord: nil,
         weather: [],
         main: Current.Main(temp: 25.3, feels_like: 23, temp_min: 20.4, temp_max: 27.3, pressure: 500, humidity: 1012, sea_level: 100, grnd_level: 0),
