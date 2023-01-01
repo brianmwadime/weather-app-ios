@@ -13,7 +13,7 @@ struct WeatherApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(CurrentViewModel(weatherService: WeatherService()))
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
