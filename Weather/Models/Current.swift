@@ -8,6 +8,7 @@
 import Foundation
 
 struct Current: Decodable {
+  let dt: TimeInterval
   let coord: Coordinates?
   let weather: [Weather]
   let main: Main
