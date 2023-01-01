@@ -32,11 +32,6 @@ final class ForecastTests: XCTestCase {
   }
 }
 
-struct Forecast: Decodable {
-  let message: Int
-  let list: [Current]
-}
-
 private extension ForecastTests {
 
   func mapForecast(from filename: String) throws -> Forecast {
