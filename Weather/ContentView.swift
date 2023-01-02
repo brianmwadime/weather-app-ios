@@ -37,7 +37,7 @@ struct ContentView: View {
                   }
 
                 }
-                .edgesIgnoringSafeArea(.all)
+//                .edgesIgnoringSafeArea(.all)
               }
               .edgesIgnoringSafeArea(.top)
             } else {

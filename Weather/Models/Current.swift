@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Weather details object from openweathermap api
 struct Current: Decodable {
   let dt: TimeInterval
   let coord: Coordinates?
@@ -16,10 +17,12 @@ struct Current: Decodable {
   let wind: Wind
   let clouds: Clouds
 
+  /// Returns the day of the week from `dt` property
   func getdayOfTheWeek() -> String {
     return Date(timeIntervalSince1970: dt).dayOfTheWeek
   }
 
+  /// Returns the day of the week from `Weather.id` property
   func getWeatherCondition() -> String {
     return ConditionType.classifyCondition(by: weather[0].id).rawValue
   }
@@ -32,6 +35,7 @@ extension Current: Equatable {
 }
 
 extension Current {
+  /// Coordinates object
   struct Coordinates: Decodable {
     let lat: Double
     let lon: Double
@@ -39,6 +43,7 @@ extension Current {
 }
 
 extension Current {
+  /// Weather object
   struct Weather: Decodable {
     let id: Int
     let main: String
@@ -48,6 +53,7 @@ extension Current {
 }
 
 extension Current {
+  /// Rain object
   struct Rain: Decodable {
     let last1h: Double?
     let last3h: Double?
@@ -60,6 +66,7 @@ extension Current {
 }
 
 extension Current {
+  /// Wind object
   struct Wind: Decodable {
     let speed: Double
     let deg: Int
@@ -68,12 +75,14 @@ extension Current {
 }
 
 extension Current {
+  /// Clouds object
   struct Clouds: Decodable {
     let all: Int
   }
 }
 
 extension Current {
+  /// Main object
   struct Main: Decodable {
     let temp: Double
     let feels_like: Double

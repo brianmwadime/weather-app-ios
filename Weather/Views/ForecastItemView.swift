@@ -12,20 +12,21 @@ struct ForecastItemView: View {
     var body: some View {
         HStack {
           Text(forcastItem.getdayOfTheWeek())
+            .font(.system(size: 18))
           .foregroundColor(.white)
-          Spacer()
+          .frame(maxWidth: .infinity, alignment: .leading)
+
           Image(forcastItem.getWeatherCondition())
             .resizable()
             .aspectRatio(contentMode: .fit)
 //            .aspectRatio(UIImage(named: forcastItem.getWeatherCondition())!.size, contentMode: .fit)
-            .frame(width: 50, height: 25)
-          Spacer()
+            .frame(width: 50, height: 25, alignment: .center)
+
           Text("\(forcastItem.main.temp.roundDouble())°")
           .foregroundColor(.white)
+          .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .padding([.leading, .trailing])
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-//      .background(Color.clear)
     }
 }
 

@@ -13,23 +13,32 @@ struct CurrentView: View {
   var current: Current
 
   var body: some View {
-    ZStack(alignment: .leading) {
+    ZStack(alignment: .center) {
       VStack(spacing: 0) {
-        Image("sea_\(current.getWeatherCondition())")
-          .resizable()
-          .aspectRatio(contentMode: .fill)
-          .frame(maxWidth: .infinity, maxHeight: 320)
+        GeometryReader { geometry in
+          Image("sea_\(current.getWeatherCondition())")
+            .resizable()
+//            .scaledToFill()
+//            .aspectRatio(contentMode: .fill)
+            .offset(y: geometry.frame(in: .global).minY > 0 ? -geometry.frame(in: .global).minY : 0)
+            .frame(height: geometry.frame(in: .global).minY > 0 ? 320 + geometry.frame(in: .global).minY : 320)
+//          Image("sea_\(current.getWeatherCondition())")
+//            .resizable()
+//            .aspectRatio(contentMode: .fill)
+//            .frame(maxWidth: .infinity, maxHeight: 320)
+        }
+        .frame(height: 320)
         TemperatureView(main: current.main)
           .background(Color(current.getWeatherCondition()))
       }
-      .frame(maxWidth: .infinity, maxHeight: 660)
+      .frame(maxWidth: .infinity)
       VStack {
         VStack(alignment: .center, spacing: 5) {
           Text("\(current.main.temp.roundDouble())°")
             .foregroundColor(.white)
             .fontWeight(.bold)
             .font(.system(size: 50))
-          Text("SUNNY")
+          Text(current.getWeatherCondition().uppercased())
             .foregroundColor(.white)
             .fontWeight(.semibold)
             .font(.system(size: 30))

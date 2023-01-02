@@ -8,6 +8,7 @@
 import Foundation
 
 extension DateFormatter {
+  /// Shared `DateFormatter`
   static var shared: DateFormatter = {
     return DateFormatter()
   }()

@@ -7,7 +7,9 @@
 
 import Foundation
 
+/// Weather Forecast from openweathermap api
 struct Forecast: Decodable {
   let message: Int
+  /// List of `Current` for the weather forecast
   let list: [Current]
 }

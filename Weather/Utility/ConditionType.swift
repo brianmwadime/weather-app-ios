@@ -7,29 +7,38 @@
 
 import Foundation
 
+/// Weather condition classification.
 struct ConditionType {
+
+  /// Returns weather `ConditionType.Condition`
+  ///
+  /// Get weather condition based on `ConditionType.Ranges` value
+  /// - Parameters:
+  ///  - by: A range value
   static func classifyCondition(by: Int) -> Condition {
     switch by {
       case Ranges.rain:
         return .rainy
       case Ranges.cloudy:
-        return .partlysunny
+        return .cloudy
       case Ranges.clear:
-        return .clear
+        return .sunny
       default:
-        return .clear
+        return .sunny
     }
   }
 
+  /// Weather condition ranges
   enum Ranges {
     static let clear  = 800
     static let rain   = 200...531
     static let cloudy = 801...899
   }
 
+  /// Weather condition type
   enum Condition: String {
-    case clear
-    case partlysunny
+    case sunny
+    case cloudy
     case rainy
   }
 }

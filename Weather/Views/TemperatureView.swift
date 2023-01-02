@@ -17,7 +17,7 @@ struct TemperatureView: View {
             .foregroundColor(.white)
             .fontWeight(.bold)
             .font(.system(size: 16))
-          Text("Min")
+          Text("min")
             .foregroundColor(.white)
             .fontWeight(.semibold)
             .font(.system(size: 14))
@@ -39,7 +39,7 @@ struct TemperatureView: View {
             .foregroundColor(.white)
             .fontWeight(.bold)
             .font(.system(size: 16))
-          Text("Max")
+          Text("max")
             .foregroundColor(.white)
             .fontWeight(.semibold)
             .font(.system(size: 14))
@@ -48,7 +48,7 @@ struct TemperatureView: View {
       .padding(EdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20))
       .frame(maxWidth: .infinity)
       Divider()
-      .frame(maxWidth: .infinity, maxHeight: 3)
+      .frame(height: 2)
       .background(Color.white)
     }
   }

@@ -7,6 +7,7 @@
 import Foundation
 @testable import Weather
 
+/// Factory for creating various model objects for testing purposes.
 struct WeatherFactory {
   static func createCurrent(with coordinates: Current.Coordinates) -> Current {
     return Current(

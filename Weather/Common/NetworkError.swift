@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// Custom network handler/service errors
+///
 enum NetworkError: Error {
   case urlError(Error)
   case transportError(Error)
@@ -18,6 +20,12 @@ enum NetworkError: Error {
 
 extension NetworkError {
 
+  /// Creates a new Error type based on the error passed or response statusCode not in the 200...299 range.
+  ///
+  ///  - Parameters:
+  ///   - data: The `Data` object.
+  ///   - response: The `URLResponse`.
+  ///   - error: the `Error` object.
   init?(data: Data?, response: URLResponse?, error: Error?) {
     if let error = error {
       self = .transportError(error)

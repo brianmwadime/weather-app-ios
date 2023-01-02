@@ -8,6 +8,7 @@
 import Foundation
 
 extension Date {
+  /// Returns the day of the week
   var dayOfTheWeek: String {
     let dateFormatter = DateFormatter.shared
     dateFormatter.dateFormat = "EEEE"
