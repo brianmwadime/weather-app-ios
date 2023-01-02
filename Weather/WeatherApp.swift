@@ -14,7 +14,7 @@ struct WeatherApp: App {
     var body: some Scene {
         WindowGroup {
           ContentView(
-            viewModel: CurrentViewModel(
+            currentViewModel: CurrentViewModel(
             weatherService: weatherService),
             forcastViewModel: ForecastViewModel(weatherService: weatherService))
         }

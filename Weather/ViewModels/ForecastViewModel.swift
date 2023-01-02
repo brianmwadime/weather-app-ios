@@ -20,13 +20,9 @@ class ForecastViewModel: ObservableObject {
     weatherService.fetchForecast(coordinates: coordinates) { result in
       switch result {
         case .success(let forecast):
-          DispatchQueue.main.async {
             self.forecast = forecast
-          }
         case .failure(let error):
-          DispatchQueue.main.async {
             self.error = error
-          }
       }
 
     }

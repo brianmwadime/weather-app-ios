@@ -10,7 +10,7 @@ import SwiftUI
 struct TemperatureView: View {
   var main: Current.Main
   var body: some View {
-    VStack(spacing:0) {
+    VStack(spacing: 0) {
       HStack {
         VStack(alignment: .center) {
           Text("\(main.temp_min.roundDouble())°")
@@ -47,7 +47,6 @@ struct TemperatureView: View {
       }
       .padding(EdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20))
       .frame(maxWidth: .infinity)
-      .background(Color("blue"))
       Divider()
       .frame(maxWidth: .infinity, maxHeight: 3)
       .background(Color.white)

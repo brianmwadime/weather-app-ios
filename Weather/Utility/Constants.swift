@@ -17,5 +17,11 @@ enum Constants {
     return "e9e69bbebd860dd3da4fac154290bf58"
   }
 
+  enum UnitsType: String {
+    case standard
+    case metric
+    case imperial
+  }
+
 
 }

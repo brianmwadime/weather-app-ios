@@ -46,17 +46,10 @@ final class CurrentViewModelTests: XCTestCase {
 
   func test_CurrentViewModel_should_fetch_Current() {
     mockWeatherService.currentResult = .success(WeatherFactory.createCurrent(with: WeatherFactory.createNairobiCoordinates()))
-    let expectation = XCTestExpectation(description: "current should not be nil")
-
-    sut?.$current
-      .sink { currentValue in
-        XCTAssertNotNil(currentValue)
-        expectation.fulfill()
-    }.store(in: &cancellables)
 
     sut?.fetchCurrent(for: WeatherFactory.createNairobiCoordinates())
 
-    wait(for: [expectation], timeout: 10)
+    XCTAssertNotNil(sut?.current)
   }
 
   func test_CurrentViewModel_should_fetch_Error() {

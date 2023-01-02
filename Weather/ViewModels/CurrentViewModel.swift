@@ -19,13 +19,9 @@ class CurrentViewModel: ObservableObject {
     weatherService.fetchCurrent(coordinates: coordinates) { result in
       switch result {
         case .success(let current):
-          DispatchQueue.main.async {
             self.current = current
-          }
         case .failure(let error):
-          DispatchQueue.main.async {
             self.error = error
-          }
       }
     }
   }

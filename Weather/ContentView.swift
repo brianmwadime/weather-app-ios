@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @StateObject var viewModel: CurrentViewModel
+    @StateObject var currentViewModel: CurrentViewModel
     @StateObject var forcastViewModel: ForecastViewModel
 //    @Environment(\.managedObjectContext) private var viewContext
 
@@ -21,17 +21,32 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
           ZStack {
-            if let current = viewModel.current {
-              VStack {
-                CurrentView(current: current)
-                Spacer()
+            if let current = currentViewModel.current {
+              Color(current.getWeatherCondition())
+                .ignoresSafeArea(.all)
+              ScrollView {
+                VStack {
+                  CurrentView(current: current)
+                  Spacer()
+                  if let forcast = forcastViewModel.forecast {
+                    ForecastListView(forecast: forcast, backgroundColor: current.getWeatherCondition())
+                      .background(Color(current.getWeatherCondition()))
+                    Spacer()
+                  } else {
+                    ProgressView()
+                  }
+
+                }
+                .edgesIgnoringSafeArea(.all)
               }
+              .edgesIgnoringSafeArea(.top)
             } else {
               ProgressView()
             }
           }
           .onAppear {
-            viewModel.fetchCurrent(for: Current.Coordinates(lat: 1.2921, lon: 36.8219))
+            currentViewModel.fetchCurrent(for: Current.Coordinates(lat: 1.2921, lon: 36.8219))
+            forcastViewModel.fetchForecast(for: Current.Coordinates(lat: 1.2921, lon: 36.8219))
           }
         }
 

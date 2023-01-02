@@ -18,7 +18,7 @@ final class WeatherService: WeatherServiceProtocol {
   }
 
   func fetchForecast(coordinates: Current.Coordinates, completion: @escaping (Result<Forecast, Error>) -> Void) {
-    guard let url = buildURL(base: Constants.baseURL + "forcast", coordinates: coordinates) else {
+    guard let url = buildURL(base: Constants.baseURL + "forecast", coordinates: coordinates) else {
       return completion(.failure(NetworkError.urlError(NSError(domain: "Malformed URL", code: 1200))))
     }
 
@@ -29,7 +29,12 @@ final class WeatherService: WeatherServiceProtocol {
 
 extension WeatherService {
   private func buildURL(base: String, coordinates: Current.Coordinates) -> URL? {
-    let queries = String(format: "lat=%.4f&lon=%.4f&appid=%@&units=metric", coordinates.lat, coordinates.lon, Constants.openWeatherMapApi)
+    let queries = String(
+      format: "lat=%.4f&lon=%.4f&appid=%@&units=%@",
+      coordinates.lat,
+      coordinates.lon,
+      Constants.openWeatherMapApi,
+      Constants.UnitsType.metric.rawValue)
     let urlString = "\(base)?\(queries)"
 
     return (URL(string: urlString))
@@ -41,7 +46,9 @@ extension WeatherService {
     URLSession.shared.dataTask(with: request) { data, response, error in
 
       if let networkError = NetworkError(data: data, response: response, error: error) {
-        completion(.failure(networkError))
+        DispatchQueue.main.async {
+          completion(.failure(networkError))
+        }
       }
 
       do {
@@ -50,10 +57,14 @@ extension WeatherService {
         }
 
         let decodedObject = try JSONDecoder().decode(T.self, from: data)
-        completion(.success(decodedObject))
+        DispatchQueue.main.async {
+          completion(.success(decodedObject))
+        }
 
       } catch {
-        completion(.failure(NetworkError.decodingError(error)))
+        DispatchQueue.main.async {
+          completion(.failure(NetworkError.decodingError(error)))
+        }
       }
     }.resume()
   }

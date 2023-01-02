@@ -15,14 +15,14 @@ struct CurrentView: View {
   var body: some View {
     ZStack(alignment: .leading) {
       VStack(spacing: 0) {
-        Image("sea_sunny")
+        Image("sea_\(current.getWeatherCondition())")
           .resizable()
-          .aspectRatio(contentMode: .fit)
-          .background(Color("blue"))
-          .frame(maxWidth: .infinity)
+          .aspectRatio(contentMode: .fill)
+          .frame(maxWidth: .infinity, maxHeight: 320)
         TemperatureView(main: current.main)
+          .background(Color(current.getWeatherCondition()))
       }
-      .frame(maxWidth: .infinity)
+      .frame(maxWidth: .infinity, maxHeight: 660)
       VStack {
         VStack(alignment: .center, spacing: 5) {
           Text("\(current.main.temp.roundDouble())°")
@@ -42,6 +42,7 @@ struct CurrentView: View {
   }
 }
 
+#if DEBUG
 struct CurrentView_Previews: PreviewProvider {
   static var previews: some View {
     CurrentView(
@@ -55,3 +56,4 @@ struct CurrentView_Previews: PreviewProvider {
         clouds: Current.Clouds(all: 100)))
   }
 }
+#endif

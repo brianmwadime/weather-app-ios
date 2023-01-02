@@ -15,6 +15,20 @@ struct Current: Decodable {
   let rain: Rain?
   let wind: Wind
   let clouds: Clouds
+
+  func getdayOfTheWeek() -> String {
+    return Date(timeIntervalSince1970: dt).dayOfTheWeek
+  }
+
+  func getWeatherCondition() -> String {
+    return ConditionType.classifyCondition(by: weather[0].id).rawValue
+  }
+}
+
+extension Current: Equatable {
+  static func == (lhs: Current, rhs: Current) -> Bool {
+    return Date(timeIntervalSince1970: lhs.dt).dayOfTheWeek == Date(timeIntervalSince1970: rhs.dt).dayOfTheWeek
+  }
 }
 
 extension Current {
@@ -38,7 +52,7 @@ extension Current {
     let last1h: Double?
     let last3h: Double?
 
-    private enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
       case last1h = "1h"
       case last3h = "3h"
     }
