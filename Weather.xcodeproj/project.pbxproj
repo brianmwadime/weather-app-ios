@@ -33,6 +33,7 @@
 		75427603295FA6A400358B16 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75427602295FA6A400358B16 /* Constants.swift */; };
 		754276062960838900358B16 /* Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754276052960838900358B16 /* Current.swift */; };
 		754276082960840500358B16 /* ForecastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754276072960840400358B16 /* ForecastTests.swift */; };
+		75AFC5082963866700CE8F9C /* NetworkErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AFC5072963866700CE8F9C /* NetworkErrorTests.swift */; };
 		75B0952E29622DFA00DF3321 /* ForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B0952D29622DFA00DF3321 /* ForecastViewModel.swift */; };
 		75B0953129623E4B00DF3321 /* DoubleExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B0953029623E4B00DF3321 /* DoubleExtensionsTests.swift */; };
 		75B0953329623E8400DF3321 /* DateExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B0953229623E8400DF3321 /* DateExtensionsTests.swift */; };
@@ -95,6 +96,7 @@
 		75427602295FA6A400358B16 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		754276052960838900358B16 /* Current.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Current.swift; sourceTree = "<group>"; };
 		754276072960840400358B16 /* ForecastTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTests.swift; sourceTree = "<group>"; };
+		75AFC5072963866700CE8F9C /* NetworkErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorTests.swift; sourceTree = "<group>"; };
 		75B0952D29622DFA00DF3321 /* ForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModel.swift; sourceTree = "<group>"; };
 		75B0953029623E4B00DF3321 /* DoubleExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtensionsTests.swift; sourceTree = "<group>"; };
 		75B0953229623E8400DF3321 /* DateExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensionsTests.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 		7504272E295DFDA300F04A5E /* WeatherTests */ = {
 			isa = PBXGroup;
 			children = (
+				75AFC5062963863C00CE8F9C /* Common */,
 				75B0952F29623E2F00DF3321 /* Extensions */,
 				751F5A2929621AEE00059853 /* ViewModels */,
 				7514EC1B2961FCE800CE4F97 /* Utility */,
@@ -335,6 +338,14 @@
 				7514EC1F2961FDB700CE4F97 /* Forecast.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		75AFC5062963863C00CE8F9C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				75AFC5072963866700CE8F9C /* NetworkErrorTests.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		75B0952F29623E2F00DF3321 /* Extensions */ = {
@@ -543,6 +554,7 @@
 				751F5A2D29621B3500059853 /* ForecastViewModelTests.swift in Sources */,
 				751F5A2B29621B1600059853 /* CurrentViewModelTests.swift in Sources */,
 				75B0953329623E8400DF3321 /* DateExtensionsTests.swift in Sources */,
+				75AFC5082963866700CE8F9C /* NetworkErrorTests.swift in Sources */,
 				75427600295F7F1800358B16 /* CurrentTests.swift in Sources */,
 				754275FD295F7B2E00358B16 /* Loader.swift in Sources */,
 				75B0953129623E4B00DF3321 /* DoubleExtensionsTests.swift in Sources */,

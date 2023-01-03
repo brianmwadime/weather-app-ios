@@ -16,9 +16,6 @@ enum NetworkError: Error {
   case noData
   case decodingError(Error)
   case encodingError(Error)
-}
-
-extension NetworkError {
 
   /// Creates a new Error type based on the error passed or response statusCode not in the 200...299 range.
   ///
