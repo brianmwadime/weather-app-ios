@@ -8,7 +8,7 @@
 import Foundation
 
 /// Weather details object from openweathermap api
-struct Current: Decodable {
+struct Current: Codable {
   let dt: TimeInterval
   let coord: Coordinates?
   let weather: [Weather]
@@ -36,7 +36,7 @@ extension Current: Equatable {
 
 extension Current {
   /// Coordinates object
-  struct Coordinates: Decodable {
+  struct Coordinates: Codable {
     let lat: Double
     let lon: Double
   }
@@ -44,7 +44,7 @@ extension Current {
 
 extension Current {
   /// Weather object
-  struct Weather: Decodable {
+  struct Weather: Codable {
     let id: Int
     let main: String
     let description: String
@@ -54,7 +54,7 @@ extension Current {
 
 extension Current {
   /// Rain object
-  struct Rain: Decodable {
+  struct Rain: Codable {
     let last1h: Double?
     let last3h: Double?
 
@@ -67,7 +67,7 @@ extension Current {
 
 extension Current {
   /// Wind object
-  struct Wind: Decodable {
+  struct Wind: Codable {
     let speed: Double
     let deg: Int
     let gust: Double
@@ -76,14 +76,14 @@ extension Current {
 
 extension Current {
   /// Clouds object
-  struct Clouds: Decodable {
+  struct Clouds: Codable {
     let all: Int
   }
 }
 
 extension Current {
   /// Main object
-  struct Main: Decodable {
+  struct Main: Codable {
     let temp: Double
     let feels_like: Double
     let temp_min: Double

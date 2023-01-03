@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct WeatherApp: App {
-    let weatherService = WeatherService()
+  let weatherService = WeatherService(network: DefaultNetworkService())
 
     var body: some Scene {
         WindowGroup {

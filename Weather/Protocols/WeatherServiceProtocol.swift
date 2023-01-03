@@ -10,12 +10,14 @@ import Foundation
 protocol WeatherServiceProtocol: AnyObject {
 
   /// Fetches  `Current` weather object
+  ///
   /// - Parameters:
   ///  - coordinates: `Current.Coordinates` for location
   ///  - completion: Completion object with `Result<Current, Error>`
   func fetchCurrent(coordinates: Current.Coordinates, completion: @escaping (Result<Current, Error>) -> Void)
 
   /// Fetches  `Forecast` weather object
+  /// 
   /// - Parameters:
   ///  - coordinates: `Current.Coordinates` for location
   ///  - completion: Completion object with `Result<Forecast, Error>`

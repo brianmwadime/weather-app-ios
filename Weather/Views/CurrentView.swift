@@ -43,11 +43,11 @@ struct CurrentView: View {
             .fontWeight(.semibold)
             .font(.system(size: 30))
         }
-        .frame(maxWidth: .infinity, alignment: .center)
+//        .frame(maxWidth: .infinity, alignment: .center)
       }
-      .frame(maxWidth: .infinity, alignment: .center)
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-    .edgesIgnoringSafeArea(.all)
+    .edgesIgnoringSafeArea(.top)
   }
 }
 
