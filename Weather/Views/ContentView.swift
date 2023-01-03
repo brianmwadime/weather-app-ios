@@ -22,22 +22,20 @@ struct ContentView: View {
         NavigationView {
           ZStack {
             if let current = currentViewModel.current {
-              Color(current.getWeatherCondition())
+              Color(current.condition)
                 .ignoresSafeArea(.all)
               ScrollView {
                 VStack {
                   CurrentView(current: current)
                   Spacer()
                   if let forcast = forcastViewModel.forecast {
-                    ForecastListView(forecast: forcast, backgroundColor: current.getWeatherCondition())
-                      .background(Color(current.getWeatherCondition()))
+                    ForecastListView(forecast: forcast, backgroundColor: current.condition)
+                      .background(Color(current.condition))
                     Spacer()
                   } else {
                     ProgressView()
                   }
-
                 }
-//                .edgesIgnoringSafeArea(.all)
               }
               .edgesIgnoringSafeArea(.top)
             } else {
@@ -49,7 +47,6 @@ struct ContentView: View {
             forcastViewModel.fetchForecast(for: Current.Coordinates(lat: 1.2921, lon: 36.8219))
           }
         }
-
     }
 
 //    private func addItem() {
@@ -84,17 +81,15 @@ struct ContentView: View {
 //    }
 }
 
-//private let itemFormatter: DateFormatter = {
-//    let formatter = DateFormatter()
-//    formatter.dateStyle = .short
-//    formatter.timeStyle = .medium
-//    return formatter
-//}()
-
 #if DEBUG
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//      ContentView(viewModel: CurrentViewModel(weatherService: MockSe))
-//    }
-//}
+struct ContentView_Previews: PreviewProvider {
+  static var previews: some View {
+    let weatherService = WeatherService(network: DefaultNetworkService())
+
+    return ContentView(
+      currentViewModel: CurrentViewModel(
+        weatherService: weatherService),
+      forcastViewModel: ForecastViewModel(weatherService: weatherService))
+  }
+}
 #endif

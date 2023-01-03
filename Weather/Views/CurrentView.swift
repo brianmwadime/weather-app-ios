@@ -16,7 +16,7 @@ struct CurrentView: View {
     ZStack(alignment: .center) {
       VStack(spacing: 0) {
         GeometryReader { geometry in
-          Image("sea_\(current.getWeatherCondition())")
+          Image("forest_\(current.condition)")
             .resizable()
 //            .scaledToFill()
 //            .aspectRatio(contentMode: .fill)
@@ -29,23 +29,21 @@ struct CurrentView: View {
         }
         .frame(height: 320)
         TemperatureView(main: current.main)
-          .background(Color(current.getWeatherCondition()))
+          .background(Color(current.condition))
       }
       .frame(maxWidth: .infinity)
-      VStack {
+      VStack(alignment: .center) {
         VStack(alignment: .center, spacing: 5) {
           Text("\(current.main.temp.roundDouble())°")
             .foregroundColor(.white)
             .fontWeight(.bold)
             .font(.system(size: 50))
-          Text(current.getWeatherCondition().uppercased())
+          Text(current.condition.uppercased())
             .foregroundColor(.white)
             .fontWeight(.semibold)
             .font(.system(size: 30))
         }
-//        .frame(maxWidth: .infinity, alignment: .center)
       }
-      .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     .edgesIgnoringSafeArea(.top)
   }
@@ -59,7 +57,15 @@ struct CurrentView_Previews: PreviewProvider {
         dt: 1553709600,
         coord: nil,
         weather: [],
-        main: Current.Main(temp: 25.3, feels_like: 23, temp_min: 20.4, temp_max: 27.3, pressure: 500, humidity: 1012, sea_level: 100, grnd_level: 0),
+        main: Current.Main(
+          temp: 25.3,
+          feels_like: 23,
+          temp_min: 20.4,
+          temp_max: 27.3,
+          pressure: 500,
+          humidity: 1012,
+          sea_level: 100,
+          grnd_level: 0),
         rain: nil,
         wind: Current.Wind(speed: 200, deg: 10, gust: 1.2),
         clouds: Current.Clouds(all: 100)))

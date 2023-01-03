@@ -48,7 +48,7 @@ struct TemperatureView: View {
       .padding(EdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20))
       .frame(maxWidth: .infinity)
       Divider()
-      .frame(height: 2)
+      .frame(height: 1)
       .background(Color.white)
     }
   }

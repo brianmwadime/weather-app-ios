@@ -46,33 +46,4 @@ extension WeatherService {
 
     return (URL(string: urlString))
   }
-
-//  private func execute<T: Decodable>(with request: URLRequest, model: T.Type,
-//                                   completion: @escaping(Result<T, Error>) -> Void) {
-//
-//    URLSession.shared.dataTask(with: request) { data, response, error in
-//
-//      if let networkError = NetworkError(data: data, response: response, error: error) {
-//        DispatchQueue.main.async {
-//          completion(.failure(networkError))
-//        }
-//      }
-//
-//      do {
-//        guard let data = data else {
-//          preconditionFailure("No error was received but we also don't have data...")
-//        }
-//
-//        let decodedObject = try JSONDecoder().decode(T.self, from: data)
-//        DispatchQueue.main.async {
-//          completion(.success(decodedObject))
-//        }
-//
-//      } catch {
-//        DispatchQueue.main.async {
-//          completion(.failure(NetworkError.decodingError(error)))
-//        }
-//      }
-//    }.resume()
-//  }
 }

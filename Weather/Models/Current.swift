@@ -16,16 +16,20 @@ struct Current: Codable {
   let rain: Rain?
   let wind: Wind
   let clouds: Clouds
+  /// Day of the week from `dt` property
+  var dayOfTheWeek: String { Date(timeIntervalSince1970: dt).dayOfTheWeek }
+  /// Day of the week from `Weather.id` property
+  var condition: String { ConditionType.classifyCondition(by: weather[0].id).rawValue }
 
-  /// Returns the day of the week from `dt` property
-  func getdayOfTheWeek() -> String {
-    return Date(timeIntervalSince1970: dt).dayOfTheWeek
-  }
-
-  /// Returns the day of the week from `Weather.id` property
-  func getWeatherCondition() -> String {
-    return ConditionType.classifyCondition(by: weather[0].id).rawValue
-  }
+//  /// Returns the day of the week from `dt` property
+//  func getdayOfTheWeek() -> String {
+//    return Date(timeIntervalSince1970: dt).dayOfTheWeek
+//  }
+//
+//  /// Returns the day of the week from `Weather.id` property
+//  func getWeatherCondition() -> String {
+//    return ConditionType.classifyCondition(by: weather[0].id).rawValue
+//  }
 }
 
 extension Current: Equatable {
