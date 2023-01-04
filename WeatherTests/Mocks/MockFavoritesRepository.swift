@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 @testable import Weather
 
-class MockdFavoritesRepository: RepositoryType {
+class MockFavoritesRepository: RepositoryType {
 
   var context: NSManagedObjectContext { persistentContainer.viewContext }
 

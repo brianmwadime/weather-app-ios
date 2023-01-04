@@ -58,17 +58,17 @@ final class NetworkErrorTests: XCTestCase {
 extension NetworkError: Equatable {
   public static func == (lhs: NetworkError, rhs: NetworkError) -> Bool {
     switch (lhs, rhs) {
-      case (.transportError(_), .transportError(_)):
+      case (.transportError(_), .transportError(_)): // swiftlint:disable:this empty_enum_arguments
         return true
       case (.noData, .noData):
         return true
-      case (.serverError(_), .serverError(_)):
+      case (.serverError(_), .serverError(_)): // swiftlint:disable:this empty_enum_arguments
         return true
-      case (.urlError(_), .urlError(_)):
+      case (.urlError(_), .urlError(_)): // swiftlint:disable:this empty_enum_arguments
         return true
-      case (.decodingError(_), .decodingError(_)):
+      case (.decodingError(_), .decodingError(_)): // swiftlint:disable:this empty_enum_arguments
         return true
-      case (.encodingError(_), .encodingError(_)):
+      case (.encodingError(_), .encodingError(_)): // swiftlint:disable:this empty_enum_arguments
         return true
       default:
         return false

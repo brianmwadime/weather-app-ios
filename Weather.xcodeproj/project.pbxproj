@@ -22,6 +22,7 @@
 		7512A3F529659880005D7311 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7512A3F429659880005D7311 /* WelcomeView.swift */; };
 		7512A3F72965B6B7005D7311 /* LocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7512A3F62965B6B7005D7311 /* LocationSearchView.swift */; };
 		7512A3F92965B73D005D7311 /* LocationsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7512A3F82965B73D005D7311 /* LocationsViewModelTests.swift */; };
+		7512A3FC2965CACE005D7311 /* FavoriteLocationRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7512A3FB2965CACE005D7311 /* FavoriteLocationRepositoryTests.swift */; };
 		7514EC182961FC3000CE4F97 /* MockWeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7514EC172961FC3000CE4F97 /* MockWeatherService.swift */; };
 		7514EC1A2961FCD000CE4F97 /* WeatherFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7514EC192961FCD000CE4F97 /* WeatherFactory.swift */; };
 		7514EC1E2961FD5C00CE4F97 /* WeatherServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7514EC1D2961FD5C00CE4F97 /* WeatherServiceProtocol.swift */; };
@@ -102,6 +103,7 @@
 		7512A3F429659880005D7311 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		7512A3F62965B6B7005D7311 /* LocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchView.swift; sourceTree = "<group>"; };
 		7512A3F82965B73D005D7311 /* LocationsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsViewModelTests.swift; sourceTree = "<group>"; };
+		7512A3FB2965CACE005D7311 /* FavoriteLocationRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLocationRepositoryTests.swift; sourceTree = "<group>"; };
 		7514EC072961BED500CE4F97 /* ForecastViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModelTests.swift; sourceTree = "<group>"; };
 		7514EC172961FC3000CE4F97 /* MockWeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWeatherService.swift; sourceTree = "<group>"; };
 		7514EC192961FCD000CE4F97 /* WeatherFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeatherFactory.swift; path = WeatherTests/Factories/WeatherFactory.swift; sourceTree = SOURCE_ROOT; };
@@ -145,7 +147,6 @@
 		75C173AC29648590000863DD /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		75C173AE2964873A000863DD /* FavoritesViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModelTests.swift; sourceTree = "<group>"; };
 		75C173B22964F09C000863DD /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +227,7 @@
 		7504272E295DFDA300F04A5E /* WeatherTests */ = {
 			isa = PBXGroup;
 			children = (
+				7512A3FA2965CAB0005D7311 /* Repositories */,
 				75B1FB4729645BCA00BFB9ED /* Factories */,
 				75AFC5062963863C00CE8F9C /* Common */,
 				75B0952F29623E2F00DF3321 /* Extensions */,
@@ -255,6 +257,14 @@
 				7504276B295E1BCF00F04A5E /* current.json */,
 			);
 			path = Responses;
+			sourceTree = "<group>";
+		};
+		7512A3FA2965CAB0005D7311 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				7512A3FB2965CACE005D7311 /* FavoriteLocationRepositoryTests.swift */,
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		7514EBFA2961B8D600CE4F97 /* Views */ = {
@@ -644,6 +654,7 @@
 				75AFC50D296442CF00CE8F9C /* MockNetworkService.swift in Sources */,
 				7514EC182961FC3000CE4F97 /* MockWeatherService.swift in Sources */,
 				7585FF312964F7200025058B /* MockFavoritesRepository.swift in Sources */,
+				7512A3FC2965CACE005D7311 /* FavoriteLocationRepositoryTests.swift in Sources */,
 				7514EC1A2961FCD000CE4F97 /* WeatherFactory.swift in Sources */,
 				75AFC50A2964257000CE8F9C /* WeatherServiceTests.swift in Sources */,
 			);
