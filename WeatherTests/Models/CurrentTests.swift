@@ -19,6 +19,14 @@ class CurrentTests: XCTestCase {
     XCTAssertNotNil(current.coord)
   }
 
+  func test_current_has_dayOfTheWeek() {
+    XCTAssertNotNil(current.dayOfTheWeek)
+  }
+
+  func test_current_has_condition() {
+    XCTAssertNotNil(current.condition)
+  }
+
   func test_currentCoord_has_lat_lon() throws {
 
     let coord = try XCTUnwrap(current.coord)

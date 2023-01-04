@@ -40,6 +40,16 @@ final class FavoriteLocationRepositoryTests: XCTestCase {
     try super.tearDownWithError()
   }
 
+  func test_FavoriteLocationRepository_context_exists() {
+
+    XCTAssertNotNil(sut.context)
+  }
+
+  func test_FavoriteLocationRepository_persistenceContainer_exists() {
+
+    XCTAssertNotNil(sut.persistentContainer)
+  }
+
   func test_FavoriteLocationRepository_adds_object() throws {
     let city = "That Place"
     let latitude = 1.2345

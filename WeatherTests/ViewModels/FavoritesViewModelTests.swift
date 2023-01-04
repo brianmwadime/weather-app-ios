@@ -60,7 +60,6 @@ final class FavoritesViewModelTests: XCTestCase {
     sut?.fetch()
 
     wait(for: [expectation], timeout: 1)
-
   }
 
 }

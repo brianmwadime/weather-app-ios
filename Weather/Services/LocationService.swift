@@ -9,27 +9,31 @@ import Foundation
 import MapKit
 import os
 
-/**
- * The LocationService provides the user's current location, if the user has authorized it. You
- * can also enable monitoring of location changes and automatically update the weather on the
- * screen has the user moves around.
- */
+
+ /// The LocationService provides the user's current location, if the user has authorized it. You
+ /// can also enable monitoring of location changes and automatically update the weather on the
+ /// screen has the user moves around.
+ ///
 final class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
 
-  // LocationService uses its own status enum to simplify knowing if the app can or
-  // cannot get the device's current location.
+  /// LocationService uses its own status enum to simplify knowing if the app can or
+  /// cannot get the device's current location.
   enum Status {
     case waiting
     case available
     case denied
   }
 
+  /// `CLLocationManager` instance
   private let locationManager = CLLocationManager()
 
+  /// Location status
   @Published var status = Status.waiting
+  /// Last location
   @Published var lastLocation: CLLocation? = nil
   @Published var lastTitle: String = ""
 
+  /// Start `LocationService`
   func start() {
     locationManager.delegate = self
 
@@ -37,12 +41,7 @@ final class LocationService: NSObject, ObservableObject, CLLocationManagerDelega
     locationManager.startUpdatingLocation()
   }
 
-  func isLocationEnabled() -> Bool {
-    return CLLocationManager.locationServicesEnabled()
-  }
-
-  // CLLocationManagerDelegate Implementations
-
+  /// CLLocationManagerDelegate Implementations
   func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
     // if the app is authorized to get the current location, that location may be
     // immediately availble. If not, then the app has to request location updates
@@ -80,9 +79,9 @@ final class LocationService: NSObject, ObservableObject, CLLocationManagerDelega
     }
   }
 
-  // Use reverse geocoding to name the current location (well, the location given as parameter). If
-  // that fails, default to a generic title.
-
+  /// Use reverse geocoding to name the current location (well, the location given as parameter). If
+  /// that fails, default to a generic title.
+  ///
   private func geocode(location: CLLocation) {
     let geocoder = CLGeocoder()
 
