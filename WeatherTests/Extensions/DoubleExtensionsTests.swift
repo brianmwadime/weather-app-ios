@@ -4,7 +4,6 @@
 //
 //  Created by Brian Mwakima on 1/1/23.
 //
-
 import XCTest
 @testable import Weather
 

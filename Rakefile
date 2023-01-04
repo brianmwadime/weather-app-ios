@@ -179,7 +179,7 @@ end
 
 def xcodebuild(*build_cmds)
   cmd = 'xcodebuild'
-  cmd += " -destination 'platform=iOS Simulator,name=iPhone 6s'"
+  cmd += " -destination 'platform=iOS Simulator,name=iPhone 12'"
   cmd += ' -sdk iphonesimulator'
   cmd += " -project #{XCODE_PROJECT}"
   cmd += " -scheme #{XCODE_SCHEME}"

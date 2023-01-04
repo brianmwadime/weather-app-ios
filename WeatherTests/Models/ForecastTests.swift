@@ -30,6 +30,10 @@ final class ForecastTests: XCTestCase {
   func test_forecast_has_5_Current_items_in_array() {
     XCTAssertEqual(forecast.list.count, 5)
   }
+
+  func test_forecast_has_fiveDayForcast() {
+    XCTAssertNotNil(forecast.fiveDayForcast)
+  }
 }
 
 private extension ForecastTests {

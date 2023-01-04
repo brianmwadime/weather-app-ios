@@ -4,7 +4,6 @@
 //
 //  Created by Brian Mwakima on 12/31/22.
 //
-
 import XCTest
 import Combine
 @testable import Weather
@@ -34,26 +33,28 @@ final class CurrentViewModelTests: XCTestCase {
 
   func test_CurrentViewModel_current_should_be_nil() {
 
-    let expectation = XCTestExpectation(description: "Should be nil")
+  let expectation = XCTestExpectation(description: "current should be nil")
 
-    sut?.$current.sink { currentValue in
-      XCTAssertNil(currentValue)
-      expectation.fulfill()
+    sut?.$current
+      .sink { currentValue in
+        XCTAssertNil(currentValue)
+        expectation.fulfill()
     }.store(in: &cancellables)
 
     wait(for: [expectation], timeout: 1)
   }
 
   func test_CurrentViewModel_should_fetch_Current() {
+    mockWeatherService.currentResult = .success(WeatherFactory.createCurrent(with: WeatherFactory.createNairobiCoordinates()))
 
-    sut?.fetchCurrent(for: WeatherFactory.createNairobiCoordinates())
+    sut?.fetchCurrent(for: WeatherFactory.createCLLocation())
 
     XCTAssertNotNil(sut?.current)
   }
 
   func test_CurrentViewModel_should_fetch_Error() {
     mockWeatherService.currentResult = .failure(WeatherFactory.createError())
-    sut?.fetchCurrent(for: WeatherFactory.createNairobiCoordinates())
+    sut?.fetchCurrent(for: WeatherFactory.createCLLocation())
 
     XCTAssertNotNil(sut?.error)
   }

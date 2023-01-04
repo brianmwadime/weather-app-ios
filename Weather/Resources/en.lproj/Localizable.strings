@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  Weather
+
+  Created by Brian Mwakima on 1/4/23.
+  
+*/
+
+not_available = "N/A";
+no_data = "Unable to get any weather Data";
+enable_location = "Please enable location services.";
+go_settings = "Open location Settings";
+current_location = "Current Location";
