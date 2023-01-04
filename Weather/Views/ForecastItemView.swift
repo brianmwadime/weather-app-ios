@@ -19,6 +19,7 @@ struct ForecastItemView: View {
           Image(forcastItem.condition)
             .resizable()
             .aspectRatio(contentMode: .fit)
+            .foregroundColor(Color.white)
             .frame(width: 32, height: 32, alignment: .center)
 
           Text("\(forcastItem.main.temp.roundDouble())°")

@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct TemperatureView: View {
-  var main: Current.Main
+  var main: Current.Main?
   var body: some View {
     VStack(spacing: 0) {
       HStack {
         VStack(alignment: .center) {
-          Text("\(main.temp_min.roundDouble())°")
+          Text("\(main?.temp_min.roundDouble() ?? "0")°")
             .foregroundColor(.white)
             .fontWeight(.bold)
             .font(.system(size: 16))
@@ -24,7 +24,7 @@ struct TemperatureView: View {
         }
         Spacer()
         VStack(alignment: .center) {
-          Text("\(main.temp.roundDouble())°")
+          Text("\(main?.temp.roundDouble() ?? "0")°")
             .foregroundColor(.white)
             .fontWeight(.bold)
             .font(.system(size: 16))
@@ -35,7 +35,7 @@ struct TemperatureView: View {
         }
         Spacer()
         VStack(alignment: .center) {
-          Text("\(main.temp_max.roundDouble())°")
+          Text("\(main?.temp_max.roundDouble() ?? "0")°")
             .foregroundColor(.white)
             .fontWeight(.bold)
             .font(.system(size: 16))
