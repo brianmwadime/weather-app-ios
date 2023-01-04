@@ -29,9 +29,13 @@ struct ContentView: View {
                 }
               }
               .edgesIgnoringSafeArea(.top)
-          } else if locationService.status == .waiting {
+          }
+
+          if locationService.status == .waiting {
             ProgressView()
-          } else {
+          }
+
+          if locationService.status == .denied {
             SelectLocationContent(action: {
               openURL(URL(string: UIApplication.openSettingsURLString)!)
             })
@@ -57,6 +61,7 @@ struct ContentView: View {
         self.isFavoriteLocations = true
       } label: {
         Image(systemName: "list.bullet")
+          .imageScale(.medium)
           .tint(.white)
           .font(.title)
       }

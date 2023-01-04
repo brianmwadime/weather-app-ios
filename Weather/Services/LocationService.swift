@@ -32,7 +32,13 @@ final class LocationService: NSObject, ObservableObject, CLLocationManagerDelega
 
   func start() {
     locationManager.delegate = self
+
+    locationManager.requestLocation()
     locationManager.startUpdatingLocation()
+  }
+
+  func isLocationEnabled() -> Bool {
+    return CLLocationManager.locationServicesEnabled()
   }
 
   // CLLocationManagerDelegate Implementations
@@ -46,7 +52,6 @@ final class LocationService: NSObject, ObservableObject, CLLocationManagerDelega
         geocode(location: location)
       } else {
         status = .waiting // isn't really available yet
-        manager.requestLocation()
         manager.startUpdatingLocation()
       }
     } else if manager.authorizationStatus == .denied || manager.authorizationStatus == .restricted {
@@ -64,16 +69,13 @@ final class LocationService: NSObject, ObservableObject, CLLocationManagerDelega
 
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
     print("Location manager has failed with error: \(error)")
+    status = .denied
   }
 
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     if let location = locations.last {
       geocode(location: location)
 
-      // if you want to keep updating the location as the user moves around, do not stop
-      // updating the location. you may want to compare the newly changed location to
-      // the last location and do some filtering so its not constantly updating for changes
-      // of just a few meters.
       manager.stopUpdatingLocation()
     }
   }
