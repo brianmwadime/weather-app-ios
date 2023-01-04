@@ -5,6 +5,7 @@
 //  Created by Brian Mwakima on 1/1/23.
 //
 import Foundation
+import CoreLocation
 @testable import Weather
 
 /// Factory for creating various model objects for testing purposes.
@@ -29,6 +30,10 @@ struct WeatherFactory {
         createCurrent(with: createNairobiCoordinates()),
         createCurrent(with: createNairobiCoordinates())
       ])
+  }
+
+  static func createCLLocation() -> CLLocation {
+    return CLLocation(latitude: 1.2921, longitude: 36.8219)
   }
 
   static func createNairobiCoordinates() -> Current.Coordinates {

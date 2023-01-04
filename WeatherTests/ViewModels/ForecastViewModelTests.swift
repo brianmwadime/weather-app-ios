@@ -44,14 +44,14 @@ final class ForecastViewModelTests: XCTestCase {
 
   func test_ForecastViewModel_should_fetch_Forcast() {
 
-    sut?.fetchForecast(for: WeatherFactory.createNairobiCoordinates())
+    sut?.fetchForecast(for: WeatherFactory.createCLLocation())
 
     XCTAssertNotNil(sut?.forecast)
   }
 
   func test_ForecastViewModel_should_fetch_Error() {
     mockWeatherService.forecastResult = .failure(WeatherFactory.createError())
-    sut?.fetchForecast(for: WeatherFactory.createNairobiCoordinates())
+    sut?.fetchForecast(for: WeatherFactory.createCLLocation())
 
     XCTAssertNotNil(sut?.error)
   }

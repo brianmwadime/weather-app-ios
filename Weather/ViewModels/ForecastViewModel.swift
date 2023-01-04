@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 class ForecastViewModel: ObservableObject {
   @Published var forecast: Forecast? = nil
@@ -16,8 +17,12 @@ class ForecastViewModel: ObservableObject {
     self.weatherService = weatherService
   }
 
-  func fetchForecast(for coordinates: Current.Coordinates) {
-    weatherService.fetchForecast(coordinates: coordinates) { result in
+  func fetchForecast(for location: CLLocation?) {
+    guard let coordinates = location?.coordinate else {return}
+    let currentCoordinates = Current.Coordinates(
+      lat: coordinates.latitude,
+      lon: coordinates.latitude)
+    weatherService.fetchForecast(coordinates: currentCoordinates) { result in
       switch result {
         case .success(let forecast):
             self.forecast = forecast

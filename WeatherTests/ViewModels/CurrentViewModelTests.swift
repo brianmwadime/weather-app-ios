@@ -47,14 +47,14 @@ final class CurrentViewModelTests: XCTestCase {
   func test_CurrentViewModel_should_fetch_Current() {
     mockWeatherService.currentResult = .success(WeatherFactory.createCurrent(with: WeatherFactory.createNairobiCoordinates()))
 
-    sut?.fetchCurrent(for: WeatherFactory.createNairobiCoordinates())
+    sut?.fetchCurrent(for: WeatherFactory.createCLLocation())
 
     XCTAssertNotNil(sut?.current)
   }
 
   func test_CurrentViewModel_should_fetch_Error() {
     mockWeatherService.currentResult = .failure(WeatherFactory.createError())
-    sut?.fetchCurrent(for: WeatherFactory.createNairobiCoordinates())
+    sut?.fetchCurrent(for: WeatherFactory.createCLLocation())
 
     XCTAssertNotNil(sut?.error)
   }
