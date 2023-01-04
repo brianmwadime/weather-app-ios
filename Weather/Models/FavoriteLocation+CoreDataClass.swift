@@ -18,3 +18,5 @@ class FavoriteLocation: NSManagedObject {
   @NSManaged public var latitude: Double
   @NSManaged public var longitude: Double
 }
+
+extension FavoriteLocation: Identifiable {}
