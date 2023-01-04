@@ -19,7 +19,6 @@ struct ContentView: View {
       NavigationView {
         ZStack {
           if locationService.status == .available {
-//            if let current = currentViewModel.current {
             Color(currentViewModel.current?.condition ?? "sunny")
                 .ignoresSafeArea(.all)
               ScrollView {
@@ -29,12 +28,9 @@ struct ContentView: View {
                   ForecastListView(vm: forcastViewModel, backgroundColor: currentViewModel.current?.condition ?? "sunny")
                 }
               }
-//              .onAppear {
-//                currentViewModel.fetchCurrent(for: locationService.lastLocation)
-//                forcastViewModel.fetchForecast(for: locationService.lastLocation)
-//              }
               .edgesIgnoringSafeArea(.top)
-//            }
+          } else if locationService.status == .waiting {
+            ProgressView()
           } else {
             SelectLocationContent(action: {
               openURL(URL(string: UIApplication.openSettingsURLString)!)
