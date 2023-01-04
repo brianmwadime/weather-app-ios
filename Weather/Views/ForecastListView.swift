@@ -19,7 +19,7 @@ struct ForecastListView: View {
           .frame(height: 16)
           .overlay(Color(backgroundColor))
         VStack(spacing: 8.0) {
-          ForEach(forecast.list, id: \.dt) { forcastItem in
+          ForEach(forecast.fiveDayForcast, id: \.dt) { forcastItem in
             ForecastItemView(forcastItem: forcastItem)
           }
         }
