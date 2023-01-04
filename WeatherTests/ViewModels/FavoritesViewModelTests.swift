@@ -107,7 +107,7 @@ class MockFavoritesRepository: RepositoryType {
 //    context.delete(object)
 //  }
 
-  func fetchOne<T>(_ object: T.Type, predicate: NSPredicate?) -> Result<T?, Error> where T : NSManagedObject {
+  func fetchOne<T>(_ object: T.Type, predicate: NSPredicate?) -> Result<T?, Error> where T: NSManagedObject {
     let request = object.fetchRequest()
     request.predicate = predicate
     request.fetchLimit = 1
@@ -119,7 +119,7 @@ class MockFavoritesRepository: RepositoryType {
     }
   }
 
-  func fetch<T>(_ object: T.Type, predicate: NSPredicate?, limit: Int?) -> Result<[T], Error> where T : NSManagedObject {
+  func fetch<T>(_ object: T.Type, predicate: NSPredicate?, limit: Int?) -> Result<[T], Error> where T: NSManagedObject {
     let request = object.fetchRequest()
     request.predicate = predicate
     if let limit = limit {

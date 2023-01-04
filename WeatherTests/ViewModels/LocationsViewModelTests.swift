@@ -81,7 +81,7 @@ final class LocationsViewModelTests: XCTestCase {
 
 /// Location searching viewmodel
 ///
-class LocationsViewModel: NSObject, ObservableObject, MKLocalSearchCompleterDelegate  {
+class LocationsViewModel: NSObject, ObservableObject, MKLocalSearchCompleterDelegate {
   /// Locations returned from search
   ///
   @Published var locations = [String]()
