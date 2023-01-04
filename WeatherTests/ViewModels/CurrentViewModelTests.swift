@@ -33,7 +33,7 @@ final class CurrentViewModelTests: XCTestCase {
 
   func test_CurrentViewModel_current_should_be_nil() {
 
-    let expectation = XCTestExpectation(description: "current should be nil")
+  let expectation = XCTestExpectation(description: "current should be nil")
 
     sut?.$current
       .sink { currentValue in
