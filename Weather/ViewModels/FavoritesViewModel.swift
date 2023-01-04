@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 class FavoritesViewModel: ObservableObject {
-  @Published var query: String?
+  @Published var query: String = ""
   @Published var favorites: [FavoriteLocation] = []
   @Published var error: Error?
 
