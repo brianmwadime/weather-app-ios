@@ -120,7 +120,42 @@
       },
       "dt_txt": "2022-08-30 21:00:00"
     },
-    ....
+    {
+      "dt": 1662292800,
+      "main": {
+        "temp": 294.93,
+        "feels_like": 294.83,
+        "temp_min": 294.93,
+        "temp_max": 294.93,
+        "pressure": 1018,
+        "sea_level": 1018,
+        "grnd_level": 935,
+        "humidity": 64,
+        "temp_kf": 0
+      },
+      "weather": [
+        {
+          "id": 804,
+          "main": "Clouds",
+          "description": "overcast clouds",
+          "icon": "04d"
+        }
+      ],
+      "clouds": {
+        "all": 88
+      },
+      "wind": {
+        "speed": 1.14,
+        "deg": 17,
+        "gust": 1.57
+      },
+      "visibility": 10000,
+      "pop": 0,
+      "sys": {
+        "pod": "d"
+      },
+      "dt_txt": "2022-09-04 12:00:00"
+    },
     {
       "dt": 1662292800,
       "main": {

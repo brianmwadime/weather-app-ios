@@ -41,13 +41,45 @@ only_rules:
 
   - custom_rules
 
+  - force_try
+
+  - force_cast
+
+  - function_parameter_count
+
+  - line_length
+
+  - vertical_whitespace
+
+  - multiline_arguments
+
 # Rules configuration
+
+line_length:
+  warning: 150
+  error: 200
+  ignores_function_declarations: true
+  ignores_comments: true
+  ignores_urls: true
+
+function_parameter_count:
+  warning: 3
+  error: 4
 
 control_statement:
   severity: error
 
-custom_rules:
+vertical_whitespace:
+  max_empty_lines: 2
 
+multiline_arguments:
+  first_argument_location: next_line
+  only_enforce_after_first_closure_on_first_line: true
+
+force_cast: warning
+force_try: warning
+
+custom_rules:
   natural_content_alignment:
     name: "Natural Content Alignment"
     regex: '\.contentHorizontalAlignment(\s*)=(\s*)(\.left|\.right)'
@@ -80,7 +112,7 @@ custom_rules:
 
   swiftui_localization:
     name: "SwiftUI Localization"
-    regex: 'LocalizedStringKey'
+    regex: "LocalizedStringKey"
     message: "Using `LocalizedStringKey` is incompatible with our tooling and doesn't allow you to provide a hint/context comment for translators either. Please use `NSLocalizedString` instead, even with SwiftUI code."
     severity: error
-    excluded: '.*Widgets/.*'
+    excluded: ".*Widgets/.*"

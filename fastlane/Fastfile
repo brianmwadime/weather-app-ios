@@ -21,7 +21,9 @@ platform :ios do
     run_tests(
       project: "Weather.xcodeproj",
       scheme: "Weather",
+      device: 'iPhone 12',
       skip_build: true
     )
+    publish_code_coverage
   end
 end

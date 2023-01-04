@@ -8,4 +8,13 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - run: fastlane tests
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Run Tests & Generate code coverage
+        env:
+          GITHUB_API_TOKEN: ${{secrets.PERSONAL_API_TOKEN}}
+        run: |
+          bundle lock --add-platform x86_64-darwin-19
+          bundle exec fastlane tests

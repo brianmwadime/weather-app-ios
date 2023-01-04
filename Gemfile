@@ -2,10 +2,10 @@ source 'https://rubygems.org'
 
 group :fastlane do
   gem 'fastlane'
+  gem 'slather'
+  gem 'dotenv'
   gem 'xcodeproj'
   gem 'xcode-install'
-  gem 'danger', '~> 8.6'
-  gem 'danger-rubocop', '~> 0.10'
   gem 'rake'
 end
 
