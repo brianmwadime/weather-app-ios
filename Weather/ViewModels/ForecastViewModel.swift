@@ -29,7 +29,6 @@ class ForecastViewModel: ObservableObject {
         case .failure(let error):
             self.error = error
       }
-
     }
   }
 }
