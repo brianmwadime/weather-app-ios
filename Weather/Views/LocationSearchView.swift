@@ -9,6 +9,7 @@ import SwiftUI
 import MapKit
 
 struct LocationSearchView: View {
+  @Environment(\.dismissSearch) private var dismissSearch
   @ObservedObject var searchModel: LocationsViewModel
   @Binding var selectedItem: MKMapItem?
   var query: String = ""
@@ -42,6 +43,7 @@ struct LocationSearchView: View {
             .listRowSeparator(.hidden)
             .contentShape(Rectangle())
             .onTapGesture {
+              dismissSearch()
               self.searchModel.mapItem(for: term) { mapItem in
                 self.selectedItem = mapItem
               }
