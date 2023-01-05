@@ -23,25 +23,9 @@ class FavoriteLocationsRepository: RepositoryType {
     return container
   }()
 
-  func create(_ object: NSManagedObject) {
-    do {
-      try context.save()
-    } catch {
-
-    }
+  func create(_ object: NSManagedObject) throws {
+    try context.save()
   }
-
-  //  func update(_ object: FavoriteLocation) {
-  //    do {
-  //      try context.save()
-  //    } catch {
-  //      fatalError("error saving context while updating an object")
-  //    }
-  //  }
-
-  //  func delete(_ object: FavoriteLocation) {
-  //    context.delete(object)
-  //  }
 
   func fetchOne<T>(_ object: T.Type, predicate: NSPredicate?) -> Result<T?, Error> where T: NSManagedObject {
     let request = object.fetchRequest()

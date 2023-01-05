@@ -60,7 +60,7 @@ final class FavoriteLocationRepositoryTests: XCTestCase {
     favoriteLocation.latitude = latitude
     favoriteLocation.longitude = longitude
 
-    sut.create(favoriteLocation)
+    try sut.create(favoriteLocation)
 
     let result = sut.fetchOne(FavoriteLocation.self, predicate: nil)
 
@@ -79,7 +79,7 @@ final class FavoriteLocationRepositoryTests: XCTestCase {
     favoriteLocation.latitude = latitude
     favoriteLocation.longitude = longitude
 
-    sut.create(favoriteLocation)
+    try sut.create(favoriteLocation)
 
     let result = sut.fetch(FavoriteLocation.self, predicate: nil, limit: nil)
 
