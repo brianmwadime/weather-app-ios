@@ -31,13 +31,14 @@ struct ForecastListView: View {
         }
         if vm.error == nil {
           VStack(alignment: .center, spacing: 8.0) {
-            ForEach(vm.forecast?.fiveDayForcast ?? [], id: \.dt) { forcastItem in
+            ForEach(vm.fiveDayForcast, id: \.dt) { forcastItem in
               ForecastItemView(forcastItem: forcastItem)
             }
           }
         }
       }
     }
+    .frame(maxHeight: .infinity)
     .onAppear {
       vm.fetchForecast(for: locationService.lastLocation)
     }

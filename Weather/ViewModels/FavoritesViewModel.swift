@@ -66,7 +66,8 @@ class FavoritesViewModel: ObservableObject {
     switch result {
       case .success(let favorites):
         print(favorites)
-//        self.favorites = favorites
+        self.favorites = favorites
+        self.error = nil
       case .failure(let error):
         self.error = error
     }
@@ -74,6 +75,14 @@ class FavoritesViewModel: ObservableObject {
 
   func delete(_ location: FavoriteLocation) {
     repository.delete(location)
+  }
+
+  func deleteItems(_ offsets: IndexSet) {
+    offsets.map { favorites[$0] }.forEach { toDelete in
+      repository.delete(toDelete)
+    }
+
+    favorites.remove(atOffsets: offsets)
   }
 
 }

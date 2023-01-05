@@ -9,12 +9,13 @@ import SwiftUI
 import MapKit
 
 struct FavoritesView: View {
-  @Environment(\.dismissSearch) var dismissSearch
-  @StateObject var viewModel: FavoritesViewModel
+  @AppStorage("units") var units: Int = Constants.UnitsType.metric.rawValue
+  @StateObject var viewModel: FavoritesViewModel = FavoritesViewModel(repository: FavoriteLocationsRepository())
   @ObservedObject var currentViewModel: CurrentViewModel
   @StateObject private var searchViewModel = LocationsViewModel()
   @State var query: String = ""
   @State private var selectedItem: MKMapItem?
+  var condition: String?
 
   var body: some View {
     ZStack {
@@ -37,28 +38,23 @@ struct FavoritesView: View {
                   .buttonStyle(.plain)
                   FavoriteCardView(favorite: favorite)
                 }
-//                .listRowSeparator(.hidden)
+                .listRowSeparator(.hidden)
                 .listRowBackground(Color.clear)
               }
               .onDelete { idx in
-
+                self.viewModel.deleteItems(idx)
               }
               .onAppear {
                 UITableView.appearance().tableFooterView = UIView()
               }
             }
             .listStyle(.plain)
+            .refreshable {
+              viewModel.fetch()
+            }
           }
         }
         .onAppear {
-          let appearance = UINavigationBarAppearance()
-          appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
-          appearance.backgroundColor = UIColor(Color.orange.opacity(0.2))
-
-          // Inline appearance (standard height appearance)
-          UINavigationBar.appearance().standardAppearance = appearance
-          // Large Title appearance
-          UINavigationBar.appearance().scrollEdgeAppearance = appearance
           self.viewModel.fetch()
         }
       }
@@ -71,19 +67,44 @@ struct FavoritesView: View {
                 city: place.title ?? "saved_location".localized(),
                 latitude: place.coordinate.latitude,
                 longitude: place.coordinate.longitude)
-                dismissSearch()
             }
           }
       }
     }
-    .navigationTitle("Weather")
+    // Note: ios 16+
+//    .toolbarBackground((condition != nil) ? Color(condition!) : Color.clear, for: .navigationBar)
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Menu {
+          Picker(selection: $units, label: Text("Units options")) {
+            HStack {
+              Text("Celcius")
+              Spacer()
+              Text("°C")
+            }
+            .tag(0)
+            HStack {
+              Text("Farenheit")
+              Spacer()
+              Text("F")
+            }
+            .tag(1)
+          }
+          .onChange(of: units) { value in
+            viewModel.fetch()
+          }
+        } label: {
+          Image(systemName: "ellipsis.circle")
+        }
+      }
+    }
+    .navigationBarTitle("favorites_screen_title".localized(), displayMode: .large)
     .searchable(
       text: $query,
       placement: .navigationBarDrawer(displayMode: .always),
-      prompt: "Search for a city or airport".localized())
+      prompt: "search_prompt".localized())
       .onChange(of: self.query) { (value) in
         self.searchViewModel.search(for: value)
-
       }
   }
 }

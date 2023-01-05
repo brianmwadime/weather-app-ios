@@ -11,6 +11,11 @@ import CoreLocation
 class ForecastViewModel: ObservableObject {
   @Published var forecast: Forecast? = nil
   @Published var error: Error?
+
+  var fiveDayForcast: [Current] {
+    forecast?.fiveDayForcast ?? []
+  }
+
   private let weatherService: WeatherServiceProtocol
 
   init(weatherService: WeatherServiceProtocol) {
@@ -25,9 +30,10 @@ class ForecastViewModel: ObservableObject {
     weatherService.fetchForecast(coordinates: currentCoordinates) { result in
       switch result {
         case .success(let forecast):
-            self.forecast = forecast
+          self.forecast = forecast
+          self.error = nil
         case .failure(let error):
-            self.error = error
+          self.error = error
       }
     }
   }

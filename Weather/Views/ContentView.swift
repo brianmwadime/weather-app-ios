@@ -20,14 +20,17 @@ struct ContentView: View {
       NavigationView {
         ZStack {
           if locationService.status == .available {
-            Color(currentViewModel.current?.condition ?? "sunny")
+            Color(currentViewModel.condition ?? "sunny")
                 .ignoresSafeArea(.all)
               ScrollView {
                 VStack {
                   CurrentView(vm: currentViewModel)
                   Spacer()
-                  ForecastListView(vm: forcastViewModel, backgroundColor: currentViewModel.current?.condition ?? "sunny")
+                  ForecastListView(vm: forcastViewModel, backgroundColor: currentViewModel.condition ?? "sunny")
                 }
+              }
+              .refreshable {
+                
               }
               .edgesIgnoringSafeArea(.top)
           }
@@ -48,15 +51,15 @@ struct ContentView: View {
           }
         }
         .navigationTitle("")
+        .animation(Animation.easeInOut.speed(0.25), value: currentViewModel.condition)
       }
       .accentColor(.white)
   }
 
   private var addButton: some View {
     NavigationLink(
-      destination: FavoritesView(
-        viewModel: FavoritesViewModel(repository: favoritesRepository), currentViewModel: currentViewModel)
-      .background(currentViewModel.current?.condition != nil ? Color(currentViewModel.current!.condition) : Color.black),
+      destination: FavoritesView(currentViewModel: currentViewModel, condition: currentViewModel.condition)
+      .background(currentViewModel.condition != nil ? Color(currentViewModel.condition!) : Color.black),
       isActive: $isFavoriteLocations) {
       Button {
         self.isFavoriteLocations = true

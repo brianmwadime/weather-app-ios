@@ -40,12 +40,13 @@ struct CurrentView: View {
         .offset(y: -28)
       }
       TemperatureView(main: vm.current?.main)
-        .background(Color(vm.current?.condition ?? "sunny"))
+        .background(Color(vm.condition ?? "sunny"))
     }
     .frame(maxWidth: .infinity)
     .onAppear {
       vm.fetchCurrent(for: locationService.lastLocation)
     }
+    .animation(Animation.easeInOut.speed(0.25), value: vm.condition)
     .edgesIgnoringSafeArea(.top)
   }
 }
