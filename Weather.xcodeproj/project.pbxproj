@@ -162,6 +162,7 @@
 		75F3B1342966E144008B0D7A /* CurrentWeather+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentWeather+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		75F3B1352966E144008B0D7A /* CurrentWeather+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentWeather+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		75F3B1382966E4B1008B0D7A /* FavoriteCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCardView.swift; sourceTree = "<group>"; };
+		75F3B13A29675194008B0D7A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +193,7 @@
 		7504270D295DFD8B00F04A5E = {
 			isa = PBXGroup;
 			children = (
+				75F3B13A29675194008B0D7A /* README.md */,
 				75042768295E048600F04A5E /* docs */,
 				75042718295DFD8B00F04A5E /* Weather */,
 				7504272E295DFDA300F04A5E /* WeatherTests */,

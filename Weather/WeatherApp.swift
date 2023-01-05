@@ -22,18 +22,17 @@ struct WeatherApp: App {
 
     // this only applies to big titles
     appearance.largeTitleTextAttributes = [
-      .font: UIFont.systemFont(ofSize: 20),
       NSAttributedString.Key.foregroundColor: UIColor.white
     ]
     // this only applies to small titles
     appearance.titleTextAttributes = [
-      .font: UIFont.systemFont(ofSize: 20),
       NSAttributedString.Key.foregroundColor: UIColor.white
     ]
 
     // In the following two lines you make sure that you apply the style for good
     UINavigationBar.appearance().scrollEdgeAppearance = appearance
     UINavigationBar.appearance().standardAppearance = appearance
+    UINavigationBar.appearance().compactScrollEdgeAppearance = appearance
 
     // This property is not present on the UINavigationBarAppearance
     // object for some reason and you have to leave it til the end
@@ -52,7 +51,6 @@ struct WeatherApp: App {
             weatherService: weatherService),
             forcastViewModel: ForecastViewModel(weatherService: weatherService))
           .environmentObject(locationService)
-          .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         // use onChange to detect when the scenePhase changes and when the app becomes
         // active, so check for location permissions.

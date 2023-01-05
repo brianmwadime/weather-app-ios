@@ -63,5 +63,10 @@ class FavoriteLocationsRepository: RepositoryType {
 
   func delete(_ object: NSManagedObject) {
     context.delete(object)
+    do {
+      try context.save()
+    } catch {
+      fatalError("error saving context while updating an object")
+    }
   }
 }

@@ -22,9 +22,7 @@ struct Current: Codable {
   var condition: String { ConditionType.classifyCondition(by: weather[0].id).rawValue }
   /// Date object
   var date: Date { Date(timeIntervalSince1970: dt) }
-  var timezone: Double
-  var id: Double
-  var name: String
+  var timezone: Double?
 }
 
 extension Current: Equatable {

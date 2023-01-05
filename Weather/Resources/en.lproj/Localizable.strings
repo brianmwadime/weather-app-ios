@@ -6,7 +6,7 @@
   
 */
 
-not_available = "N/A";
+not_available = "--";
 search_prompt = "Search for a location";
 no_data = "Unable to get any weather Data";
 enable_location = "Please enable location services.";
@@ -17,3 +17,4 @@ no_results = "No Results";
 "no_results_description %@" = "No results found for %@";
 saved_location = "Saved Location";
 no_forecast = "Forecast not available.\nTry again later.";
+favorites_screen_title = "Weather";
