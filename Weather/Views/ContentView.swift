@@ -14,6 +14,7 @@ struct ContentView: View {
   @State var isFavoriteLocations: Bool = false
   @EnvironmentObject var locationService: LocationService
   @Environment(\.openURL) var openURL
+  let favoritesRepository = FavoriteLocationsRepository()
 
   var body: some View {
       NavigationView {
@@ -54,7 +55,7 @@ struct ContentView: View {
   private var addButton: some View {
     NavigationLink(
       destination: FavoritesView(
-        viewModel: FavoritesViewModel(repository: FavoriteLocationsRepository()))
+        viewModel: FavoritesViewModel(repository: favoritesRepository), currentViewModel: currentViewModel)
       .background(currentViewModel.current?.condition != nil ? Color(currentViewModel.current!.condition) : Color.black),
       isActive: $isFavoriteLocations) {
       Button {
