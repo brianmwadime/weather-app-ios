@@ -11,7 +11,7 @@ import XCTest
 final class StringExtensionsTests: XCTestCase {
 
   func test_String_is_localized() {
-    let localized = "N/A"
+    let localized = "--"
 
     XCTAssertEqual(localized, "not_available".localized())
   }
