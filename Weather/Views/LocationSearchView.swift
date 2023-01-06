@@ -18,7 +18,7 @@ struct LocationSearchView: View {
     ZStack {
       Color.clear.ignoresSafeArea(.all)
       VStack(alignment: .center) {
-        if self.searchModel.locations.count == 0 {
+        if self.searchModel.locations.isEmpty {
           if self.searchModel.isSearching {
             VStack(alignment: .center, spacing: 0) {
               Text("no_results".localized())
@@ -43,10 +43,10 @@ struct LocationSearchView: View {
             .listRowSeparator(.hidden)
             .contentShape(Rectangle())
             .onTapGesture {
-              dismissSearch()
               self.searchModel.mapItem(for: term) { mapItem in
                 self.selectedItem = mapItem
               }
+              dismissSearch()
             }
           }
           .listStyle(.plain)
