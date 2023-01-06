@@ -49,7 +49,7 @@ struct WeatherApp: App {
           ContentView(
             currentViewModel: CurrentViewModel(
             weatherService: weatherService),
-            forcastViewModel: ForecastViewModel(weatherService: weatherService))
+            forecastViewModel: ForecastViewModel(weatherService: weatherService))
           .environmentObject(locationService)
         }
         // use onChange to detect when the scenePhase changes and when the app becomes

@@ -36,7 +36,7 @@ struct FavoritesView: View {
                   }
                   .opacity(0.0)
                   .buttonStyle(.plain)
-                  FavoriteCardView(favorite: favorite)
+                  FavoriteCardView(favorite: favorite, condition: condition ?? "sunny")
                 }
                 .listRowSeparator(.hidden)
                 .listRowBackground(Color.clear)
@@ -55,12 +55,12 @@ struct FavoritesView: View {
           }
         }
         .onAppear {
-          self.viewModel.fetch()
+          viewModel.fetch()
         }
       }
 
       if !query.isEmpty {
-        LocationSearchView(searchModel: searchViewModel, selectedItem: self.$selectedItem, query: self.query)
+        LocationSearchView(searchModel: searchViewModel, selectedItem: $selectedItem, query: self.query)
           .onChange(of: self.selectedItem) { location in
             if let place = location?.placemark {
               self.viewModel.save(

@@ -10,7 +10,7 @@ import CoreData
 
 struct ContentView: View {
   @StateObject var currentViewModel: CurrentViewModel
-  @StateObject var forcastViewModel: ForecastViewModel
+  @StateObject var forecastViewModel: ForecastViewModel
   @State var isFavoriteLocations: Bool = false
   @EnvironmentObject var locationService: LocationService
   @Environment(\.openURL) var openURL
@@ -26,11 +26,8 @@ struct ContentView: View {
                 VStack {
                   CurrentView(vm: currentViewModel)
                   Spacer()
-                  ForecastListView(vm: forcastViewModel, backgroundColor: currentViewModel.condition ?? "sunny")
+                  ForecastListView(vm: forecastViewModel, backgroundColor: currentViewModel.condition ?? "sunny")
                 }
-              }
-              .refreshable {
-                
               }
               .edgesIgnoringSafeArea(.top)
           }
