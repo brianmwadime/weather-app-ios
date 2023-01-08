@@ -25,7 +25,7 @@ struct MapView: View {
       longitudeDelta: 0.5))
 
   var body: some View {
-    Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: viewModel.getAnnotations()) { place in
+    Map(coordinateRegion: $region, annotationItems: viewModel.getAnnotations()) { place in
       MapMarker(coordinate: place.coordinate, tint: Color.red)
     }
       .onAppear {
