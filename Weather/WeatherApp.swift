@@ -44,24 +44,30 @@ struct WeatherApp: App {
     UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
   }
 
-    var body: some Scene {
-        WindowGroup {
-          ContentView(
-            currentViewModel: CurrentViewModel(
-            weatherService: weatherService),
-            forecastViewModel: ForecastViewModel(weatherService: weatherService))
-          .environmentObject(locationService)
-        }
-        // use onChange to detect when the scenePhase changes and when the app becomes
-        // active, so check for location permissions.
-        .onChange(of: scenePhase) { (newScenePhase) in
-          switch newScenePhase {
-            case .active:
-              self.locationService.start()
-            default:
-              // ignore
-              break
-          }
-        }
+  var body: some Scene {
+    WindowGroup {
+      ContentView(
+        currentViewModel: CurrentViewModel(
+        weatherService: weatherService),
+        forecastViewModel: ForecastViewModel(weatherService: weatherService),
+        favoritesViewModel: FavoritesViewModel(repository: FavoriteLocationsRepository()))
+      .environmentObject(locationService)
+      .preferredColorScheme(.light)
     }
+    // use onChange to detect when the scenePhase changes and when the app becomes
+    // active, so check for location permissions.
+    .onChange(of: scenePhase) { (newScenePhase) in
+      switch newScenePhase {
+        case .active:
+          self.locationService.start()
+        default:
+          // ignore
+          break
+      }
+    }
+  }
+
+  func applyNavigationStyling() {
+    
+  }
 }

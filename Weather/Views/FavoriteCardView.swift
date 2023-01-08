@@ -16,7 +16,7 @@ struct FavoriteCardView: View {
   var body: some View {
     HStack {
       VStack(alignment: .leading) {
-        Text(favorite.city ?? "saved_location".localized())
+        Text(favorite.city)
           .foregroundColor(Color.white)
         Spacer()
         Text(currentViewModel.current?.weather[0].description.capitalized ?? "")
@@ -25,7 +25,8 @@ struct FavoriteCardView: View {
       Spacer()
       if currentViewModel.current != nil {
         VStack(alignment: .trailing) {
-          Text("\((Date.now.date(with: currentViewModel.current?.timezone)))")
+          Text("\((currentViewModel.current?.date.date(with: currentViewModel.current?.timezone))!)")
+//          Text("\((Date.now.date(with: currentViewModel.current?.timezone)))")
             .foregroundColor(Color.white)
           Spacer()
           HStack(alignment: .center, spacing: 4) {

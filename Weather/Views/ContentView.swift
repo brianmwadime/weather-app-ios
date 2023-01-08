@@ -11,10 +11,10 @@ import CoreData
 struct ContentView: View {
   @StateObject var currentViewModel: CurrentViewModel
   @StateObject var forecastViewModel: ForecastViewModel
+  @StateObject var favoritesViewModel: FavoritesViewModel
   @State var isFavoriteLocations: Bool = false
   @EnvironmentObject var locationService: LocationService
   @Environment(\.openURL) var openURL
-  let favoritesRepository = FavoriteLocationsRepository()
 
   var body: some View {
       NavigationView {
@@ -46,6 +46,9 @@ struct ContentView: View {
           ToolbarItem(placement: .navigationBarTrailing) {
             addButton
           }
+          ToolbarItem(placement: .navigationBarLeading) {
+            mapButton
+          }
         }
         .navigationTitle("")
         .animation(Animation.easeInOut.speed(0.25), value: currentViewModel.condition)
@@ -55,7 +58,7 @@ struct ContentView: View {
 
   private var addButton: some View {
     NavigationLink(
-      destination: FavoritesView(currentViewModel: currentViewModel, condition: currentViewModel.condition)
+      destination: FavoritesView(viewModel: favoritesViewModel, currentViewModel: currentViewModel, condition: currentViewModel.condition)
       .background(currentViewModel.condition != nil ? Color(currentViewModel.condition!) : Color.black),
       isActive: $isFavoriteLocations) {
       Button {
@@ -67,5 +70,12 @@ struct ContentView: View {
           .font(.title)
       }
     }
+  }
+
+  private var mapButton: some View {
+    NavigationLink(
+      destination: MapView(viewModel: favoritesViewModel)) {
+        Image(systemName: "map")
+      }
   }
 }

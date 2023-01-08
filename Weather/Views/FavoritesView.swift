@@ -10,9 +10,9 @@ import MapKit
 
 struct FavoritesView: View {
   @AppStorage("units") var units: Int = Constants.UnitsType.metric.rawValue
-  @StateObject var viewModel: FavoritesViewModel = FavoritesViewModel(repository: FavoriteLocationsRepository())
+  @StateObject var viewModel: FavoritesViewModel
   @ObservedObject var currentViewModel: CurrentViewModel
-  @StateObject private var searchViewModel = LocationsViewModel()
+  @StateObject private var searchViewModel = LocationSearchViewModel()
   @State var query: String = ""
   @State private var selectedItem: MKMapItem?
   var condition: String?
