@@ -69,6 +69,60 @@ final class FavoriteLocationRepositoryTests: XCTestCase {
     XCTAssertEqual(savedLocation, favoriteLocation)
   }
 
+  func test_FavoriteLocationRepository_updates_object() throws {
+    let city = "That Place"
+    let latitude = 1.2345
+    let longitude = 32.234
+
+    let favoriteLocation = FavoriteLocation(context: sut.context)
+    favoriteLocation.city = city
+    favoriteLocation.latitude = latitude
+    favoriteLocation.longitude = longitude
+
+    try sut.create(favoriteLocation)
+
+    let cityUpdate = "That Place 2"
+
+    let result = sut.fetchOne(FavoriteLocation.self, predicate: nil)
+
+    let favoriteToUpdate = try result.get()
+
+    favoriteToUpdate?.city = cityUpdate
+
+    try sut.update(favoriteToUpdate!)
+
+    let updateResult = sut.fetchOne(FavoriteLocation.self, predicate: nil)
+
+    let updatedFavoriteLocation = try updateResult.get()
+
+    XCTAssertEqual(updatedFavoriteLocation, favoriteToUpdate)
+  }
+
+  func test_FavoriteLocationRepository_deletes_object() throws {
+    let city = "That Place"
+    let latitude = 1.2345
+    let longitude = 32.234
+
+    let favoriteLocation = FavoriteLocation(context: sut.context)
+    favoriteLocation.city = city
+    favoriteLocation.latitude = latitude
+    favoriteLocation.longitude = longitude
+
+    try sut.create(favoriteLocation)
+
+    let result = sut.fetchOne(FavoriteLocation.self, predicate: nil)
+
+    let favoriteToDelete = try result.get()
+
+    try sut.delete(favoriteToDelete!)
+
+    let results = sut.fetch(FavoriteLocation.self, predicate: nil, limit: nil)
+
+    let favoriteLocations = try results.get()
+
+    XCTAssertEqual(favoriteLocations.count, 0)
+  }
+
   func test_FavoriteLocationRepository_fetches_objects() throws {
     let city = "That Place"
     let latitude = 1.2345
