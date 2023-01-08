@@ -41,7 +41,7 @@ extension WeatherService {
       coordinates.lat,
       coordinates.lon,
       Constants.openWeatherMapApi,
-      Constants.UnitsType.metric.rawValue)
+      Constants.UnitsType.getUnitsName(by: UserDefaults.standard.integer(forKey: "units")))
     let urlString = "\(base)?\(queries)"
 
     return (URL(string: urlString))

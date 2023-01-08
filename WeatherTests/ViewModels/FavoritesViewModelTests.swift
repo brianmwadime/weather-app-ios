@@ -21,7 +21,7 @@ final class FavoritesViewModelTests: XCTestCase {
 
     favoriteRepository = MockFavoritesRepository()
 
-    sut = FavoritesViewModel(repository: favoriteRepository)
+    sut = FavoritesViewModel(repository: favoriteRepository, locationService: LocationService())
   }
 
   override func tearDownWithError() throws {
@@ -60,7 +60,6 @@ final class FavoritesViewModelTests: XCTestCase {
     sut?.fetch()
 
     wait(for: [expectation], timeout: 1)
-
   }
 
 }

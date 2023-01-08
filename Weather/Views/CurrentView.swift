@@ -14,8 +14,8 @@ struct CurrentView: View {
   @EnvironmentObject var locationService: LocationService
 
   var body: some View {
-    ZStack {
-      VStack(spacing: 0) {
+    VStack(spacing: 0) {
+      ZStack {
         GeometryReader { geometry in
           Image("forest_\(vm.current?.condition ?? "sunny")")
             .resizable()
@@ -23,26 +23,30 @@ struct CurrentView: View {
             .frame(height: geometry.frame(in: .global).minY > 0 ? 320 + geometry.frame(in: .global).minY : 320)
         }
         .frame(height: 320)
-        TemperatureView(main: vm.current?.main)
-          .background(Color(vm.current?.condition ?? "sunny"))
-      }
-      .frame(maxWidth: .infinity)
-      VStack {
-        VStack(alignment: .trailing, spacing: 5) {
-          Text("\(vm.current?.main.temp.roundDouble() ?? "0")°")
+        VStack(alignment: .center, spacing: 5) {
+          Text(vm.current?.main.temp.roundDouble() ?? "0")
             .foregroundColor(.white)
-            .fontWeight(.bold)
-            .font(.system(size: 50))
+            .fontWeight(.semibold)
+            .font(.system(size: 54))
+          + Text("°")
+            .foregroundColor(.white)
+            .fontWeight(.thin)
+            .font(.system(size: 64))
           Text(vm.current?.condition.uppercased() ?? "not_available".localized())
             .foregroundColor(.white)
             .fontWeight(.semibold)
             .font(.system(size: 30))
         }
+        .offset(y: -28)
       }
+      TemperatureView(main: vm.current?.main)
+        .background(Color(vm.condition ?? "sunny"))
     }
+    .frame(maxWidth: .infinity)
     .onAppear {
       vm.fetchCurrent(for: locationService.lastLocation)
     }
+    .animation(Animation.easeInOut.speed(0.25), value: vm.condition)
     .edgesIgnoringSafeArea(.top)
   }
 }

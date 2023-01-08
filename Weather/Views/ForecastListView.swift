@@ -19,13 +19,26 @@ struct ForecastListView: View {
         Divider()
           .frame(height: 16)
           .overlay(Color(backgroundColor))
-        VStack(spacing: 8.0) {
-          ForEach(vm.forecast?.fiveDayForcast ?? [], id: \.dt) { forcastItem in
-            ForecastItemView(forcastItem: forcastItem)
+        if vm.error != nil {
+          VStack(alignment: .center) {
+            Spacer()
+            Text("no_forecast".localized())
+              .foregroundColor(Color.white)
+              .multilineTextAlignment(.center)
+            Spacer()
+          }
+          .frame(maxHeight: .infinity)
+        }
+        if vm.error == nil {
+          VStack(alignment: .center, spacing: 8.0) {
+            ForEach(vm.fiveDayForcast, id: \.dt) { forcastItem in
+              ForecastItemView(forcastItem: forcastItem)
+            }
           }
         }
       }
     }
+    .frame(maxHeight: .infinity)
     .onAppear {
       vm.fetchForecast(for: locationService.lastLocation)
     }
