@@ -15,13 +15,25 @@ extension Date {
     return dateFormatter.string(from: self)
   }
 
-  func date(with offset: Double?) -> String {
+  func date(with offset: Int?) -> String {
     let dateFormatter = DateFormatter.shared
     dateFormatter.dateFormat = "hh:mm a"
-
     if let offset = offset {
+//      dateFormatter.timeZone = TimeZone(secondsFromGMT: offset)
+      let epochDate = self.timeIntervalSince1970
+      let timezoneEpochOffset = epochDate + Double(offset)
 
-      return dateFormatter.string(from: self.addingTimeInterval(offset))
+      return dateFormatter.string(from: Date(timeIntervalSince1970: timezoneEpochOffset))
+    }
+
+    return dateFormatter.string(from: self)
+  }
+
+  func format(to format: String? = "hh:mm a") -> String {
+    let dateFormatter = DateFormatter.shared
+
+    if let format = format {
+      dateFormatter.dateFormat = format
     }
 
     return dateFormatter.string(from: self)
