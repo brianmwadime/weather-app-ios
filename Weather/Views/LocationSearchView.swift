@@ -10,7 +10,7 @@ import MapKit
 
 struct LocationSearchView: View {
   @Environment(\.dismissSearch) private var dismissSearch
-  @ObservedObject var searchModel: LocationsViewModel
+  @ObservedObject var searchModel: LocationSearchViewModel
   @Binding var selectedItem: MKMapItem?
   var query: String = ""
 

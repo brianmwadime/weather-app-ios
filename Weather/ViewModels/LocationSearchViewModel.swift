@@ -1,5 +1,5 @@
 //
-//  LocationsViewModel.swift
+//  LocationSearchViewModel.swift
 //  Weather
 //
 //  Created by Brian Mwakima on 1/4/23.
@@ -10,7 +10,7 @@ import MapKit
 
 /// Location searching viewmodel
 ///
-class LocationsViewModel: NSObject, ObservableObject, MKLocalSearchCompleterDelegate {
+class LocationSearchViewModel: NSObject, ObservableObject, MKLocalSearchCompleterDelegate {
   /// Locations returned from search
   ///
   @Published var locations = [String]()
