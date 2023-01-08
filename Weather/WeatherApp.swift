@@ -14,6 +14,33 @@ struct WeatherApp: App {
   @StateObject var locationService = LocationService()
 
   init() {
+    applyNavigationStyling()
+  }
+
+  var body: some Scene {
+    WindowGroup {
+      ContentView(
+        currentViewModel: CurrentViewModel(
+        weatherService: weatherService),
+        forecastViewModel: ForecastViewModel(weatherService: weatherService),
+        favoritesViewModel: FavoritesViewModel(repository: FavoriteLocationsRepository(), locationService: locationService))
+      .environmentObject(locationService)
+      .preferredColorScheme(.light)
+    }
+    // use onChange to detect when the scenePhase changes and when the app becomes
+    // active, so check for location permissions.
+    .onChange(of: scenePhase) { (newScenePhase) in
+      switch newScenePhase {
+        case .active:
+          self.locationService.start()
+        default:
+          // ignore
+          break
+      }
+    }
+  }
+
+  func applyNavigationStyling() {
     // this is not the same as manipulating the proxy directly
     let appearance = UINavigationBarAppearance()
 
@@ -42,32 +69,5 @@ struct WeatherApp: App {
     UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = .white
     UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .black
     UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
-  }
-
-  var body: some Scene {
-    WindowGroup {
-      ContentView(
-        currentViewModel: CurrentViewModel(
-        weatherService: weatherService),
-        forecastViewModel: ForecastViewModel(weatherService: weatherService),
-        favoritesViewModel: FavoritesViewModel(repository: FavoriteLocationsRepository()))
-      .environmentObject(locationService)
-      .preferredColorScheme(.light)
-    }
-    // use onChange to detect when the scenePhase changes and when the app becomes
-    // active, so check for location permissions.
-    .onChange(of: scenePhase) { (newScenePhase) in
-      switch newScenePhase {
-        case .active:
-          self.locationService.start()
-        default:
-          // ignore
-          break
-      }
-    }
-  }
-
-  func applyNavigationStyling() {
-    
   }
 }
