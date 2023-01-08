@@ -9,34 +9,39 @@ import Foundation
 import MapKit
 import os
 
-/**
- * The LocationService provides the user's current location, if the user has authorized it. You
- * can also enable monitoring of location changes and automatically update the weather on the
- * screen has the user moves around.
- */
+
+ /// The LocationService provides the user's current location, if the user has authorized it. You
+ /// can also enable monitoring of location changes and automatically update the weather on the
+ /// screen has the user moves around.
+ ///
 final class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
 
-  // LocationService uses its own status enum to simplify knowing if the app can or
-  // cannot get the device's current location.
+  /// LocationService uses its own status enum to simplify knowing if the app can or
+  /// cannot get the device's current location.
   enum Status {
     case waiting
     case available
     case denied
   }
 
+  /// `CLLocationManager` instance
   private let locationManager = CLLocationManager()
 
+  /// Location status
   @Published var status = Status.waiting
+  /// Last location
   @Published var lastLocation: CLLocation? = nil
   @Published var lastTitle: String = ""
 
+  /// Start `LocationService`
   func start() {
     locationManager.delegate = self
+
+    locationManager.requestLocation()
     locationManager.startUpdatingLocation()
   }
 
-  // CLLocationManagerDelegate Implementations
-
+  /// CLLocationManagerDelegate Implementations
   func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
     // if the app is authorized to get the current location, that location may be
     // immediately availble. If not, then the app has to request location updates
@@ -46,7 +51,6 @@ final class LocationService: NSObject, ObservableObject, CLLocationManagerDelega
         geocode(location: location)
       } else {
         status = .waiting // isn't really available yet
-        manager.requestLocation()
         manager.startUpdatingLocation()
       }
     } else if manager.authorizationStatus == .denied || manager.authorizationStatus == .restricted {
@@ -64,23 +68,20 @@ final class LocationService: NSObject, ObservableObject, CLLocationManagerDelega
 
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
     print("Location manager has failed with error: \(error)")
+    status = .denied
   }
 
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     if let location = locations.last {
       geocode(location: location)
 
-      // if you want to keep updating the location as the user moves around, do not stop
-      // updating the location. you may want to compare the newly changed location to
-      // the last location and do some filtering so its not constantly updating for changes
-      // of just a few meters.
       manager.stopUpdatingLocation()
     }
   }
 
-  // Use reverse geocoding to name the current location (well, the location given as parameter). If
-  // that fails, default to a generic title.
-
+  /// Use reverse geocoding to name the current location (well, the location given as parameter). If
+  /// that fails, default to a generic title.
+  ///
   private func geocode(location: CLLocation) {
     let geocoder = CLGeocoder()
 

@@ -19,6 +19,14 @@ class CurrentTests: XCTestCase {
     XCTAssertNotNil(current.coord)
   }
 
+  func test_current_has_dayOfTheWeek() {
+    XCTAssertNotNil(current.dayOfTheWeek)
+  }
+
+  func test_current_has_condition() {
+    XCTAssertNotNil(current.condition)
+  }
+
   func test_currentCoord_has_lat_lon() throws {
 
     let coord = try XCTUnwrap(current.coord)
@@ -90,6 +98,11 @@ class CurrentTests: XCTestCase {
 
   func test_currentClouds_has_props() {
     XCTAssertNotNil(current.clouds.all)
+  }
+
+  func test_current_has_date_n_timezone() {
+    XCTAssertNotNil(current.date)
+    XCTAssertNotNil(current.timezone)
   }
 }
 

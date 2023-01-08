@@ -19,11 +19,19 @@ enum Constants {
   }
 
   /// Unit type for setting measurement system to be used
-  enum UnitsType: String {
-    case standard
+  enum UnitsType: Int {
     case metric
     case imperial
+
+    static func getUnitsName(by: Int) -> String {
+      switch by {
+        case 0:
+          return "metric"
+        case 1:
+          return "imperial"
+        default:
+          return "standard"
+      }
+    }
   }
-
-
 }

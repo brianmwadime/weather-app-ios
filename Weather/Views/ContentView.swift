@@ -10,7 +10,8 @@ import CoreData
 
 struct ContentView: View {
   @StateObject var currentViewModel: CurrentViewModel
-  @StateObject var forcastViewModel: ForecastViewModel
+  @StateObject var forecastViewModel: ForecastViewModel
+  @StateObject var favoritesViewModel: FavoritesViewModel
   @State var isFavoriteLocations: Bool = false
   @EnvironmentObject var locationService: LocationService
   @Environment(\.openURL) var openURL
@@ -19,19 +20,23 @@ struct ContentView: View {
       NavigationView {
         ZStack {
           if locationService.status == .available {
-            Color(currentViewModel.current?.condition ?? "sunny")
+            Color(currentViewModel.condition ?? "sunny")
                 .ignoresSafeArea(.all)
               ScrollView {
                 VStack {
                   CurrentView(vm: currentViewModel)
                   Spacer()
-                  ForecastListView(vm: forcastViewModel, backgroundColor: currentViewModel.current?.condition ?? "sunny")
+                  ForecastListView(vm: forecastViewModel, backgroundColor: currentViewModel.condition ?? "sunny")
                 }
               }
               .edgesIgnoringSafeArea(.top)
-          } else if locationService.status == .waiting {
+          }
+
+          if locationService.status == .waiting {
             ProgressView()
-          } else {
+          }
+
+          if locationService.status == .denied {
             SelectLocationContent(action: {
               openURL(URL(string: UIApplication.openSettingsURLString)!)
             })
@@ -41,25 +46,36 @@ struct ContentView: View {
           ToolbarItem(placement: .navigationBarTrailing) {
             addButton
           }
+          ToolbarItem(placement: .navigationBarLeading) {
+            mapButton
+          }
         }
         .navigationTitle("")
+        .animation(Animation.easeInOut.speed(0.25), value: currentViewModel.condition)
       }
       .accentColor(.white)
   }
 
   private var addButton: some View {
     NavigationLink(
-      destination: FavoritesView(
-        viewModel: FavoritesViewModel(repository: FavoriteLocationsRepository()))
-      .background(currentViewModel.current?.condition != nil ? Color(currentViewModel.current!.condition) : Color.black),
+      destination: FavoritesView(viewModel: favoritesViewModel, currentViewModel: currentViewModel, condition: currentViewModel.condition)
+      .background(currentViewModel.condition != nil ? Color(currentViewModel.condition!) : Color.black),
       isActive: $isFavoriteLocations) {
       Button {
         self.isFavoriteLocations = true
       } label: {
         Image(systemName: "list.bullet")
+          .imageScale(.medium)
           .tint(.white)
           .font(.title)
       }
     }
+  }
+
+  private var mapButton: some View {
+    NavigationLink(
+      destination: MapView(viewModel: favoritesViewModel)) {
+        Image(systemName: "map")
+      }
   }
 }
