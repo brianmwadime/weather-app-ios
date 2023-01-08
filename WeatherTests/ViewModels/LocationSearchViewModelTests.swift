@@ -8,6 +8,7 @@
 import XCTest
 import Combine
 @testable import Weather
+import MapKit
 
 final class LocationSearchViewModelTests: XCTestCase {
 

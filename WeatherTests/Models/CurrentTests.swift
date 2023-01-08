@@ -99,6 +99,11 @@ class CurrentTests: XCTestCase {
   func test_currentClouds_has_props() {
     XCTAssertNotNil(current.clouds.all)
   }
+
+  func test_current_has_date_n_timezone() {
+    XCTAssertNotNil(current.date)
+    XCTAssertNotNil(current.timezone)
+  }
 }
 
 private extension CurrentTests {

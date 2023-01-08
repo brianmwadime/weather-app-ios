@@ -50,6 +50,7 @@
 		75AF91D9296AEC0500EA4C54 /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AF91D8296AEC0500EA4C54 /* MapAnnotation.swift */; };
 		75AF91DB296B08C800EA4C54 /* MockLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AF91DA296B08C800EA4C54 /* MockLocationService.swift */; };
 		75AF91DD296B094200EA4C54 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AF91DC296B094200EA4C54 /* LocationManager.swift */; };
+		75AF91DF296B21E900EA4C54 /* MapAnnotationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AF91DE296B21E900EA4C54 /* MapAnnotationTests.swift */; };
 		75AFC5082963866700CE8F9C /* NetworkErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AFC5072963866700CE8F9C /* NetworkErrorTests.swift */; };
 		75AFC50A2964257000CE8F9C /* WeatherServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AFC5092964257000CE8F9C /* WeatherServiceTests.swift */; };
 		75AFC50D296442CF00CE8F9C /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AFC50C296442CF00CE8F9C /* MockNetworkService.swift */; };
@@ -146,6 +147,7 @@
 		75AF91D8296AEC0500EA4C54 /* MapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		75AF91DA296B08C800EA4C54 /* MockLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationService.swift; sourceTree = "<group>"; };
 		75AF91DC296B094200EA4C54 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		75AF91DE296B21E900EA4C54 /* MapAnnotationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationTests.swift; sourceTree = "<group>"; };
 		75AFC5072963866700CE8F9C /* NetworkErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorTests.swift; sourceTree = "<group>"; };
 		75AFC5092964257000CE8F9C /* WeatherServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherServiceTests.swift; sourceTree = "<group>"; };
 		75AFC50C296442CF00CE8F9C /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
@@ -407,6 +409,7 @@
 			children = (
 				754275FF295F7F1800358B16 /* CurrentTests.swift */,
 				754276072960840400358B16 /* ForecastTests.swift */,
+				75AF91DE296B21E900EA4C54 /* MapAnnotationTests.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -697,6 +700,7 @@
 				75AFC5082963866700CE8F9C /* NetworkErrorTests.swift in Sources */,
 				75427600295F7F1800358B16 /* CurrentTests.swift in Sources */,
 				754275FD295F7B2E00358B16 /* Loader.swift in Sources */,
+				75AF91DF296B21E900EA4C54 /* MapAnnotationTests.swift in Sources */,
 				75B0953129623E4B00DF3321 /* DoubleExtensionsTests.swift in Sources */,
 				75C173AF2964873B000863DD /* FavoritesViewModelTests.swift in Sources */,
 				754276082960840500358B16 /* ForecastTests.swift in Sources */,

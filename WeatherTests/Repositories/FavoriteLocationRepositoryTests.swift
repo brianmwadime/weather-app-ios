@@ -143,4 +143,25 @@ final class FavoriteLocationRepositoryTests: XCTestCase {
     XCTAssertEqual(savedLocations.count, 1)
   }
 
+  func test_FavoriteLocationRepository_fetches_limit_objects() throws {
+    let latitude = 1.2345
+    let longitude = 32.234
+
+    for city in ["That Place", "This Place", "Other Place", "No other Place"] {
+      let favoriteLocation = FavoriteLocation(context: sut.context)
+      favoriteLocation.city = city
+      favoriteLocation.latitude = latitude
+      favoriteLocation.longitude = longitude
+
+      try sut.create(favoriteLocation)
+    }
+
+    let result = sut.fetch(FavoriteLocation.self, predicate: nil, limit: 3)
+
+    let fetchedLocations = try result.get()
+
+    XCTAssertNotNil(fetchedLocations)
+    XCTAssertEqual(fetchedLocations.count, 3)
+  }
+
 }
