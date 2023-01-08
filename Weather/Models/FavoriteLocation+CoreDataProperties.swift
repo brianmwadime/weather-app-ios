@@ -12,13 +12,13 @@ import MapKit
 
 extension FavoriteLocation {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<FavoriteLocation> {
-        return NSFetchRequest<FavoriteLocation>(entityName: "FavoriteLocation")
-    }
+  @nonobjc public class func fetchRequest() -> NSFetchRequest<FavoriteLocation> {
+      return NSFetchRequest<FavoriteLocation>(entityName: "FavoriteLocation")
+  }
 
-    @NSManaged public var city: String
-    @NSManaged public var latitude: Double
-    @NSManaged public var longitude: Double
+  @NSManaged public var city: String
+  @NSManaged public var latitude: Double
+  @NSManaged public var longitude: Double
 
 }
 
