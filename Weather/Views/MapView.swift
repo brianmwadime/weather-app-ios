@@ -25,10 +25,11 @@ struct MapView: View {
       longitudeDelta: 0.5))
 
   var body: some View {
-    Map(coordinateRegion: $region, annotationItems: viewModel.favorites) { place in
+    Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: viewModel.getAnnotations()) { place in
       MapMarker(coordinate: place.coordinate, tint: Color.red)
     }
       .onAppear {
+
         if let coord = locationService.lastLocation?.coordinate {
           self.region = MKCoordinateRegion(center: coord, span: span)
         }

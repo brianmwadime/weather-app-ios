@@ -12,10 +12,21 @@ class FavoritesViewModel: ObservableObject {
   @Published var favorites: [FavoriteLocation] = []
   @Published var error: Error?
 
+  let locationService: LocationService
   let repository: RepositoryType
 
-  init(repository: RepositoryType) {
+  init(repository: RepositoryType, locationService: LocationService) {
     self.repository = repository
+    self.locationService = locationService
+  }
+
+  func getAnnotations() -> [MapAnnotation] {
+    guard let location = locationService.lastLocation else {
+      return favorites.map { MapAnnotation(name: $0.city, coordinate: $0.coordinate) }
+    }
+
+    return [MapAnnotation(name: "My Location", coordinate: location.coordinate)] +
+    favorites.map { MapAnnotation(name: $0.city, coordinate: $0.coordinate) }
   }
 
   @discardableResult
@@ -49,23 +60,11 @@ class FavoritesViewModel: ObservableObject {
 
   }
 
-  func update() {
-
-  }
-
   func fetch() {
-    let request = FavoriteLocation.fetchRequest()
-
-    if let result = try? repository.context.fetch(request) {
-      self.favorites = result
-      return
-    }
-
     let result = repository.fetch(FavoriteLocation.self, predicate: nil, limit: nil)
 
     switch result {
       case .success(let favorites):
-        print(favorites)
         self.favorites = favorites
         self.error = nil
       case .failure(let error):
@@ -74,12 +73,20 @@ class FavoritesViewModel: ObservableObject {
   }
 
   func delete(_ location: FavoriteLocation) {
-    repository.delete(location)
+    do {
+      try repository.delete(location)
+    } catch {
+
+    }
   }
 
   func deleteItems(_ offsets: IndexSet) {
     offsets.map { favorites[$0] }.forEach { toDelete in
-      repository.delete(toDelete)
+      do {
+        try repository.delete(toDelete)
+      } catch {
+
+      }
     }
 
     favorites.remove(atOffsets: offsets)
