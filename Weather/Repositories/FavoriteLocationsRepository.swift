@@ -12,16 +12,11 @@ class FavoriteLocationsRepository: RepositoryType {
 
   var context: NSManagedObjectContext { persistentContainer.viewContext }
 
-  lazy var persistentContainer: NSPersistentContainer = {
-    let container = NSPersistentContainer(name: "Weather")
+  var persistentContainer: NSPersistentContainer
 
-    container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-      if let error = error as NSError? {
-        fatalError("Failed to load stores: \(error), \(error.userInfo)")
-      }
-    })
-    return container
-  }()
+  init() {
+    persistentContainer = PersistentContainer.persistentContainer
+  }
 
   func create(_ object: NSManagedObject) throws {
     try context.save()
@@ -53,20 +48,12 @@ class FavoriteLocationsRepository: RepositoryType {
     }
   }
 
-  func update(_ object: NSManagedObject) {
-    do {
-      try context.save()
-    } catch {
-      fatalError("error saving context while updating an object")
-    }
+  func update(_ object: NSManagedObject) throws {
+    try context.save()
   }
 
-  func delete(_ object: NSManagedObject) {
+  func delete(_ object: NSManagedObject) throws {
     context.delete(object)
-    do {
-      try context.save()
-    } catch {
-      fatalError("error saving context while updating an object")
-    }
+    try context.save()
   }
 }
