@@ -11,9 +11,9 @@ import CoreData
 
 extension CurrentWeather {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<CurrentWeather> {
-        return NSFetchRequest<CurrentWeather>(entityName: "Current")
-    }
+  @nonobjc public class func fetchRequest() -> NSFetchRequest<CurrentWeather> {
+    return NSFetchRequest<CurrentWeather>(entityName: "Current")
+  }
 
 
 }
