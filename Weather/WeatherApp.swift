@@ -12,6 +12,7 @@ struct WeatherApp: App {
   @Environment(\.scenePhase) private var scenePhase
   let weatherService = WeatherService(network: DefaultNetworkService())
   @StateObject var locationService = LocationService()
+  let coreDataRepository = CoreDataRepository()
 
   init() {
     applyNavigationStyling()
@@ -21,9 +22,9 @@ struct WeatherApp: App {
     WindowGroup {
       ContentView(
         currentViewModel: CurrentViewModel(
-        weatherService: weatherService),
+          repository: coreDataRepository, weatherService: weatherService),
         forecastViewModel: ForecastViewModel(weatherService: weatherService),
-        favoritesViewModel: FavoritesViewModel(repository: FavoriteLocationsRepository(), locationService: locationService))
+        favoritesViewModel: FavoritesViewModel(repository: coreDataRepository, locationService: locationService))
       .environmentObject(locationService)
       .preferredColorScheme(.light)
     }

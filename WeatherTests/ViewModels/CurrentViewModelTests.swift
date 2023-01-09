@@ -13,11 +13,13 @@ final class CurrentViewModelTests: XCTestCase {
   var sut: CurrentViewModel?
   var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
   var mockWeatherService: MockWeatherService!
+  var currentRepository: MockCoreDataRepository!
 
   override func setUpWithError() throws {
     try super.setUpWithError()
     mockWeatherService = MockWeatherService()
-    sut = CurrentViewModel(weatherService: mockWeatherService)
+    currentRepository = MockCoreDataRepository()
+    sut = CurrentViewModel(repository: currentRepository, weatherService: mockWeatherService)
   }
 
   override func tearDownWithError() throws {

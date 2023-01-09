@@ -14,12 +14,12 @@ import CoreData
 final class FavoritesViewModelTests: XCTestCase {
   var sut: FavoritesViewModel?
   var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
-  var favoriteRepository: MockFavoritesRepository!
+  var favoriteRepository: MockCoreDataRepository!
 
   override func setUpWithError() throws {
     try super.setUpWithError()
 
-    favoriteRepository = MockFavoritesRepository()
+    favoriteRepository = MockCoreDataRepository()
 
     sut = FavoritesViewModel(repository: favoriteRepository, locationService: LocationService())
   }
