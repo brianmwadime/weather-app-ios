@@ -17,7 +17,7 @@ extension CurrentWeather {
 
   @NSManaged public var dt: Double
   @NSManaged public var timezone: Double
-  @NSManaged public var main: Main
+  @NSManaged public var main: MainCurrent
   @NSManaged public var weather: NSSet?
 
 }

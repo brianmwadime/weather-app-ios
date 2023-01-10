@@ -140,7 +140,6 @@ extension Current: NSManagedObjectConvertible {
   typealias ObjectType = CurrentWeather
 
   func toNSManagedObject(in context: NSManagedObjectContext) -> CurrentWeather? {
-    //    let entityDescription = CurrentWeather.entity()
     guard let entityDescription = NSEntityDescription.entity(forEntityName: "Current", in: context) else {
       NSLog("Can't create entity Current")
       return nil
@@ -172,9 +171,14 @@ extension Current: NSManagedObjectConvertible {
       return nil
     }
 
-    let mainEntity = Main(entity: mainDescription, insertInto: context)
+    let mainEntity = MainCurrent(entity: mainDescription, insertInto: context)
+    mainEntity.temp = main.temp
+    mainEntity.feels_like = main.feels_like
+    mainEntity.temp_min = main.temp_min
+    mainEntity.temp_max = main.temp_max
+    mainEntity.pressure = Double(main.pressure)
 
-    object.main =
+    object.main = mainEntity
     object.dt = dt
 
     return object
@@ -219,7 +223,7 @@ extension WeatherCurrent: ModelConvertible {
   }
 }
 
-extension Main: ModelConvertible {
+extension MainCurrent: ModelConvertible {
   typealias ModelType = Current.Main
 
   func toModel() -> Current.Main? {
