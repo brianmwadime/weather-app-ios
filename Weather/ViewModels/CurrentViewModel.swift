@@ -29,15 +29,12 @@ class CurrentViewModel: ObservableObject {
 
   func fetchCurrent(for location: CLLocation?) {
 
-    let result = repository?.fetchOne(CurrentWeather.self, predicate: nil)
-
-    switch result {
-      case .success(let currentEntity):
-        self.current = currentEntity?.toModel() ?? Current.empty()
-      case .failure(_):
-        break
-      case .none:
-        break
+    if let result = repository?.fetchOne(CurrentWeather.self, predicate: nil) {
+      switch result {
+        case .success(let currentEntity):
+          self.current = currentEntity?.toModel() ?? Current.empty()
+        case .failure(let error): break
+      }
     }
 
     guard let coordinates = location?.coordinate else {return}
