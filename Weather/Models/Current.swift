@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 /// Weather details object from openweathermap api
 struct Current: Codable {
@@ -120,5 +121,42 @@ extension Current {
         gust: 0),
       clouds: Clouds(all: 0),
       timezone: 0)
+  }
+}
+
+extension Current: NSManagedObjectConvertible {
+  typealias ObjectType = CurrentWeather
+
+  func toNSManagedObject(in context: NSManagedObjectContext) -> CurrentWeather? {
+    //    let entityDescription = CurrentWeather.entity()
+    guard let entityDescription = NSEntityDescription.entity(forEntityName: "Current", in: context) else {
+      NSLog("Can't create entity Current")
+      return nil
+    }
+
+    let object = CurrentWeather(entity: entityDescription, insertInto: context)
+
+    if let timezone = timezone {
+      object.timezone = timezone
+    }
+
+    guard let weatherDescription = NSEntityDescription.entity(forEntityName: "Weather", in: context) else {
+      NSLog("Can't create entity Weather")
+      return nil
+    }
+
+    for weather in self.weather {
+
+      let weatherEntity = WeatherCurrent(entity: weatherDescription, insertInto: context)
+      weatherEntity.main = weather.main
+      weatherEntity.icon = weather.icon
+      weatherEntity.main_description = weather.description
+      weatherEntity.current = object
+      object.addToWeather(weatherEntity)
+    }
+
+    object.dt = dt
+
+    return object
   }
 }
