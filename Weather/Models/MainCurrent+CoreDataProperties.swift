@@ -1,18 +1,18 @@
 //
-//  Main+CoreDataProperties.swift
+//  MainCurrent+CoreDataProperties.swift
 //  Weather
 //
-//  Created by Brian Mwakima on 1/9/23.
+//  Created by Brian Mwakima on 1/10/23.
 //
 //
 
 import Foundation
 import CoreData
 
-extension Main {
+extension MainCurrent {
 
-  @nonobjc public class func fetchRequest() -> NSFetchRequest<Main> {
-      return NSFetchRequest<Main>(entityName: "Main")
+  @nonobjc public class func fetchRequest() -> NSFetchRequest<MainCurrent> {
+      return NSFetchRequest<MainCurrent>(entityName: "Main")
   }
 
   @NSManaged public var feels_like: Double
@@ -25,6 +25,6 @@ extension Main {
 
 }
 
-extension Main: Identifiable {
+extension MainCurrent: Identifiable {
 
 }
