@@ -17,14 +17,14 @@ struct CurrentView: View {
     VStack(spacing: 0) {
       ZStack {
         GeometryReader { geometry in
-          Image("forest_\(vm.current?.condition ?? "sunny")")
+          Image("forest_\(vm.current.condition)")
             .resizable()
             .offset(y: geometry.frame(in: .global).minY > 0 ? -geometry.frame(in: .global).minY : 0)
             .frame(height: geometry.frame(in: .global).minY > 0 ? 320 + geometry.frame(in: .global).minY : 320)
         }
         .frame(height: 320)
         VStack(alignment: .center, spacing: 5) {
-          Text(vm.current?.main.temp.roundDouble() ?? "0")
+          Text(vm.current.main.temp.roundDouble())
             .foregroundColor(.white)
             .fontWeight(.semibold)
             .font(.system(size: 54))
@@ -32,15 +32,15 @@ struct CurrentView: View {
             .foregroundColor(.white)
             .fontWeight(.thin)
             .font(.system(size: 64))
-          Text(vm.current?.condition.uppercased() ?? "not_available".localized())
+          Text(vm.current.condition.uppercased())
             .foregroundColor(.white)
             .fontWeight(.semibold)
             .font(.system(size: 30))
         }
         .offset(y: -28)
       }
-      TemperatureView(main: vm.current?.main)
-        .background(Color(vm.condition ?? "sunny"))
+      TemperatureView(main: vm.current.main)
+        .background(Color(vm.condition))
     }
     .frame(maxWidth: .infinity)
     .onAppear {

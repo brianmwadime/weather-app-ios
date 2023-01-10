@@ -11,7 +11,7 @@ protocol RepositoryType {
 
   var context: NSManagedObjectContext { get }
 
-  var persistentContainer: NSPersistentContainer { get }
+  var persistentContainer: NSPersistentContainer { get set }
 
   func create(_ object: NSManagedObject) throws
   func fetchOne<T: NSManagedObject>(_ object: T.Type, predicate: NSPredicate?) -> Result<T?, Error>

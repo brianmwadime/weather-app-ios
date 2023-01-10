@@ -22,9 +22,12 @@ struct WeatherApp: App {
     WindowGroup {
       ContentView(
         currentViewModel: CurrentViewModel(
-          repository: coreDataRepository, weatherService: weatherService),
+          weatherService: weatherService,
+          repository: coreDataRepository),
         forecastViewModel: ForecastViewModel(weatherService: weatherService),
-        favoritesViewModel: FavoritesViewModel(repository: coreDataRepository, locationService: locationService))
+        favoritesViewModel: FavoritesViewModel(
+          repository: coreDataRepository,
+          locationService: locationService))
       .environmentObject(locationService)
       .preferredColorScheme(.light)
     }

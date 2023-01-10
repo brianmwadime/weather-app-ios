@@ -62,6 +62,7 @@ struct FavoritesView: View {
       if !query.isEmpty {
         LocationSearchView(searchModel: searchViewModel, selectedItem: $selectedItem, query: self.query)
           .onChange(of: self.selectedItem) { location in
+            hideKeyboard()
             if let place = location?.placemark {
               self.viewModel.save(
                 city: place.title ?? "saved_location".localized(),

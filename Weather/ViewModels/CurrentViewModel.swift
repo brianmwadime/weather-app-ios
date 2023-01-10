@@ -8,16 +8,22 @@ import Foundation
 import CoreLocation
 
 class CurrentViewModel: ObservableObject {
-  @Published var current: Current? = nil
+  @Published var current: Current = Current.empty()
   @Published var error: Error?
 
-  var condition: String? {
-    current?.condition
+  var condition: String {
+    current.condition
+  }
+
+  var timeZone: Double {
+    current.timezone ?? 0
   }
 
   private let weatherService: WeatherServiceProtocol
+  let repository: RepositoryType?
 
-  init(weatherService: WeatherServiceProtocol) {
+  init(weatherService: WeatherServiceProtocol, repository: RepositoryType? = nil) {
+    self.repository = repository
     self.weatherService = weatherService
   }
 
@@ -29,11 +35,16 @@ class CurrentViewModel: ObservableObject {
     weatherService.fetchCurrent(coordinates: currentCoordinates) { result in
       switch result {
         case .success(let current):
+          self.saveToDatabase(current)
           self.current = current
           self.error = nil
         case .failure(let error):
             self.error = error
       }
     }
+  }
+
+  func saveToDatabase(_ current: Current) {
+
   }
 }
