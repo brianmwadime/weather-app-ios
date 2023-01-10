@@ -9,34 +9,33 @@
 import Foundation
 import CoreData
 
-
 extension CurrentWeather {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<CurrentWeather> {
-        return NSFetchRequest<CurrentWeather>(entityName: "Current")
-    }
+  @nonobjc public class func fetchRequest() -> NSFetchRequest<CurrentWeather> {
+    return NSFetchRequest<CurrentWeather>(entityName: "Current")
+  }
 
-    @NSManaged public var dt: Double
-    @NSManaged public var timezone: Double
-    @NSManaged public var main: Main?
-    @NSManaged public var weather: NSSet?
+  @NSManaged public var dt: Double
+  @NSManaged public var timezone: Double
+  @NSManaged public var main: Main
+  @NSManaged public var weather: NSSet?
 
 }
 
 // MARK: Generated accessors for weather
 extension CurrentWeather {
 
-    @objc(addWeatherObject:)
-    @NSManaged public func addToWeather(_ value: WeatherCurrent)
+  @objc(addWeatherObject:)
+  @NSManaged public func addToWeather(_ value: WeatherCurrent)
 
-    @objc(removeWeatherObject:)
-    @NSManaged public func removeFromWeather(_ value: WeatherCurrent)
+  @objc(removeWeatherObject:)
+  @NSManaged public func removeFromWeather(_ value: WeatherCurrent)
 
-    @objc(addWeather:)
-    @NSManaged public func addToWeather(_ values: NSSet)
+  @objc(addWeather:)
+  @NSManaged public func addToWeather(_ values: NSSet)
 
-    @objc(removeWeather:)
-    @NSManaged public func removeFromWeather(_ values: NSSet)
+  @objc(removeWeather:)
+  @NSManaged public func removeFromWeather(_ values: NSSet)
 
 }
 

@@ -9,20 +9,19 @@
 import Foundation
 import CoreData
 
-
 extension Main {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Main> {
-        return NSFetchRequest<Main>(entityName: "Main")
-    }
+  @nonobjc public class func fetchRequest() -> NSFetchRequest<Main> {
+      return NSFetchRequest<Main>(entityName: "Main")
+  }
 
-    @NSManaged public var feels_like: Double
-    @NSManaged public var humidity: Double
-    @NSManaged public var pressure: Double
-    @NSManaged public var temp: Double
-    @NSManaged public var temp_max: Double
-    @NSManaged public var temp_min: Double
-    @NSManaged public var current: CurrentWeather?
+  @NSManaged public var feels_like: Double
+  @NSManaged public var humidity: Double
+  @NSManaged public var pressure: Double
+  @NSManaged public var temp: Double
+  @NSManaged public var temp_max: Double
+  @NSManaged public var temp_min: Double
+  @NSManaged public var current: CurrentWeather?
 
 }
 

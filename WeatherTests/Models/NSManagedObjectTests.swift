@@ -14,6 +14,7 @@ final class NSManagedObjectTests: XCTestCase {
     let context = getCoreDataContext()
 
     let sut = WeatherCurrent(context: context)
+    sut.weather_id = 500
     sut.current = nil
     sut.main_description = "Sunny Outside"
     sut.icon = ":-)"
@@ -30,22 +31,4 @@ final class NSManagedObjectTests: XCTestCase {
       XCTFail(error.localizedDescription)
     }
   }
-
-}
-
-extension WeatherCurrent: ModelConvertible {
-  typealias ModelType = Current.Weather
-
-  func toModel() -> Current.Weather? {
-    return Current.Weather(id: 500, main: self.main ?? "", description: self.main_description ?? "", icon: self.icon ?? "")
-  }
-}
-
-
-protocol ModelConvertible {
-  /// The Model to convert to
-  associatedtype ModelType
-
-  /// converts a confroming instance to `ModelType` instance
-  func toModel() -> ModelType?
 }
