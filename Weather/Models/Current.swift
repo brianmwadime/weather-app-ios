@@ -167,6 +167,14 @@ extension Current: NSManagedObjectConvertible {
       object.addToWeather(weatherEntity)
     }
 
+    guard let mainDescription = NSEntityDescription.entity(forEntityName: "Main", in: context) else {
+      NSLog("Can't create entity Main")
+      return nil
+    }
+
+    let mainEntity = Main(entity: mainDescription, insertInto: context)
+
+    object.main =
     object.dt = dt
 
     return object
