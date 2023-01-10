@@ -67,8 +67,8 @@
 		75B12DA52962043000BD905B /* DoubleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B12DA42962042F00BD905B /* DoubleExtensions.swift */; };
 		75B12DA72962079100BD905B /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B12DA62962079100BD905B /* NetworkError.swift */; };
 		75B1FB4929645BF400BFB9ED /* ConditionTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B1FB4829645BF400BFB9ED /* ConditionTypeTests.swift */; };
-		75B6729E296C156B003E73F1 /* Weather+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B6729A296C156B003E73F1 /* Weather+CoreDataClass.swift */; };
-		75B6729F296C156B003E73F1 /* Weather+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B6729B296C156B003E73F1 /* Weather+CoreDataProperties.swift */; };
+		75B6729E296C156B003E73F1 /* WeatherCurrent+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B6729A296C156B003E73F1 /* WeatherCurrent+CoreDataClass.swift */; };
+		75B6729F296C156B003E73F1 /* WeatherCurrent+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B6729B296C156B003E73F1 /* WeatherCurrent+CoreDataProperties.swift */; };
 		75B672A0296C156B003E73F1 /* Main+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B6729C296C156B003E73F1 /* Main+CoreDataClass.swift */; };
 		75B672A1296C156B003E73F1 /* Main+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B6729D296C156B003E73F1 /* Main+CoreDataProperties.swift */; };
 		75C173AD29648590000863DD /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C173AC29648590000863DD /* FavoritesView.swift */; };
@@ -168,10 +168,11 @@
 		75B12DA42962042F00BD905B /* DoubleExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleExtensions.swift; sourceTree = "<group>"; };
 		75B12DA62962079100BD905B /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		75B1FB4829645BF400BFB9ED /* ConditionTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionTypeTests.swift; sourceTree = "<group>"; };
-		75B6729A296C156B003E73F1 /* Weather+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Weather+CoreDataClass.swift"; sourceTree = "<group>"; };
-		75B6729B296C156B003E73F1 /* Weather+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Weather+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		75B6729A296C156B003E73F1 /* WeatherCurrent+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherCurrent+CoreDataClass.swift"; sourceTree = "<group>"; };
+		75B6729B296C156B003E73F1 /* WeatherCurrent+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherCurrent+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		75B6729C296C156B003E73F1 /* Main+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Main+CoreDataClass.swift"; sourceTree = "<group>"; };
 		75B6729D296C156B003E73F1 /* Main+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Main+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		75B672A4296C4902003E73F1 /* Weather 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Weather 3.xcdatamodel"; sourceTree = "<group>"; };
 		75C173AC29648590000863DD /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		75C173AE2964873A000863DD /* FavoritesViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModelTests.swift; sourceTree = "<group>"; };
 		75C173B22964F09C000863DD /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
@@ -435,8 +436,8 @@
 		754276042960836E00358B16 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				75B6729A296C156B003E73F1 /* Weather+CoreDataClass.swift */,
-				75B6729B296C156B003E73F1 /* Weather+CoreDataProperties.swift */,
+				75B6729A296C156B003E73F1 /* WeatherCurrent+CoreDataClass.swift */,
+				75B6729B296C156B003E73F1 /* WeatherCurrent+CoreDataProperties.swift */,
 				75B6729C296C156B003E73F1 /* Main+CoreDataClass.swift */,
 				75B6729D296C156B003E73F1 /* Main+CoreDataProperties.swift */,
 				75AF91D4296AA97400EA4C54 /* CurrentWeather+CoreDataClass.swift */,
@@ -673,7 +674,7 @@
 				75C173B32964F09C000863DD /* FavoritesViewModel.swift in Sources */,
 				7514EC292961FF2900CE4F97 /* WeatherService.swift in Sources */,
 				75B0953B2962485300DF3321 /* ForecastListView.swift in Sources */,
-				75B6729E296C156B003E73F1 /* Weather+CoreDataClass.swift in Sources */,
+				75B6729E296C156B003E73F1 /* WeatherCurrent+CoreDataClass.swift in Sources */,
 				75AF91D7296AA97400EA4C54 /* CurrentWeather+CoreDataProperties.swift in Sources */,
 				75F3B11E29662ACA008B0D7A /* ViewExtensions.swift in Sources */,
 				7514EC272961FF0F00CE4F97 /* CurrentView.swift in Sources */,
@@ -696,7 +697,7 @@
 				75B09539296247BC00DF3321 /* ForecastItemView.swift in Sources */,
 				75B0953729623FE900DF3321 /* DateFormatterExtensions.swift in Sources */,
 				75C173AD29648590000863DD /* FavoritesView.swift in Sources */,
-				75B6729F296C156B003E73F1 /* Weather+CoreDataProperties.swift in Sources */,
+				75B6729F296C156B003E73F1 /* WeatherCurrent+CoreDataProperties.swift in Sources */,
 				7504271C295DFD8B00F04A5E /* ContentView.swift in Sources */,
 				7504271A295DFD8B00F04A5E /* WeatherApp.swift in Sources */,
 				75B0953D29624AF400DF3321 /* ConditionType.swift in Sources */,
@@ -1086,10 +1087,11 @@
 		75042724295DFDA100F04A5E /* Weather.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				75B672A4296C4902003E73F1 /* Weather 3.xcdatamodel */,
 				75F3B12B2966D0C0008B0D7A /* Weather 2.xcdatamodel */,
 				75042725295DFDA100F04A5E /* Weather.xcdatamodel */,
 			);
-			currentVersion = 75F3B12B2966D0C0008B0D7A /* Weather 2.xcdatamodel */;
+			currentVersion = 75B672A4296C4902003E73F1 /* Weather 3.xcdatamodel */;
 			path = Weather.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

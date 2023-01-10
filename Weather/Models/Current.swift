@@ -22,7 +22,7 @@ struct Current: Codable {
   var condition: String { ConditionType.classifyCondition(by: weather[0].id).rawValue }
   /// Date object
   var date: Date { Date(timeIntervalSince1970: dt) }
-  var timezone: Int?
+  let timezone: Double?
 }
 
 extension Current: Equatable {
@@ -89,5 +89,36 @@ extension Current {
     let humidity: Int
     let sea_level: Int
     let grnd_level: Int
+  }
+}
+
+extension Current {
+  static func empty() -> Self {
+    return Current(
+      dt: 0,
+      coord: nil,
+      weather: [
+        Weather(
+          id: 0,
+          main: "",
+          description: "",
+          icon: "")
+      ],
+      main: Main(
+        temp: 0,
+        feels_like: 0,
+        temp_min: 0,
+        temp_max: 0,
+        pressure: 0,
+        humidity: 0,
+        sea_level: 0,
+        grnd_level: 0),
+      rain: nil,
+      wind: Wind(
+        speed: 0,
+        deg: 0,
+        gust: 0),
+      clouds: Clouds(all: 0),
+      timezone: 0)
   }
 }

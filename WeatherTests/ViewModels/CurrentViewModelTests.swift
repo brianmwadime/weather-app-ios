@@ -19,7 +19,7 @@ final class CurrentViewModelTests: XCTestCase {
     try super.setUpWithError()
     mockWeatherService = MockWeatherService()
     currentRepository = MockCoreDataRepository()
-    sut = CurrentViewModel(repository: currentRepository, weatherService: mockWeatherService)
+    sut = CurrentViewModel(weatherService: mockWeatherService, repository: currentRepository)
   }
 
   override func tearDownWithError() throws {
@@ -39,7 +39,7 @@ final class CurrentViewModelTests: XCTestCase {
 
     sut?.$current
       .sink { currentValue in
-        XCTAssertNil(currentValue)
+        XCTAssertNotNil(currentValue)
         expectation.fulfill()
     }.store(in: &cancellables)
 

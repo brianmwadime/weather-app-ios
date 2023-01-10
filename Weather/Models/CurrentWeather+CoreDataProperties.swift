@@ -16,8 +16,8 @@ extension CurrentWeather {
         return NSFetchRequest<CurrentWeather>(entityName: "Current")
     }
 
-    @NSManaged public var timezone: Int16
-    @NSManaged public var dt: Date?
+    @NSManaged public var dt: Double
+    @NSManaged public var timezone: Double
     @NSManaged public var main: Main?
     @NSManaged public var weather: NSSet?
 
@@ -27,10 +27,10 @@ extension CurrentWeather {
 extension CurrentWeather {
 
     @objc(addWeatherObject:)
-    @NSManaged public func addToWeather(_ value: Weather)
+    @NSManaged public func addToWeather(_ value: WeatherCurrent)
 
     @objc(removeWeatherObject:)
-    @NSManaged public func removeFromWeather(_ value: Weather)
+    @NSManaged public func removeFromWeather(_ value: WeatherCurrent)
 
     @objc(addWeather:)
     @NSManaged public func addToWeather(_ values: NSSet)
@@ -40,6 +40,6 @@ extension CurrentWeather {
 
 }
 
-extension CurrentWeather : Identifiable {
+extension CurrentWeather: Identifiable {
 
 }

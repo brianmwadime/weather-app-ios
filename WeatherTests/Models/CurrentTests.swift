@@ -107,14 +107,84 @@ class CurrentTests: XCTestCase {
   }
 
   func test_current_return_FavoriteCurrent() {
+    let context = getCoreDataContext()
 
-    let dataObject = current.currentEntity()
+    let dataObject = current.toNSManagedObject(in: context)
 
-    XCTAssert(dataObject is NSManagedObject)
+    XCTAssertNotNil(dataObject)
+    XCTAssert((dataObject as Any) is CurrentWeather)
   }
 }
 
+extension Current: NSManagedObjectConvertible {
+//  typealias ObjectType = CurrentWeather
+
+  func toNSManagedObject(in context: NSManagedObjectContext) -> CurrentWeather? {
+//    let entityDescription = CurrentWeather.entity()
+    guard let entityDescription = NSEntityDescription.entity(forEntityName: "Current", in: context) else {
+      NSLog("Can't create entity Current")
+      return nil
+    }
+
+    let object = CurrentWeather(entity: entityDescription, insertInto: context)
+
+    if let timezone = timezone {
+      object.timezone = timezone
+    }
+
+    guard let weatherDescription = NSEntityDescription.entity(forEntityName: "Weather", in: context) else {
+      NSLog("Can't create entity Weather")
+      return nil
+    }
+
+    for weather in self.weather {
+
+      let weatherEntity = WeatherCurrent(entity: weatherDescription, insertInto: context)
+      weatherEntity.main = weather.main
+      weatherEntity.icon = weather.icon
+      weatherEntity.main_description = weather.description
+      weatherEntity.current = object
+      object.addToWeather(weatherEntity)
+    }
+
+    object.dt = dt
+
+    return object
+  }
+}
+
+protocol NSManagedObjectConvertible {
+
+  associatedtype ObjectType
+
+  func toNSManagedObject(in context: NSManagedObjectContext) -> ObjectType?
+}
+
 private extension CurrentTests {
+
+  func getCoreDataContext() -> NSManagedObjectContext {
+    var sut: CoreDataRepository!
+    sut = CoreDataRepository()
+    sut.persistentContainer = {
+      let container = NSPersistentContainer(name: "Weather")
+
+      // create a persistent store description that informs the persistent container that it should write data to /dev/null
+      // while using the default SQLite storage mechanism Writing to /dev/null effectively uses an in-memory store,
+      // except you get all the features that you also get from the SQLite store that your app uses
+      let description = NSPersistentStoreDescription()
+      description.url = URL(fileURLWithPath: "/dev/null")
+      container.persistentStoreDescriptions = [description]
+
+      container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        if let error = error as NSError? {
+          fatalError("Failed to load stores: \(error), \(error.userInfo)")
+        }
+      })
+      return container
+    }()
+
+    return sut.context
+  }
 
   func mapCurrent(from filename: String) throws -> Current {
     let response = Loader.contentsOf(filename)!

@@ -16,16 +16,16 @@ extension Main {
         return NSFetchRequest<Main>(entityName: "Main")
     }
 
-    @NSManaged public var temp: Double
-    @NSManaged public var temp_min: Double
-    @NSManaged public var temp_max: Double
-    @NSManaged public var feels_like: NSObject?
-    @NSManaged public var pressure: Int16
+    @NSManaged public var feels_like: Double
     @NSManaged public var humidity: Double
+    @NSManaged public var pressure: Double
+    @NSManaged public var temp: Double
+    @NSManaged public var temp_max: Double
+    @NSManaged public var temp_min: Double
     @NSManaged public var current: CurrentWeather?
 
 }
 
-extension Main : Identifiable {
+extension Main: Identifiable {
 
 }
