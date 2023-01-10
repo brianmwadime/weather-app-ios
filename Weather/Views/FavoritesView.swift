@@ -19,7 +19,7 @@ struct FavoritesView: View {
 
   var body: some View {
     ZStack {
-      Color.clear.ignoresSafeArea(.all)
+      Color.clear
       if query.isEmpty {
         ZStack {
           if viewModel.favorites.isEmpty {
@@ -30,14 +30,7 @@ struct FavoritesView: View {
           if let favorites = viewModel.favorites {
             List {
               ForEach(favorites) { favorite in
-                ZStack {
-                  NavigationLink(destination: Color.red) {
-                    EmptyView()
-                  }
-                  .opacity(0.0)
-                  .buttonStyle(.plain)
-                  FavoriteCardView(favorite: favorite, condition: condition ?? "sunny")
-                }
+                FavoriteCardView(favorite: favorite, condition: condition ?? "sunny")
                 .listRowSeparator(.hidden)
                 .listRowBackground(Color.clear)
               }
