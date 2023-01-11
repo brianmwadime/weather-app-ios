@@ -8,6 +8,7 @@
 import XCTest
 import Foundation
 @testable import Weather
+import CoreData
 
 class CurrentTests: XCTestCase {
 
@@ -103,6 +104,15 @@ class CurrentTests: XCTestCase {
   func test_current_has_date_n_timezone() {
     XCTAssertNotNil(current.date)
     XCTAssertNotNil(current.timezone)
+  }
+
+  func test_current_return_FavoriteCurrent() {
+    let context = getCoreDataContext()
+
+    let dataObject = current.toNSManagedObject(in: context)
+
+    XCTAssertNotNil(dataObject)
+    XCTAssert((dataObject as Any) is CurrentWeather)
   }
 }
 

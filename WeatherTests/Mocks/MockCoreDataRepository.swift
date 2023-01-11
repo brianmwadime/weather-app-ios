@@ -1,5 +1,5 @@
 //
-//  MockFavoritesRepository.swift
+//  MockCoreDataRepository.swift
 //  WeatherTests
 //
 //  Created by Brian Mwakima on 1/4/23.
@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 @testable import Weather
 
-class MockFavoritesRepository: RepositoryType {
+class MockCoreDataRepository: RepositoryType {
 
   var context: NSManagedObjectContext { persistentContainer.viewContext }
 
@@ -38,18 +38,6 @@ class MockFavoritesRepository: RepositoryType {
 
     }
   }
-
-  //  func update(_ object: FavoriteLocation) {
-  //    do {
-  //      try context.save()
-  //    } catch {
-  //      fatalError("error saving context while updating an object")
-  //    }
-  //  }
-
-  //  func delete(_ object: FavoriteLocation) {
-  //    context.delete(object)
-  //  }
 
   func fetchOne<T>(_ object: T.Type, predicate: NSPredicate?) -> Result<T?, Error> where T: NSManagedObject {
     let request = object.fetchRequest()

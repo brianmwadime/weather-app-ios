@@ -19,32 +19,29 @@ struct FavoriteCardView: View {
         Text(favorite.city)
           .foregroundColor(Color.white)
         Spacer()
-        Text(currentViewModel.current?.weather[0].description.capitalized ?? "")
+        Text(currentViewModel.current.weather[0].description.capitalized)
           .foregroundColor(Color.white)
       }
       Spacer()
-      if currentViewModel.current != nil {
-        VStack(alignment: .trailing) {
-          Text("\((currentViewModel.current?.date.date(with: currentViewModel.current?.timezone))!)")
-//          Text("\((Date.now.date(with: currentViewModel.current?.timezone)))")
+      VStack(alignment: .trailing) {
+        Text(currentViewModel.current.date.format(with: currentViewModel.timeZone))
+          .foregroundColor(Color.white)
+        Spacer()
+        HStack(alignment: .center, spacing: 4) {
+          Text("\((currentViewModel.current.main.feels_like.roundDouble()))°")
             .foregroundColor(Color.white)
-          Spacer()
-          HStack(alignment: .center, spacing: 4) {
-            Text("\((currentViewModel.current?.main.feels_like.roundDouble())!)°")
-              .foregroundColor(Color.white)
-            Image((currentViewModel.condition)!)
-              .resizable()
-              .aspectRatio(contentMode: .fit)
-              .foregroundColor(Color.white)
-              .frame(width: 32, height: 32, alignment: .center)
-          }
+          Image(currentViewModel.condition)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .foregroundColor(Color.white)
+            .frame(width: 32, height: 32, alignment: .center)
         }
       }
     }
     .padding(
       EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
     )
-    .background(Color(currentViewModel.condition ?? condition))
+    .background(Color(currentViewModel.condition))
     .border(.white, width: 2)
     .onAppear {
       currentViewModel.fetchCurrent(for: CLLocation(latitude: favorite.latitude, longitude: favorite.longitude))

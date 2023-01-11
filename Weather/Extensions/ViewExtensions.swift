@@ -17,3 +17,9 @@ extension View {
   }
 }
 #endif
+
+extension View {
+  func setAppBackgroundColor(_ color: Color) -> some View {
+    environment(\.appBackgroundColor, color)
+  }
+}

@@ -2,7 +2,7 @@
 //  CurrentWeather+CoreDataProperties.swift
 //  Weather
 //
-//  Created by Brian Mwakima on 1/5/23.
+//  Created by Brian Mwakima on 1/9/23.
 //
 //
 
@@ -15,6 +15,27 @@ extension CurrentWeather {
     return NSFetchRequest<CurrentWeather>(entityName: "Current")
   }
 
+  @NSManaged public var dt: Double
+  @NSManaged public var timezone: Double
+  @NSManaged public var main: MainCurrent
+  @NSManaged public var weather: NSSet?
+
+}
+
+// MARK: Generated accessors for weather
+extension CurrentWeather {
+
+  @objc(addWeatherObject:)
+  @NSManaged public func addToWeather(_ value: WeatherCurrent)
+
+  @objc(removeWeatherObject:)
+  @NSManaged public func removeFromWeather(_ value: WeatherCurrent)
+
+  @objc(addWeather:)
+  @NSManaged public func addToWeather(_ values: NSSet)
+
+  @objc(removeWeather:)
+  @NSManaged public func removeFromWeather(_ values: NSSet)
 
 }
 
