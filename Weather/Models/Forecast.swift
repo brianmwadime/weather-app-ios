@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 /// Weather Forecast from openweathermap api
 struct Forecast: Codable {
@@ -32,53 +33,29 @@ struct Forecast: Codable {
 
     return result
   }
+
+  static func empty() -> Self {
+    return Forecast(
+      message: 0,
+      list: [])
+  }
 }
 
 extension Forecast: NSManagedObjectConvertible {
-  typealias ObjectType = CurrentWeather
+  typealias ObjectType = WeatherForecast
 
-  func toNSManagedObject(in context: NSManagedObjectContext) -> CurrentWeather? {
-    guard let entityDescription = NSEntityDescription.entity(forEntityName: "Current", in: context) else {
-      NSLog("Can't create entity Current")
-      return nil
+  func toNSManagedObject(in context: NSManagedObjectContext) -> WeatherForecast? {
+    let entityDescription = WeatherForecast.entity()
+
+    let forecastEntity = WeatherForecast(entity: entityDescription, insertInto: context)
+
+    for current in self.list {
+
+      if let currentEntity = current.toNSManagedObject(in: context) {
+        forecastEntity.addToList(currentEntity)
+      }
     }
 
-    let object = CurrentWeather(entity: entityDescription, insertInto: context)
-
-    if let timezone = timezone {
-      object.timezone = timezone
-    }
-
-    guard let weatherDescription = NSEntityDescription.entity(forEntityName: "Weather", in: context) else {
-      NSLog("Can't create entity Weather")
-      return nil
-    }
-
-    for weather in self.weather {
-
-      let weatherEntity = WeatherCurrent(entity: weatherDescription, insertInto: context)
-      weatherEntity.main = weather.main
-      weatherEntity.icon = weather.icon
-      weatherEntity.main_description = weather.description
-      weatherEntity.current = object
-      object.addToWeather(weatherEntity)
-    }
-
-    guard let mainDescription = NSEntityDescription.entity(forEntityName: "Main", in: context) else {
-      NSLog("Can't create entity Main")
-      return nil
-    }
-
-    let mainEntity = MainCurrent(entity: mainDescription, insertInto: context)
-    mainEntity.temp = main.temp
-    mainEntity.feels_like = main.feels_like
-    mainEntity.temp_min = main.temp_min
-    mainEntity.temp_max = main.temp_max
-    mainEntity.pressure = Double(main.pressure)
-
-    object.main = mainEntity
-    object.dt = dt
-
-    return object
+    return forecastEntity
   }
 }
