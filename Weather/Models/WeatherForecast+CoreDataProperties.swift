@@ -41,3 +41,23 @@ extension WeatherForecast {
 extension WeatherForecast: Identifiable {
 
 }
+
+extension WeatherForecast: ModelConvertible {
+  typealias ModelType = Forecast
+
+  func toModel() -> Forecast? {
+    let forecasts = self.list.array(of: CurrentWeather.self)
+
+    var forecastArray: [Current] = []
+
+    for forecast in forecasts {
+      forecastArray.append(
+        forecast.toModel()!
+      )
+    }
+
+    return Forecast(
+      message: 200,
+      list: forecastArray)
+  }
+}

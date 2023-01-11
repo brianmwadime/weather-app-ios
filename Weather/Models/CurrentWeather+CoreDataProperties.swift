@@ -16,7 +16,7 @@ extension CurrentWeather {
         return NSFetchRequest<CurrentWeather>(entityName: "Current")
     }
 
-    @NSManaged public var dt: Date?
+    @NSManaged public var dt: Double
     @NSManaged public var timezone: Double
     @NSManaged public var lastUpdated: Date
     @NSManaged public var main: MainCurrent
@@ -41,6 +41,32 @@ extension CurrentWeather {
 
 }
 
-extension CurrentWeather : Identifiable {
+extension CurrentWeather: Identifiable {
 
+}
+
+extension CurrentWeather: ModelConvertible {
+  typealias ModelType = Current
+
+  func toModel() -> Current? {
+    let weathers = self.weather.array(of: WeatherCurrent.self)
+
+    var weatherArray: [Current.Weather] = []
+
+    for weather in weathers {
+      weatherArray.append(
+        weather.toModel()!
+      )
+    }
+
+    return Current(
+      dt: self.dt,
+      coord: nil,
+      weather: weatherArray,
+      main: self.main.toModel()!,
+      rain: nil,
+      wind: Current.Wind.empty(),
+      clouds: Current.Clouds.empty(),
+      timezone: self.timezone)
+  }
 }

@@ -28,3 +28,19 @@ extension MainCurrent {
 extension MainCurrent: Identifiable {
 
 }
+
+extension MainCurrent: ModelConvertible {
+  typealias ModelType = Current.Main
+
+  func toModel() -> Current.Main? {
+    return Current.Main(
+      temp: self.temp,
+      feels_like: self.feels_like,
+      temp_min: self.temp_min,
+      temp_max: self.temp_max,
+      pressure: Int(self.pressure),
+      humidity: Int(self.humidity),
+      sea_level: 0,
+      grnd_level: 0)
+  }
+}

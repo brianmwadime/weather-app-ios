@@ -25,3 +25,15 @@ extension WeatherCurrent {
 extension WeatherCurrent: Identifiable {
 
 }
+
+extension WeatherCurrent: ModelConvertible {
+  typealias ModelType = Current.Weather
+
+  func toModel() -> Current.Weather? {
+    return Current.Weather(
+      id: Int(self.weather_id),
+      main: self.main,
+      description: self.main_description,
+      icon: self.icon)
+  }
+}
