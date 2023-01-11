@@ -62,4 +62,28 @@ final class FavoritesViewModelTests: XCTestCase {
     wait(for: [expectation], timeout: 1)
   }
 
+  func test_FavouritesViewModel_fetch_MapAnnotation() {
+    let expectation = XCTestExpectation(description: "Should have 4 favorite locations")
+
+    for city in ["That Place", "This Place", "Other Place", "No other Place"] {
+      sut?.save(city: city, latitude: 1.2345, longitude: 31.2345)
+    }
+
+    sut?.$favorites
+    // Drop first to ignore the initial value
+      .dropFirst()
+      .sink { favorites in
+        XCTAssertNotNil(favorites)
+        XCTAssertEqual(favorites.count, 4)
+        expectation.fulfill()
+      }.store(in: &cancellables)
+    sut?.fetch()
+
+    wait(for: [expectation], timeout: 1)
+
+    let annotations = sut?.getAnnotations()
+
+    XCTAssertNotNil(annotations)
+  }
+
 }
