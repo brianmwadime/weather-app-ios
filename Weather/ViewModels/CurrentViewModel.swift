@@ -53,7 +53,7 @@ class CurrentViewModel: ObservableObject {
     }
   }
 
-  func saveToDatabase(_ current: Current) {
+  private func saveToDatabase(_ current: Current) {
     guard let context = repository?.context else {return}
     if let currentEntity = current.toNSManagedObject(in: context) {
       do {

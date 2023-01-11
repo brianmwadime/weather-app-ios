@@ -17,8 +17,10 @@ class ForecastViewModel: ObservableObject {
   }
 
   private let weatherService: WeatherServiceProtocol
+  let repository: RepositoryType?
 
-  init(weatherService: WeatherServiceProtocol) {
+  init(weatherService: WeatherServiceProtocol, repository: RepositoryType? = nil) {
+    self.repository = repository
     self.weatherService = weatherService
   }
 
@@ -34,6 +36,17 @@ class ForecastViewModel: ObservableObject {
           self.error = nil
         case .failure(let error):
           self.error = error
+      }
+    }
+  }
+
+  private func saveToDatabase(_ current: Forecast) {
+    guard let context = repository?.context else {return}
+    if let currentEntity = current.toNSManagedObject(in: context) {
+      do {
+        try repository?.create(currentEntity)
+      } catch {
+
       }
     }
   }
