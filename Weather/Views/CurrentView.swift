@@ -42,18 +42,16 @@ struct CurrentView: View {
       }
       TemperatureView(main: vm.current?.main)
     }
-    .onChange(of: vm.current, perform: { newValue in
-      if let condition = newValue?.condition {
-        appBackgroundColor.wrappedValue = Color(condition)
-      }
+    .onChange(of: vm.condition, perform: { newValue in
+        appBackgroundColor.wrappedValue = Color(newValue)
     })
     .onChange(of: locationService.lastLocation, perform: { newValue in
       vm.fetchCurrent(for: newValue)
     })
     .onAppear {
-      vm.fetchCurrent(for: locationService.lastLocation)
+//      vm.fetchCurrent(for: locationService.lastLocation)
     }
-    .animation(Animation.easeInOut.speed(0.25), value: vm.backgroundColor)
+    .animation(Animation.easeInOut.speed(0.25), value: appBackgroundColor.wrappedValue)
     .edgesIgnoringSafeArea(.top)
   }
 }

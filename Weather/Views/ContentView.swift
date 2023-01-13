@@ -16,34 +16,33 @@ struct ContentView: View {
   @StateObject var favoritesViewModel: FavoritesViewModel
   @State var isFavoriteLocations: Bool = false
   @EnvironmentObject var locationService: LocationService
+  @EnvironmentObject var connectivity: Connectivity
   @Environment(\.openURL) var openURL
   @Environment(\.appBackgroundColor) var appBackgroundColor
 
   var body: some View {
     NavigationView {
       ZStack {
-        if locationService.status == .available {
-          appBackgroundColor.wrappedValue
-            .ignoresSafeArea(.all)
-            ScrollView {
-              VStack {
-                CurrentView(vm: currentViewModel)
-                Spacer()
-                ForecastListView(vm: forecastViewModel)
-              }
-            }
-            .edgesIgnoringSafeArea(.top)
-        }
-
         if locationService.status == .waiting {
           ProgressView()
+        } else {
+          appBackgroundColor.wrappedValue
+            .ignoresSafeArea(.all)
+          ScrollView {
+            VStack {
+              CurrentView(vm: currentViewModel)
+              Spacer()
+              ForecastListView(vm: forecastViewModel)
+            }
+          }
+          .edgesIgnoringSafeArea(.top)
         }
 
-        if locationService.status == .denied {
-          SelectLocationContent(action: {
-            openURL(URL(string: UIApplication.openSettingsURLString)!)
-          })
-        }
+//        if locationService.status == .denied && currentViewModel.current == nil {
+//          SelectLocationContent(action: {
+//            openURL(URL(string: UIApplication.openSettingsURLString)!)
+//          })
+//        }
       }
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
