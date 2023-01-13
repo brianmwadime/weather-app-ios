@@ -98,4 +98,10 @@ final class LocationService: NSObject, ObservableObject, CLLocationManagerDelega
       }
     }
   }
+
+  /// Stop `LocationService`
+  func stop() {
+    locationManager.delegate = nil
+    locationManager.stopUpdatingLocation()
+  }
 }
