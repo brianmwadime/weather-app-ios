@@ -10,30 +10,25 @@ import CoreLocation
 
 struct FavoriteCardView: View {
   @StateObject var currentViewModel: CurrentViewModel = CurrentViewModel(weatherService: WeatherService(network: DefaultNetworkService()))
-//  @State var timer: Timer
-  var favorite: FavoriteLocation
+  var favorite: MapAnnotation
   var body: some View {
     HStack {
       VStack(alignment: .leading) {
-        Text(favorite.city)
+        Text(favorite.name)
           .foregroundColor(Color.white)
         Spacer()
-        if currentViewModel.weather != nil {
-          Text(currentViewModel.weather!.description.capitalized)
-            .foregroundColor(Color.white)
-        }
+        Text(currentViewModel.weather?.description.capitalized ?? "not_available".localized())
+          .foregroundColor(Color.white)
       }
       Spacer()
       VStack(alignment: .trailing) {
-        if currentViewModel.date != nil {
-          Text(currentViewModel.date!.format(with: currentViewModel.timeZone))
-            .foregroundColor(Color.white)
-        }
+        Text(currentViewModel.date?.format(with: currentViewModel.timeZone) ?? "not_available".localized())
+          .foregroundColor(Color.white)
         Spacer()
         HStack(alignment: .center, spacing: 4) {
-          Text("\((currentViewModel.feelsLike.roundDouble()))°")
+          Text("\(currentViewModel.feelsLike?.roundDouble() ?? "not_available".localized())°")
             .foregroundColor(Color.white)
-          Image(currentViewModel.condition)
+          Image.iconFor(condition: currentViewModel.condition)?
             .resizable()
             .aspectRatio(contentMode: .fit)
             .foregroundColor(Color.white)
@@ -42,12 +37,13 @@ struct FavoriteCardView: View {
       }
     }
     .padding(
-      EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
+      EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
     )
     .background(Color(currentViewModel.condition))
     .border(.white, width: 2)
     .onAppear {
-      currentViewModel.fetchCurrent(for: CLLocation(latitude: favorite.latitude, longitude: favorite.longitude))
+      currentViewModel.fetchCurrent(
+        for: CLLocation(latitude: favorite.coordinate.latitude, longitude: favorite.coordinate.longitude))
     }
     .animation(Animation.easeInOut.speed(0.25), value: currentViewModel.condition)
   }

@@ -44,19 +44,11 @@ struct FavoritesView: View {
                   }
                 }
               }
-//              .onDelete { idx in
-//                self.viewModel.deleteItems(idx)
-//              }
               .onAppear {
                 UITableView.appearance().tableFooterView = UIView()
               }
             }
-//            .padding(
-//              EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
-//            )
             .listStyle(.plain)
-            .listRowInsets(.none)
-
             .refreshable {
               viewModel.fetch()
             }
@@ -70,7 +62,6 @@ struct FavoritesView: View {
       if !query.isEmpty {
         LocationSearchView(searchModel: searchViewModel, selectedItem: $selectedItem, query: self.query)
           .onChange(of: self.selectedItem) { location in
-//            hideKeyboard()
             if let place = location?.placemark {
               self.viewModel.save(
                 city: place.title ?? "saved_location".localized(),

@@ -45,7 +45,8 @@ struct LocationSearchView: View {
             .onTapGesture {
               self.searchModel.mapItem(for: term) { mapItem in
                 self.selectedItem = mapItem
-//                dismissSearch()
+                hideKeyboard()
+                dismissSearch()
               }
             }
           }
