@@ -9,11 +9,11 @@ import Foundation
 import SwiftUI
 
 private struct AppBackgroundColorKey: EnvironmentKey {
-  static let defaultValue = Color("sunny")
+  static let defaultValue: Binding<Color> = .constant(Color("sunny"))
 }
 
 extension EnvironmentValues {
-  var appBackgroundColor: Color {
+  var appBackgroundColor: Binding<Color> {
     get { self[AppBackgroundColorKey.self] }
     set { self[AppBackgroundColorKey.self] = newValue }
   }

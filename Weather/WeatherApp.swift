@@ -9,10 +9,12 @@ import SwiftUI
 
 @main
 struct WeatherApp: App {
+  @Environment(\.scenePhase) private var scenePhase
   let weatherService = WeatherService(network: DefaultNetworkService())
-  @StateObject var locationService = LocationService()
   let coreDataRepository = CoreDataRepository()
-  @State var backgroundColor: Color = Color("sunny")
+
+  @StateObject var locationService = LocationService()
+  @State var backgroundColor: Color = .black
 
   init() {
     applyNavigationStyling()
@@ -30,6 +32,21 @@ struct WeatherApp: App {
           locationService: locationService))
       .environmentObject(locationService)
       .preferredColorScheme(.light)
+      .environment(\.appBackgroundColor, $backgroundColor)
+      .onAppear {
+        self.locationService.start()
+      }
+    }
+    // use onChange to detect when the scenePhase changes and when the app becomes
+    // active, so check for location permissions.
+    .onChange(of: scenePhase) { (newScenePhase) in
+      switch newScenePhase {
+        case .active:
+          self.locationService.start()
+        default:
+          // ignore
+          break
+      }
     }
   }
 
@@ -49,7 +66,6 @@ struct WeatherApp: App {
       NSAttributedString.Key.foregroundColor: UIColor.white
     ]
 
-    //    appearance.backgroundColor = UIColor(appBackgroundColor)
     appearance.shadowImage = UIImage()
     appearance.shadowColor = .clear
 

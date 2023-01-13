@@ -12,23 +12,26 @@ struct FavoriteCardView: View {
   @StateObject var currentViewModel: CurrentViewModel = CurrentViewModel(weatherService: WeatherService(network: DefaultNetworkService()))
 //  @State var timer: Timer
   var favorite: FavoriteLocation
-  var condition: String
   var body: some View {
     HStack {
       VStack(alignment: .leading) {
         Text(favorite.city)
           .foregroundColor(Color.white)
         Spacer()
-        Text(currentViewModel.current.weather[0].description.capitalized)
-          .foregroundColor(Color.white)
+        if currentViewModel.weather != nil {
+          Text(currentViewModel.weather!.description.capitalized)
+            .foregroundColor(Color.white)
+        }
       }
       Spacer()
       VStack(alignment: .trailing) {
-        Text(currentViewModel.current.date.format(with: currentViewModel.timeZone))
-          .foregroundColor(Color.white)
+        if currentViewModel.date != nil {
+          Text(currentViewModel.date!.format(with: currentViewModel.timeZone))
+            .foregroundColor(Color.white)
+        }
         Spacer()
         HStack(alignment: .center, spacing: 4) {
-          Text("\((currentViewModel.current.main.feels_like.roundDouble()))°")
+          Text("\((currentViewModel.feelsLike.roundDouble()))°")
             .foregroundColor(Color.white)
           Image(currentViewModel.condition)
             .resizable()

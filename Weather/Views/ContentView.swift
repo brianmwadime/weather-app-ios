@@ -9,10 +9,11 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-  @Environment(\.scenePhase) private var scenePhase
-  @ObservedObject var currentViewModel: CurrentViewModel
-  @ObservedObject var forecastViewModel: ForecastViewModel
-  @ObservedObject var favoritesViewModel: FavoritesViewModel
+  let weatherService = WeatherService(network: DefaultNetworkService())
+  let coreDataRepository = CoreDataRepository()
+  @StateObject var currentViewModel: CurrentViewModel
+  @StateObject var forecastViewModel: ForecastViewModel
+  @StateObject var favoritesViewModel: FavoritesViewModel
   @State var isFavoriteLocations: Bool = false
   @EnvironmentObject var locationService: LocationService
   @Environment(\.openURL) var openURL
@@ -22,14 +23,13 @@ struct ContentView: View {
     NavigationView {
       ZStack {
         if locationService.status == .available {
-          Color(currentViewModel.condition)
-              .ignoresSafeArea(.all)
-              .setAppBackgroundColor(Color(currentViewModel.condition))
+          appBackgroundColor.wrappedValue
+            .ignoresSafeArea(.all)
             ScrollView {
               VStack {
                 CurrentView(vm: currentViewModel)
                 Spacer()
-                ForecastListView(vm: forecastViewModel, backgroundColor: currentViewModel.condition)
+                ForecastListView(vm: forecastViewModel)
               }
             }
             .edgesIgnoringSafeArea(.top)
@@ -54,26 +54,14 @@ struct ContentView: View {
         }
       }
       .navigationTitle("")
-      .animation(Animation.easeInOut.speed(0.25), value: currentViewModel.condition)
+      .animation(Animation.easeInOut.speed(0.25), value: appBackgroundColor.wrappedValue)
     }
     .accentColor(.white)
-    // use onChange to detect when the scenePhase changes and when the app becomes
-    // active, so check for location permissions.
-    .onChange(of: scenePhase) { (newScenePhase) in
-      switch newScenePhase {
-        case .active:
-          self.locationService.start()
-        default:
-          // ignore
-          break
-      }
-    }
   }
 
   private var addButton: some View {
     NavigationLink(
-      destination: FavoritesView(viewModel: favoritesViewModel, currentViewModel: currentViewModel, condition: currentViewModel.condition)
-      .background(Color(currentViewModel.condition)),
+      destination: FavoritesView(viewModel: favoritesViewModel),
       isActive: $isFavoriteLocations) {
       Button {
         self.isFavoriteLocations = true
@@ -88,7 +76,7 @@ struct ContentView: View {
 
   private var mapButton: some View {
     NavigationLink(
-      destination: MapView(viewModel: favoritesViewModel)) {
+      destination: MapView(viewModel: FavoritesViewModel(repository: coreDataRepository, locationService: locationService))) {
         Image(systemName: "map")
       }
   }
