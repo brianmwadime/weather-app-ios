@@ -21,30 +21,41 @@ struct FavoritesView: View {
         .ignoresSafeArea(.all)
       if query.isEmpty {
         ZStack {
-          if viewModel.favorites.isEmpty {
+          if viewModel.getAnnotations().isEmpty {
             Text("search_prompt".localized())
               .foregroundColor(Color.white)
           }
 
-          if let favorites = viewModel.favorites {
+          if let favorites = viewModel.getAnnotations() {
             List {
               ForEach(favorites) { favorite in
                 FavoriteCardView(favorite: favorite)
                 .listRowSeparator(.hidden)
                 .listRowBackground(Color.clear)
-//                .listRowInsets(.none)
+                .listRowInsets(.none)
+                .swipeActions {
+                  if !favorite.isMyLocation {
+                    Button(role: .destructive) {
+                      self.viewModel.delete(favorite)
+                    } label: {
+                      Image(systemName: "trash.fill")
+                    }
+                    .cornerRadius(10)
+                  }
+                }
               }
-              .onDelete { idx in
-                self.viewModel.deleteItems(idx)
-              }
+//              .onDelete { idx in
+//                self.viewModel.deleteItems(idx)
+//              }
               .onAppear {
                 UITableView.appearance().tableFooterView = UIView()
               }
             }
-            .padding(
-              EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
-            )
+//            .padding(
+//              EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
+//            )
             .listStyle(.plain)
+            .listRowInsets(.none)
 
             .refreshable {
               viewModel.fetch()
@@ -59,7 +70,7 @@ struct FavoritesView: View {
       if !query.isEmpty {
         LocationSearchView(searchModel: searchViewModel, selectedItem: $selectedItem, query: self.query)
           .onChange(of: self.selectedItem) { location in
-            hideKeyboard()
+//            hideKeyboard()
             if let place = location?.placemark {
               self.viewModel.save(
                 city: place.title ?? "saved_location".localized(),
@@ -69,8 +80,6 @@ struct FavoritesView: View {
           }
       }
     }
-    // Note: ios 16+
-    // .toolbarBackground((condition != nil) ? Color(condition!) : Color.clear, for: .navigationBar)
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         Menu {
@@ -91,6 +100,7 @@ struct FavoritesView: View {
           .onChange(of: units) { value in
             viewModel.fetch()
           }
+          Button("Remove All", action: removeAll)
         } label: {
           Image(systemName: "ellipsis.circle")
         }
@@ -104,5 +114,9 @@ struct FavoritesView: View {
       .onChange(of: self.query) { (value) in
         self.searchViewModel.search(for: value)
       }
+  }
+
+  private func removeAll() {
+    viewModel.removeAll()
   }
 }
