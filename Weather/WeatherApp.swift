@@ -12,9 +12,9 @@ struct WeatherApp: App {
   @Environment(\.scenePhase) private var scenePhase
   let weatherService = WeatherService(network: DefaultNetworkService())
   let coreDataRepository = CoreDataRepository()
-
+  @StateObject var connectivity = Connectivity()
   @StateObject var locationService = LocationService()
-  @State var backgroundColor: Color = .black
+  @State var backgroundColor: Color = Color("sunny")
 
   init() {
     applyNavigationStyling()
@@ -26,23 +26,27 @@ struct WeatherApp: App {
         currentViewModel: CurrentViewModel(
           weatherService: weatherService,
           repository: coreDataRepository),
-        forecastViewModel: ForecastViewModel(weatherService: weatherService),
+        forecastViewModel: ForecastViewModel(
+          weatherService: weatherService,
+          repository: coreDataRepository),
         favoritesViewModel: FavoritesViewModel(
           repository: coreDataRepository,
           locationService: locationService))
       .environmentObject(locationService)
-      .preferredColorScheme(.light)
+      .environmentObject(connectivity)
       .environment(\.appBackgroundColor, $backgroundColor)
-      .onAppear {
-        self.locationService.start()
-      }
+      .preferredColorScheme(.light)
     }
     // use onChange to detect when the scenePhase changes and when the app becomes
     // active, so check for location permissions.
     .onChange(of: scenePhase) { (newScenePhase) in
       switch newScenePhase {
         case .active:
+          self.connectivity.start()
           self.locationService.start()
+        case .inactive:
+          self.connectivity.stop()
+          self.locationService.stop()
         default:
           // ignore
           break
