@@ -44,7 +44,7 @@ struct ForecastListView: View {
       vm.fetchForecast(for: newValue)
     })
     .onAppear {
-      vm.fetchForecast(for: locationService.lastLocation)
+//      vm.fetchForecast(for: locationService.lastLocation)
     }
   }
 }
