@@ -40,8 +40,8 @@ class CurrentViewModel: ObservableObject {
     current?.main.temp_min ?? 0
   }
 
-  var feelsLike: Double {
-    current?.main.feels_like ?? 0
+  var feelsLike: Double? {
+    current?.main.feels_like
   }
 
   var date: Date? {
