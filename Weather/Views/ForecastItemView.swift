@@ -16,7 +16,7 @@ struct ForecastItemView: View {
           .foregroundColor(.white)
           .frame(maxWidth: .infinity, alignment: .leading)
 
-          Image(forcastItem.condition)
+          Image.iconFor(condition: forcastItem.condition)?
             .resizable()
             .aspectRatio(contentMode: .fit)
             .foregroundColor(Color.white)

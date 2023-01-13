@@ -18,7 +18,7 @@ struct CurrentView: View {
     VStack(spacing: 0) {
       ZStack {
         GeometryReader { geometry in
-          Image("forest_\(vm.condition)")
+          Image.backgroundFor(condition: vm.condition)?
             .resizable()
             .offset(y: geometry.frame(in: .global).minY > 0 ? -geometry.frame(in: .global).minY : 0)
             .frame(height: geometry.frame(in: .global).minY > 0 ? 320 + geometry.frame(in: .global).minY : 320)
