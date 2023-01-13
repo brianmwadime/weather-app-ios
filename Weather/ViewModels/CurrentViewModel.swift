@@ -6,17 +6,46 @@
 //
 import Foundation
 import CoreLocation
+import SwiftUI
 
 class CurrentViewModel: ObservableObject {
-  @Published var current: Current = Current.empty()
+  @Published var current: Current? = nil
   @Published var error: Error?
 
   var condition: String {
-    current.condition
+    current?.condition ?? "sunny"
+  }
+
+  var backgroundColor: Color {
+    Color(current?.condition ?? "sunny")
   }
 
   var timeZone: Double {
-    current.timezone ?? 0
+    current?.timezone ?? 0
+  }
+
+  var weather: Current.Weather? {
+    current?.weather[safe: 0]
+  }
+
+  var temperature: Double {
+    current?.main.temp ?? 0
+  }
+
+  var maxTemperature: Double {
+    current?.main.temp_max ?? 0
+  }
+
+  var minTemperature: Double {
+    current?.main.temp_min ?? 0
+  }
+
+  var feelsLike: Double {
+    current?.main.feels_like ?? 0
+  }
+
+  var date: Date? {
+    current?.date
   }
 
   private let weatherService: WeatherServiceProtocol
@@ -32,7 +61,7 @@ class CurrentViewModel: ObservableObject {
     if let result = repository?.fetchOne(CurrentWeather.self, predicate: nil) {
       switch result {
         case .success(let currentEntity):
-          self.current = currentEntity?.toModel() ?? Current.empty()
+          self.current = currentEntity?.toModel()
         case .failure(let error): break
       }
     }
@@ -40,7 +69,7 @@ class CurrentViewModel: ObservableObject {
     guard let coordinates = location?.coordinate else {return}
     let currentCoordinates = Current.Coordinates(
       lat: coordinates.latitude,
-      lon: coordinates.latitude)
+      lon: coordinates.longitude)
     weatherService.fetchCurrent(coordinates: currentCoordinates) { result in
       switch result {
         case .success(let current):
@@ -59,7 +88,7 @@ class CurrentViewModel: ObservableObject {
       do {
         try repository?.create(currentEntity)
       } catch {
-
+        print("\(error.localizedDescription)")
       }
     }
   }

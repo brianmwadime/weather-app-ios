@@ -66,9 +66,9 @@ extension Current {
 extension Current {
   /// Wind object
   struct Wind: Codable {
-    let speed: Double
-    let deg: Int
-    let gust: Double
+    let speed: Double?
+    let deg: Int?
+    let gust: Double?
 
     static func empty() -> Self {
       return Wind(
@@ -99,8 +99,8 @@ extension Current {
     let temp_max: Double
     let pressure: Int
     let humidity: Int
-    let sea_level: Int
-    let grnd_level: Int
+    let sea_level: Int?
+    let grnd_level: Int?
 
     static func empty() -> Self {
       return Main(

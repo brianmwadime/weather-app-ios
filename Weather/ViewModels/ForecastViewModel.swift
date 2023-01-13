@@ -25,13 +25,22 @@ class ForecastViewModel: ObservableObject {
   }
 
   func fetchForecast(for location: CLLocation?) {
+    if let result = repository?.fetchOne(WeatherForecast.self, predicate: nil) {
+      switch result {
+        case .success(let forecastEntity):
+          self.forecast = forecastEntity?.toModel()
+        case .failure(let error): break
+      }
+    }
+
     guard let coordinates = location?.coordinate else {return}
     let currentCoordinates = Current.Coordinates(
       lat: coordinates.latitude,
-      lon: coordinates.latitude)
+      lon: coordinates.longitude)
     weatherService.fetchForecast(coordinates: currentCoordinates) { result in
       switch result {
         case .success(let forecast):
+          self.saveToDatabase(forecast)
           self.forecast = forecast
           self.error = nil
         case .failure(let error):
@@ -40,13 +49,13 @@ class ForecastViewModel: ObservableObject {
     }
   }
 
-  private func saveToDatabase(_ current: Forecast) {
+  private func saveToDatabase(_ forecast: Forecast) {
     guard let context = repository?.context else {return}
-    if let currentEntity = current.toNSManagedObject(in: context) {
+    if let forecastEntity = forecast.toNSManagedObject(in: context) {
       do {
-        try repository?.create(currentEntity)
+        try repository?.create(forecastEntity)
       } catch {
-
+        print("\(error.localizedDescription)")
       }
     }
   }
