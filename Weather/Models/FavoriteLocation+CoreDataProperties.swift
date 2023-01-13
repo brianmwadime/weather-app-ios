@@ -16,6 +16,7 @@ extension FavoriteLocation {
       return NSFetchRequest<FavoriteLocation>(entityName: "FavoriteLocation")
   }
 
+  @NSManaged public var favoriteID: UUID
   @NSManaged public var city: String
   @NSManaged public var latitude: Double
   @NSManaged public var longitude: Double

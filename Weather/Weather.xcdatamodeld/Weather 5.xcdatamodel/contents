@@ -9,6 +9,7 @@
     </entity>
     <entity name="FavoriteLocation" representedClassName="FavoriteLocation" syncable="YES">
         <attribute name="city" optional="YES" attributeType="String"/>
+        <attribute name="favoriteID" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
