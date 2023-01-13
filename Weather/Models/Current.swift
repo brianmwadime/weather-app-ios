@@ -66,9 +66,9 @@ extension Current {
 extension Current {
   /// Wind object
   struct Wind: Codable {
-    let speed: Double
-    let deg: Int
-    let gust: Double
+    let speed: Double?
+    let deg: Int?
+    let gust: Double?
 
     static func empty() -> Self {
       return Wind(
@@ -99,8 +99,8 @@ extension Current {
     let temp_max: Double
     let pressure: Int
     let humidity: Int
-    let sea_level: Int
-    let grnd_level: Int
+    let sea_level: Int?
+    let grnd_level: Int?
 
     static func empty() -> Self {
       return Main(
@@ -182,59 +182,5 @@ extension Current: NSManagedObjectConvertible {
     object.dt = dt
 
     return object
-  }
-}
-
-extension CurrentWeather: ModelConvertible {
-  typealias ModelType = Current
-
-  func toModel() -> Current? {
-    let weathers = self.weather.array(of: WeatherCurrent.self)
-
-    var weatherArray: [Current.Weather] = []
-
-    for weather in weathers {
-      weatherArray.append(
-        weather.toModel()!
-      )
-    }
-
-    return Current(
-      dt: self.dt,
-      coord: nil,
-      weather: weatherArray,
-      main: self.main.toModel()!,
-      rain: nil,
-      wind: Current.Wind.empty(),
-      clouds: Current.Clouds.empty(),
-      timezone: self.timezone)
-  }
-}
-
-extension WeatherCurrent: ModelConvertible {
-  typealias ModelType = Current.Weather
-
-  func toModel() -> Current.Weather? {
-    return Current.Weather(
-      id: Int(self.weather_id),
-      main: self.main,
-      description: self.main_description,
-      icon: self.icon)
-  }
-}
-
-extension MainCurrent: ModelConvertible {
-  typealias ModelType = Current.Main
-
-  func toModel() -> Current.Main? {
-    return Current.Main(
-      temp: self.temp,
-      feels_like: self.feels_like,
-      temp_min: self.temp_min,
-      temp_max: self.temp_max,
-      pressure: Int(self.pressure),
-      humidity: Int(self.humidity),
-      sea_level: 0,
-      grnd_level: 0)
   }
 }

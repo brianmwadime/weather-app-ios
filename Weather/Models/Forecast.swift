@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 /// Weather Forecast from openweathermap api
 struct Forecast: Codable {
@@ -31,5 +32,30 @@ struct Forecast: Codable {
     }
 
     return result
+  }
+
+  static func empty() -> Self {
+    return Forecast(
+      message: 0,
+      list: [])
+  }
+}
+
+extension Forecast: NSManagedObjectConvertible {
+  typealias ObjectType = WeatherForecast
+
+  func toNSManagedObject(in context: NSManagedObjectContext) -> WeatherForecast? {
+    let entityDescription = WeatherForecast.entity()
+
+    let forecastEntity = WeatherForecast(entity: entityDescription, insertInto: context)
+
+    for current in self.list {
+
+      if let currentEntity = current.toNSManagedObject(in: context) {
+        forecastEntity.addToList(currentEntity)
+      }
+    }
+
+    return forecastEntity
   }
 }

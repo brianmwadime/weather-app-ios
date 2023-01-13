@@ -9,16 +9,17 @@ import SwiftUI
 
 struct ForecastListView: View {
   @ObservedObject var vm: ForecastViewModel
-  var backgroundColor: String
   @EnvironmentObject var locationService: LocationService
+  @Environment(\.appBackgroundColor) var appBackgroundColor
 
   var body: some View {
     ZStack {
-      Color(backgroundColor)
+      appBackgroundColor.wrappedValue
+        .ignoresSafeArea(.all)
       VStack(spacing: 0) {
         Divider()
           .frame(height: 16)
-          .overlay(Color(backgroundColor))
+          .overlay(appBackgroundColor.wrappedValue)
         if vm.error != nil {
           VStack(alignment: .center) {
             Spacer()
@@ -38,7 +39,10 @@ struct ForecastListView: View {
         }
       }
     }
-    .frame(maxHeight: .infinity)
+    .animation(Animation.easeInOut.speed(0.25), value: appBackgroundColor.wrappedValue)
+    .onChange(of: locationService.lastLocation, perform: { newValue in
+      vm.fetchForecast(for: newValue)
+    })
     .onAppear {
       vm.fetchForecast(for: locationService.lastLocation)
     }

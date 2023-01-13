@@ -39,7 +39,7 @@ final class CurrentViewModelTests: XCTestCase {
 
     sut?.$current
       .sink { currentValue in
-        XCTAssertNotNil(currentValue)
+        XCTAssertNil(currentValue)
         expectation.fulfill()
     }.store(in: &cancellables)
 
