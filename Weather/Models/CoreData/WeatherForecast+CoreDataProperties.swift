@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension WeatherForecast {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<WeatherForecast> {

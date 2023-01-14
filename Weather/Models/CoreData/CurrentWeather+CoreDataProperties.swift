@@ -9,14 +9,13 @@
 import Foundation
 import CoreData
 
-
 extension CurrentWeather {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<CurrentWeather> {
         return NSFetchRequest<CurrentWeather>(entityName: "Current")
     }
 
-    @NSManaged public var dt: Date
+    @NSManaged public var dt: Double
     @NSManaged public var lastUpdated: Date
     @NSManaged public var timezone: Double
     @NSManaged public var main: MainCurrent
