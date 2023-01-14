@@ -37,6 +37,7 @@ struct FavoritesView: View {
                   if !favorite.isMyLocation {
                     Button(role: .destructive) {
                       self.viewModel.delete(favorite)
+                      self.viewModel.fetch()
                     } label: {
                       Image(systemName: "trash.fill")
                     }
