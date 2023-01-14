@@ -8,7 +8,8 @@
 import Foundation
 import MapKit
 
-/// 
+/// Map annotation object
+///
 struct MapAnnotation: Identifiable {
   public let id: UUID
 

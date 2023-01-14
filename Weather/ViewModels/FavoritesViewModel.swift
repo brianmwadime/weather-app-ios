@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import CoreLocation
 
 class FavoritesViewModel: ObservableObject {
   @Published var favorites: [FavoriteLocation] = []
@@ -22,11 +23,17 @@ class FavoritesViewModel: ObservableObject {
 
   func getAnnotations() -> [MapAnnotation] {
     guard let location = locationService.lastLocation else {
-      return favorites.map { MapAnnotation(id: $0.favoriteID, name: $0.city, coordinate: $0.coordinate) }
+      return favorites.map { MapAnnotation(
+        id: $0.favoriteID,
+        name: $0.city,
+        coordinate: CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude)) }
     }
 
     return [MapAnnotation(id: UUID(), name: "my_location".localized(), coordinate: location.coordinate)] +
-    favorites.map { MapAnnotation(id: $0.favoriteID, name: $0.city, coordinate: $0.coordinate) }
+    favorites.map { MapAnnotation(
+      id: $0.favoriteID,
+      name: $0.city,
+      coordinate: CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude)) }
   }
 
   @discardableResult
