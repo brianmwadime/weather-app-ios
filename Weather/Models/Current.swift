@@ -162,7 +162,7 @@ extension Current: NSManagedObjectConvertible {
       weatherEntity.main = weather.main
       weatherEntity.icon = weather.icon
       weatherEntity.main_description = weather.description
-      weatherEntity.current = object
+      weatherEntity.ofCurrent = object
       object.addToWeather(weatherEntity)
     }
 
