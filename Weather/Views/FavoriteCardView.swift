@@ -22,7 +22,7 @@ struct FavoriteCardView: View {
       }
       Spacer()
       VStack(alignment: .trailing) {
-        Text(currentViewModel.date?.format(with: currentViewModel.timeZone) ?? "not_available".localized())
+        Text(Date.now.format(with: currentViewModel.timeZone))
           .foregroundColor(Color.white)
         Spacer()
         HStack(alignment: .center, spacing: 4) {
