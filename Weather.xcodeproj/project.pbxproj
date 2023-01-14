@@ -86,6 +86,9 @@
 		75C7C2422972B89F004E266D /* WeatherCurrent+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C7C2382972B89F004E266D /* WeatherCurrent+CoreDataProperties.swift */; };
 		75C7C2432972B89F004E266D /* WeatherForecast+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C7C2392972B89F004E266D /* WeatherForecast+CoreDataClass.swift */; };
 		75C7C2442972B89F004E266D /* WeatherForecast+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C7C23A2972B89F004E266D /* WeatherForecast+CoreDataProperties.swift */; };
+		75C7C2462972C8D0004E266D /* SchemaMigration.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 75C7C2452972C8D0004E266D /* SchemaMigration.xcmappingmodel */; };
+		75C7C2482972E489004E266D /* ModelV5MigrationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C7C2472972E488004E266D /* ModelV5MigrationPolicy.swift */; };
+		75C7C24B2972FB67004E266D /* TMLPersistentContainer in Frameworks */ = {isa = PBXBuildFile; productRef = 75C7C24A2972FB67004E266D /* TMLPersistentContainer */; };
 		75F3B11529660611008B0D7A /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F3B11429660611008B0D7A /* StringExtensionsTests.swift */; };
 		75F3B11C29661CDF008B0D7A /* LocationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F3B11B29661CDF008B0D7A /* LocationSearchViewModel.swift */; };
 		75F3B11E29662ACA008B0D7A /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F3B11D29662ACA008B0D7A /* ViewExtensions.swift */; };
@@ -200,6 +203,8 @@
 		75C7C2382972B89F004E266D /* WeatherCurrent+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherCurrent+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		75C7C2392972B89F004E266D /* WeatherForecast+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherForecast+CoreDataClass.swift"; sourceTree = "<group>"; };
 		75C7C23A2972B89F004E266D /* WeatherForecast+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherForecast+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		75C7C2452972C8D0004E266D /* SchemaMigration.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = SchemaMigration.xcmappingmodel; sourceTree = "<group>"; };
+		75C7C2472972E488004E266D /* ModelV5MigrationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelV5MigrationPolicy.swift; sourceTree = "<group>"; };
 		75F3B11429660611008B0D7A /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
 		75F3B11B29661CDF008B0D7A /* LocationSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchViewModel.swift; sourceTree = "<group>"; };
 		75F3B11D29662ACA008B0D7A /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
@@ -213,6 +218,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75C7C24B2972FB67004E266D /* TMLPersistentContainer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +461,8 @@
 				75427602295FA6A400358B16 /* Constants.swift */,
 				75B0953C29624AF300DF3321 /* ConditionType.swift */,
 				75AF91D02968D78B00EA4C54 /* PersistentContainer.swift */,
+				75C7C2452972C8D0004E266D /* SchemaMigration.xcmappingmodel */,
+				75C7C2472972E488004E266D /* ModelV5MigrationPolicy.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -555,6 +563,9 @@
 			dependencies = (
 			);
 			name = Weather;
+			packageProductDependencies = (
+				75C7C24A2972FB67004E266D /* TMLPersistentContainer */,
+			);
 			productName = Weather;
 			productReference = 75042716295DFD8B00F04A5E /* Weather.app */;
 			productType = "com.apple.product-type.application";
@@ -627,6 +638,9 @@
 				Base,
 			);
 			mainGroup = 7504270D295DFD8B00F04A5E;
+			packageReferences = (
+				75C7C2492972FB67004E266D /* XCRemoteSwiftPackageReference "TMLPersistentContainer" */,
+			);
 			productRefGroup = 75042717295DFD8B00F04A5E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -733,6 +747,7 @@
 				75C7C22D2971F5AD004E266D /* ImageExtensions.swift in Sources */,
 				7512A3F72965B6B7005D7311 /* LocationSearchView.swift in Sources */,
 				75AF91D32969FC0900EA4C54 /* MapAnnotationView.swift in Sources */,
+				75C7C2462972C8D0004E266D /* SchemaMigration.xcmappingmodel in Sources */,
 				75B12DA52962043000BD905B /* DoubleExtensions.swift in Sources */,
 				75C7C2402972B89F004E266D /* CurrentWeather+CoreDataProperties.swift in Sources */,
 				75AFC511296449A200CE8F9C /* DefaultNetworkService.swift in Sources */,
@@ -744,6 +759,7 @@
 				75B0953529623FB800DF3321 /* DateExtensions.swift in Sources */,
 				75C7C23E2972B89F004E266D /* MainCurrent+CoreDataProperties.swift in Sources */,
 				75B672B8296DDC94003E73F1 /* EnvironmentExtensions.swift in Sources */,
+				75C7C2482972E489004E266D /* ModelV5MigrationPolicy.swift in Sources */,
 				75B09539296247BC00DF3321 /* ForecastItemView.swift in Sources */,
 				75B0953729623FE900DF3321 /* DateFormatterExtensions.swift in Sources */,
 				75C173AD29648590000863DD /* FavoritesView.swift in Sources */,
@@ -1132,6 +1148,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		75C7C2492972FB67004E266D /* XCRemoteSwiftPackageReference "TMLPersistentContainer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/johnfairh/TMLPersistentContainer";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		75C7C24A2972FB67004E266D /* TMLPersistentContainer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75C7C2492972FB67004E266D /* XCRemoteSwiftPackageReference "TMLPersistentContainer" */;
+			productName = TMLPersistentContainer;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		75042724295DFDA100F04A5E /* Weather.xcdatamodeld */ = {
