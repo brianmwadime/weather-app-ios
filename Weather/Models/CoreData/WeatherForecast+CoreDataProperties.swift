@@ -2,7 +2,7 @@
 //  WeatherForecast+CoreDataProperties.swift
 //  Weather
 //
-//  Created by Brian Mwakima on 1/11/23.
+//  Created by Brian Mwakima on 1/14/23.
 //
 //
 
