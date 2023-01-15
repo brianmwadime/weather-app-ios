@@ -76,4 +76,25 @@ class MockCoreDataRepository: RepositoryType {
   func delete(_ object: NSManagedObject) {
     context.delete(object)
   }
+
+  func deleteAll(_ fetchRequest: NSFetchRequest<NSFetchRequestResult>) throws {
+    let deleteRequest = NSBatchDeleteRequest(
+      fetchRequest: fetchRequest
+    )
+    deleteRequest.resultType = .resultTypeObjectIDs
+
+    let batchDelete = try context.execute(deleteRequest) as? NSBatchDeleteResult
+
+    guard let deleteResult = batchDelete?.result
+            as? [NSManagedObjectID]
+    else { return }
+
+    let deletedObjects: [AnyHashable: Any] = [
+      NSDeletedObjectsKey: deleteResult
+    ]
+
+    NSManagedObjectContext.mergeChanges(
+      fromRemoteContextSave: deletedObjects,
+      into: [context])
+  }
 }

@@ -4,13 +4,22 @@
         <attribute name="dt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="lastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="timezone" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="main" maxCount="1" deletionRule="Cascade" destinationEntity="Main" inverseName="current" inverseEntity="Main"/>
-        <relationship name="weather" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Weather" inverseName="current" inverseEntity="Weather"/>
+        <relationship name="main" maxCount="1" deletionRule="Cascade" destinationEntity="Main" inverseName="ofCurrent" inverseEntity="Main"/>
+        <relationship name="ofWeatherForcast" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WeatherForecast" inverseName="list" inverseEntity="WeatherForecast"/>
+        <relationship name="weather" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Weather" inverseName="ofCurrent" inverseEntity="Weather"/>
     </entity>
     <entity name="FavoriteLocation" representedClassName="FavoriteLocation" syncable="YES">
         <attribute name="city" optional="YES" attributeType="String"/>
+        <attribute name="favoriteID" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="city"/>
+                <constraint value="latitude"/>
+                <constraint value="longitude"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="Main" representedClassName="MainCurrent" syncable="YES">
         <attribute name="feels_like" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -19,17 +28,17 @@
         <attribute name="temp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="temp_max" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="temp_min" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="current" maxCount="1" deletionRule="No Action" destinationEntity="Current" inverseName="main" inverseEntity="Current"/>
+        <relationship name="ofCurrent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Current" inverseName="main" inverseEntity="Current"/>
     </entity>
     <entity name="Weather" representedClassName="WeatherCurrent" syncable="YES">
         <attribute name="icon" optional="YES" attributeType="String"/>
         <attribute name="main" optional="YES" attributeType="String"/>
         <attribute name="main_description" optional="YES" attributeType="String"/>
-        <attribute name="weather_id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="current" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="Current" inverseName="weather" inverseEntity="Current"/>
+        <attribute name="weather_id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="ofCurrent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Current" inverseName="weather" inverseEntity="Current"/>
     </entity>
     <entity name="WeatherForecast" representedClassName="WeatherForecast" syncable="YES">
         <attribute name="lastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="list" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Current"/>
+        <relationship name="list" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Current" inverseName="ofWeatherForcast" inverseEntity="Current"/>
     </entity>
 </model>

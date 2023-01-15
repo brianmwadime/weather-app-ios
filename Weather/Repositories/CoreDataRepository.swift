@@ -56,4 +56,25 @@ class CoreDataRepository: RepositoryType {
     context.delete(object)
     try context.save()
   }
+
+  func deleteAll(_ fetchRequest: NSFetchRequest<NSFetchRequestResult>) throws {
+    let deleteRequest = NSBatchDeleteRequest(
+      fetchRequest: fetchRequest
+    )
+    deleteRequest.resultType = .resultTypeObjectIDs
+
+    let batchDelete = try context.execute(deleteRequest) as? NSBatchDeleteResult
+
+    guard let deleteResult = batchDelete?.result
+            as? [NSManagedObjectID]
+    else { return }
+
+    let deletedObjects: [AnyHashable: Any] = [
+      NSDeletedObjectsKey: deleteResult
+    ]
+
+    NSManagedObjectContext.mergeChanges(
+      fromRemoteContextSave: deletedObjects,
+      into: [context])
+  }
 }

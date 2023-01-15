@@ -137,8 +137,6 @@ extension Current {
 }
 
 extension Current: NSManagedObjectConvertible {
-  typealias ObjectType = CurrentWeather
-
   func toNSManagedObject(in context: NSManagedObjectContext) -> CurrentWeather? {
     guard let entityDescription = NSEntityDescription.entity(forEntityName: "Current", in: context) else {
       NSLog("Can't create entity Current")
@@ -159,10 +157,10 @@ extension Current: NSManagedObjectConvertible {
     for weather in self.weather {
 
       let weatherEntity = WeatherCurrent(entity: weatherDescription, insertInto: context)
+      weatherEntity.weather_id = Int16(weather.id)
       weatherEntity.main = weather.main
       weatherEntity.icon = weather.icon
       weatherEntity.main_description = weather.description
-      weatherEntity.current = object
       object.addToWeather(weatherEntity)
     }
 
@@ -179,7 +177,7 @@ extension Current: NSManagedObjectConvertible {
     mainEntity.pressure = Double(main.pressure)
 
     object.main = mainEntity
-    object.dt = dt
+    object.dt = Date(timeIntervalSince1970: dt)
 
     return object
   }

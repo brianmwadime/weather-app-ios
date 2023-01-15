@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import TMLPersistentContainer
 
 public class PersistentContainer {
 
@@ -15,18 +16,21 @@ public class PersistentContainer {
     return persistentContainer.viewContext
   }
 
-  private init() {}
+  private init() { }
 
   /// Core Data stack
   ///
   public static var persistentContainer: NSPersistentContainer = {
+
     let container = NSPersistentContainer(name: "Weather")
+
     container.loadPersistentStores(completionHandler: { (storeDescription, error) in
       if let error = error as NSError? {
         fatalError("Unresolved error \(error), \(error.userInfo)")
       }
     })
 
+    container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     container.viewContext.automaticallyMergesChangesFromParent = true
     return container
   }()

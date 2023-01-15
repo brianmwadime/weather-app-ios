@@ -20,23 +20,61 @@ struct ForecastListView: View {
         Divider()
           .frame(height: 16)
           .overlay(appBackgroundColor.wrappedValue)
-        if vm.error != nil {
-          VStack(alignment: .center) {
-            Spacer()
-            Text("no_forecast".localized())
-              .foregroundColor(Color.white)
-              .multilineTextAlignment(.center)
-            Spacer()
-          }
-          .frame(maxHeight: .infinity)
-        }
-        if vm.error == nil {
-          VStack(alignment: .center, spacing: 8.0) {
-            ForEach(vm.fiveDayForcast, id: \.dt) { forcastItem in
-              ForecastItemView(forcastItem: forcastItem)
+
+        switch (vm.error, vm.forecast) {
+          case (.none, let forecast) where forecast != nil:
+            VStack(alignment: .center, spacing: 8.0) {
+              ForEach(vm.fiveDayForcast, id: \.dt) { forcastItem in
+                ForecastItemView(forcastItem: forcastItem)
+              }
             }
-          }
+          case (.none, .none):
+            VStack(alignment: .center) {
+              Spacer()
+              Text("no_forecast".localized())
+                .foregroundColor(Color.white)
+                .multilineTextAlignment(.center)
+              Spacer()
+            }
+            .frame(maxHeight: .infinity)
+          case (_, let forecast):
+            if forecast?.list.isEmpty == false {
+              VStack(alignment: .center, spacing: 8.0) {
+                ForEach(vm.fiveDayForcast, id: \.dt) { forcastItem in
+                  ForecastItemView(forcastItem: forcastItem)
+                }
+              }
+            } else {
+              VStack(alignment: .center) {
+                Spacer()
+                Text("no_forecast".localized())
+                  .foregroundColor(Color.white)
+                  .multilineTextAlignment(.center)
+                Spacer()
+              }
+              .frame(maxHeight: .infinity)
+            }
+
         }
+
+//        if vm.error != nil {
+//          VStack(alignment: .center) {
+//            Spacer()
+//            Text("no_forecast".localized())
+//              .foregroundColor(Color.white)
+//              .multilineTextAlignment(.center)
+//            Spacer()
+//          }
+//          .frame(maxHeight: .infinity)
+//        }
+
+//        if vm.error == nil {
+//          VStack(alignment: .center, spacing: 8.0) {
+//            ForEach(vm.fiveDayForcast, id: \.dt) { forcastItem in
+//              ForecastItemView(forcastItem: forcastItem)
+//            }
+//          }
+//        }
       }
     }
     .animation(Animation.easeInOut.speed(0.25), value: appBackgroundColor.wrappedValue)
@@ -44,7 +82,7 @@ struct ForecastListView: View {
       vm.fetchForecast(for: newValue)
     })
     .onAppear {
-      vm.fetchForecast(for: locationService.lastLocation)
+//      vm.fetchForecast(for: locationService.lastLocation)
     }
   }
 }

@@ -18,8 +18,27 @@ struct LocationSearchView: View {
     ZStack {
       Color.clear.ignoresSafeArea(.all)
       VStack(alignment: .center) {
-        if self.searchModel.locations.isEmpty {
-          if self.searchModel.isSearching {
+        switch (searchModel.isSearching, searchModel.locations) {
+          case (_, let locations) where !locations.isEmpty:
+            List(locations, id: \.self) { term in
+              VStack(alignment: .leading) {
+                Text(term)
+                  .font(.headline)
+                  .foregroundColor(Color.white)
+              }
+              .listRowBackground(Color.clear)
+              .listRowSeparator(.hidden)
+              .contentShape(Rectangle())
+              .onTapGesture {
+                self.searchModel.mapItem(for: term) { mapItem in
+                  self.selectedItem = mapItem
+                  hideKeyboard()
+                  dismissSearch()
+                }
+              }
+            }
+            .listStyle(.plain)
+          case (let isSearching, let locations) where isSearching == true && locations.isEmpty:
             VStack(alignment: .center, spacing: 0) {
               Text("no_results".localized())
                 .foregroundColor(Color.white)
@@ -31,25 +50,20 @@ struct LocationSearchView: View {
                 .font(.body)
                 .padding(.horizontal)
             }
-          }
-        } else {
-          List(searchModel.locations, id: \.self) { term in
-            VStack(alignment: .leading) {
-              Text(term)
-                .font(.headline)
-                .foregroundColor(Color.white)
-            }
-            .listRowBackground(Color.clear)
-            .listRowSeparator(.hidden)
-            .contentShape(Rectangle())
-            .onTapGesture {
-              self.searchModel.mapItem(for: term) { mapItem in
-                self.selectedItem = mapItem
-//                dismissSearch()
+          case (_, _):
+            if let error = searchModel.error {
+              VStack(alignment: .center, spacing: 0) {
+                Text("no_search".localized())
+                  .foregroundColor(Color.white)
+                  .font(.title)
+                  .padding(.horizontal)
+                Text(error.localizedDescription)
+                  .multilineTextAlignment(.center)
+                  .foregroundColor(Color.white)
+                  .font(.body)
+                  .padding(.horizontal)
               }
             }
-          }
-          .listStyle(.plain)
         }
       }
     }
