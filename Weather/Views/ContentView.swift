@@ -60,16 +60,8 @@ struct ContentView: View {
 
   private var addButton: some View {
     NavigationLink(
-      destination: FavoritesView(viewModel: favoritesViewModel),
-      isActive: $isFavoriteLocations) {
-      Button {
-        self.isFavoriteLocations = true
-      } label: {
+      destination: FavoritesView(viewModel: favoritesViewModel)) {
         Image(systemName: "list.bullet")
-          .imageScale(.medium)
-          .tint(.white)
-          .font(.title)
-      }
     }
   }
 
