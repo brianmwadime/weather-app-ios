@@ -13,7 +13,9 @@ import MapKit
 class LocationSearchViewModel: NSObject, ObservableObject, MKLocalSearchCompleterDelegate {
   /// Locations returned from search
   ///
-  @Published var locations = [String]()
+  @Published var locations: [String] = [String]()
+
+  @Published var error: Error?
 
   /// Status of search
   ///
@@ -78,5 +80,6 @@ class LocationSearchViewModel: NSObject, ObservableObject, MKLocalSearchComplete
   func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
     print("Completer failed with some error: \(error)")
     isSearching = false
+    self.error = error
   }
 }
