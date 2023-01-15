@@ -18,14 +18,9 @@ extension Date {
   func format(with offset: Double, format: String? = "hh:mm a") -> String {
     let dateFormatter = DateFormatter.shared
     dateFormatter.dateFormat = format
-    let epochDate = self.timeIntervalSince1970
-    let timezoneEpochOffset = epochDate + offset
+    dateFormatter.timeZone = TimeZone(secondsFromGMT: Int(offset))
 
-    return dateFormatter.string(from: Date(timeIntervalSince1970: timezoneEpochOffset))
-
-//    dateFormatter.timeZone = TimeZone(secondsFromGMT: offset)
-
-//    return dateFormatter.string(from: self)
+    return dateFormatter.string(from: self)
   }
 
   func format(to format: String? = "hh:mm a") -> String {

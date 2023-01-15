@@ -56,6 +56,7 @@ final class CoreDataRepositoryTests: XCTestCase {
     let longitude = 32.234
 
     let favoriteLocation = FavoriteLocation(context: sut.context)
+    favoriteLocation.favoriteID = UUID()
     favoriteLocation.city = city
     favoriteLocation.latitude = latitude
     favoriteLocation.longitude = longitude
@@ -75,6 +76,7 @@ final class CoreDataRepositoryTests: XCTestCase {
     let longitude = 32.234
 
     let favoriteLocation = FavoriteLocation(context: sut.context)
+    favoriteLocation.favoriteID = UUID()
     favoriteLocation.city = city
     favoriteLocation.latitude = latitude
     favoriteLocation.longitude = longitude
@@ -104,6 +106,7 @@ final class CoreDataRepositoryTests: XCTestCase {
     let longitude = 32.234
 
     let favoriteLocation = FavoriteLocation(context: sut.context)
+    favoriteLocation.favoriteID = UUID()
     favoriteLocation.city = city
     favoriteLocation.latitude = latitude
     favoriteLocation.longitude = longitude
@@ -129,6 +132,7 @@ final class CoreDataRepositoryTests: XCTestCase {
     let longitude = 32.234
 
     let favoriteLocation = FavoriteLocation(context: sut.context)
+    favoriteLocation.favoriteID = UUID()
     favoriteLocation.city = city
     favoriteLocation.latitude = latitude
     favoriteLocation.longitude = longitude
@@ -149,6 +153,7 @@ final class CoreDataRepositoryTests: XCTestCase {
 
     for city in ["That Place", "This Place", "Other Place", "No other Place"] {
       let favoriteLocation = FavoriteLocation(context: sut.context)
+      favoriteLocation.favoriteID = UUID()
       favoriteLocation.city = city
       favoriteLocation.latitude = latitude
       favoriteLocation.longitude = longitude

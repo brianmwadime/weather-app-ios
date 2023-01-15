@@ -15,7 +15,6 @@ final class NSManagedObjectTests: XCTestCase {
 
     let sut = WeatherCurrent(context: context)
     sut.weather_id = 500
-    sut.current = nil
     sut.main_description = "Sunny Outside"
     sut.icon = ":-)"
     sut.main = "Sunny"

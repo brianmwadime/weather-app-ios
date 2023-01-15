@@ -12,7 +12,7 @@ struct MapView: View {
   @ObservedObject var viewModel: FavoritesViewModel
   @EnvironmentObject var locationService: LocationService
 
-  var span = MKCoordinateSpan(
+  private(set) var span = MKCoordinateSpan(
     latitudeDelta: 0.5,
     longitudeDelta: 0.5)
 

@@ -31,7 +31,6 @@ final class LocationService: NSObject, ObservableObject, CLLocationManagerDelega
   @Published var status = Status.waiting
   /// Last location
   @Published var lastLocation: CLLocation? = nil
-  @Published var lastTitle: String = ""
 
   /// Start `LocationService`
   func start() {
@@ -88,14 +87,19 @@ final class LocationService: NSObject, ObservableObject, CLLocationManagerDelega
     geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
       if let _ = error {
         self.lastLocation = location
-        self.lastTitle = "current_location".localized()
         self.status = .available
       }
-      if let placemarks = placemarks {
+
+      if let _ = placemarks {
         self.lastLocation = location
-        self.lastTitle = placemarks.first?.name ?? "current_location".localized()
         self.status = .available
       }
     }
+  }
+
+  /// Stop `LocationService`
+  func stop() {
+    locationManager.delegate = nil
+    locationManager.stopUpdatingLocation()
   }
 }

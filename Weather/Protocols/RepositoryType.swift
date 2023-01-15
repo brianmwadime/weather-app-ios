@@ -18,4 +18,5 @@ protocol RepositoryType {
   func fetch<T: NSManagedObject>(_ object: T.Type, predicate: NSPredicate?, limit: Int?) -> Result<[T], Error>
   func update(_ object: NSManagedObject) throws
   func delete(_ object: NSManagedObject) throws
+  func deleteAll(_ fetchRequest: NSFetchRequest<NSFetchRequestResult>) throws
 }

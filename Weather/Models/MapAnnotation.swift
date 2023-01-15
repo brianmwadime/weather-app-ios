@@ -8,10 +8,16 @@
 import Foundation
 import MapKit
 
+/// Map annotation object
+///
 struct MapAnnotation: Identifiable {
-  let id = UUID()
+  public let id: UUID
 
   public var name: String
 
   public var coordinate: CLLocationCoordinate2D
+
+  public var isMyLocation: Bool {
+    name == "my_location".localized()
+  }
 }

@@ -1,8 +1,8 @@
 //
-//  Weather+CoreDataClass.swift
+//  WeatherCurrent+CoreDataClass.swift
 //  Weather
 //
-//  Created by Brian Mwakima on 1/9/23.
+//  Created by Brian Mwakima on 1/14/23.
 //
 //
 
