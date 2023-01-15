@@ -86,6 +86,7 @@ class CurrentViewModel: ObservableObject {
     guard let context = repository?.context else {return}
     if let currentEntity = current.toNSManagedObject(in: context) {
       do {
+        try repository?.deleteAll(CurrentWeather.fetchRequest())
         try repository?.create(currentEntity)
       } catch {
         print("\(error.localizedDescription)")

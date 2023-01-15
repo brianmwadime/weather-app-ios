@@ -29,7 +29,8 @@ class ForecastViewModel: ObservableObject {
       switch result {
         case .success(let forecastEntity):
           self.forecast = forecastEntity?.toModel()
-        case .failure(let error): break
+        case .failure(let error):
+          print("\(error.localizedDescription)")
       }
     }
 
@@ -53,6 +54,7 @@ class ForecastViewModel: ObservableObject {
     guard let context = repository?.context else {return}
     if let forecastEntity = forecast.toNSManagedObject(in: context) {
       do {
+        try repository?.deleteAll(WeatherForecast.fetchRequest())
         try repository?.create(forecastEntity)
       } catch {
         print("\(error.localizedDescription)")

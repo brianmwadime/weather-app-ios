@@ -93,6 +93,7 @@ struct FavoritesView: View {
             viewModel.fetch()
           }
           Button("Remove All", action: removeAll)
+          Button("Clear Forcast", action: clearForcast)
         } label: {
           Image(systemName: "ellipsis.circle")
         }
@@ -110,5 +111,9 @@ struct FavoritesView: View {
 
   private func removeAll() {
     viewModel.removeAll()
+  }
+
+  private func clearForcast() {
+    viewModel.clearForcast()
   }
 }

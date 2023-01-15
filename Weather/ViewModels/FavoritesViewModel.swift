@@ -128,4 +128,13 @@ class FavoritesViewModel: ObservableObject {
     }
   }
 
+  func clearForcast() {
+    do {
+      try repository.deleteAll(CurrentWeather.fetchRequest())
+      try repository.deleteAll(WeatherForecast.fetchRequest())
+    } catch {
+
+    }
+  }
+
 }
