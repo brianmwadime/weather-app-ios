@@ -30,6 +30,7 @@ public class PersistentContainer {
       }
     })
 
+    container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     container.viewContext.automaticallyMergesChangesFromParent = true
     return container
   }()

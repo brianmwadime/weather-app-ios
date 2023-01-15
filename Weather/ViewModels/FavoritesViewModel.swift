@@ -38,21 +38,6 @@ class FavoritesViewModel: ObservableObject {
 
   @discardableResult
   func save(city: String, latitude: Double, longitude: Double) -> FavoriteLocation? {
-
-    let request = FavoriteLocation.fetchRequest()
-    request.predicate = NSPredicate(
-      format: "%K == %@",
-      #keyPath(FavoriteLocation.city),
-      city
-    )
-
-    request.fetchLimit = 1
-
-    if let result = try? repository.context.fetch(request),
-       let favoriteLocation = result.first {
-      return favoriteLocation
-    }
-
     let favorite = FavoriteLocation(context: repository.context)
     favorite.favoriteID = UUID()
     favorite.city = city
@@ -65,7 +50,6 @@ class FavoritesViewModel: ObservableObject {
     } catch {
       return nil
     }
-
   }
 
   func fetch() {
@@ -133,7 +117,7 @@ class FavoritesViewModel: ObservableObject {
       try repository.deleteAll(CurrentWeather.fetchRequest())
       try repository.deleteAll(WeatherForecast.fetchRequest())
     } catch {
-
+      print("\(error.localizedDescription)")
     }
   }
 

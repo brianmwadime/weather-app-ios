@@ -73,8 +73,6 @@ class CoreDataRepository: RepositoryType {
       NSDeletedObjectsKey: deleteResult
     ]
 
-    // Merge the delete changes into the managed
-    // object context
     NSManagedObjectContext.mergeChanges(
       fromRemoteContextSave: deletedObjects,
       into: [context])
