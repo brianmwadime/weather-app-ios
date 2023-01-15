@@ -20,7 +20,7 @@ final class Connectivity: ObservableObject {
 
   /// Starts network connection monitoring
   func start() {
-    monitor.pathUpdateHandler =  { [weak self] path in
+    monitor.pathUpdateHandler = { [weak self] path in
       DispatchQueue.main.async {
         self?.isConnected = path.status == .satisfied ? true : false
       }
