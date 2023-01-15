@@ -42,8 +42,6 @@ struct Forecast: Codable {
 }
 
 extension Forecast: NSManagedObjectConvertible {
-  typealias ObjectType = WeatherForecast
-
   func toNSManagedObject(in context: NSManagedObjectContext) -> WeatherForecast? {
     let entityDescription = WeatherForecast.entity()
 
