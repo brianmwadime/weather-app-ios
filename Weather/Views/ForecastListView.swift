@@ -37,7 +37,7 @@ struct ForecastListView: View {
               Spacer()
             }
             .frame(maxHeight: .infinity)
-          case (let error, let forecast):
+          case (_, let forecast):
             if forecast?.list.isEmpty == false {
               VStack(alignment: .center, spacing: 8.0) {
                 ForEach(vm.fiveDayForcast, id: \.dt) { forcastItem in
