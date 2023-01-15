@@ -51,14 +51,15 @@ class ForecastViewModel: ObservableObject {
   }
 
   private func saveToDatabase(_ forecast: Forecast) {
-    guard let context = repository?.context else {return}
-    if let forecastEntity = forecast.toNSManagedObject(in: context) {
-      do {
-        try repository?.deleteAll(WeatherForecast.fetchRequest())
-        try repository?.create(forecastEntity)
-      } catch {
-        print("\(error.localizedDescription)")
+    do {
+      try repository?.deleteAll(WeatherForecast.fetchRequest())
+
+      guard let context = repository?.context else {return}
+      if let currentEntity = forecast.toNSManagedObject(in: context) {
+        try repository?.create(currentEntity)
       }
+    } catch {
+      print("\(error.localizedDescription)")
     }
   }
 }

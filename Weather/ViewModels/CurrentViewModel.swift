@@ -62,7 +62,8 @@ class CurrentViewModel: ObservableObject {
       switch result {
         case .success(let currentEntity):
           self.current = currentEntity?.toModel()
-        case .failure(let error): break
+        case .failure(let error):
+          print("\(error.localizedDescription)")
       }
     }
 
@@ -83,14 +84,15 @@ class CurrentViewModel: ObservableObject {
   }
 
   private func saveToDatabase(_ current: Current) {
-    guard let context = repository?.context else {return}
-    if let currentEntity = current.toNSManagedObject(in: context) {
-      do {
-        try repository?.deleteAll(CurrentWeather.fetchRequest())
+    do {
+      try repository?.deleteAll(CurrentWeather.fetchRequest())
+
+      guard let context = repository?.context else {return}
+      if let currentEntity = current.toNSManagedObject(in: context) {
         try repository?.create(currentEntity)
-      } catch {
-        print("\(error.localizedDescription)")
       }
+    } catch {
+      print("\(error.localizedDescription)")
     }
   }
 }
