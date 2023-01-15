@@ -11,15 +11,14 @@ import MapKit
 struct FavoritesView: View {
   @AppStorage("units") var units: Int = Constants.UnitsType.metric.rawValue
   @StateObject var viewModel: FavoritesViewModel
-  @ObservedObject var currentViewModel: CurrentViewModel
   @StateObject private var searchViewModel = LocationSearchViewModel()
   @State var query: String = ""
   @State private var selectedItem: MKMapItem?
-  var condition: String?
 
   var body: some View {
     ZStack {
-      Color.clear.ignoresSafeArea(.all)
+      Color.black
+        .ignoresSafeArea(.all)
       if query.isEmpty {
         ZStack {
           if viewModel.favorites.isEmpty {
@@ -30,16 +29,10 @@ struct FavoritesView: View {
           if let favorites = viewModel.favorites {
             List {
               ForEach(favorites) { favorite in
-                ZStack {
-                  NavigationLink(destination: Color.red) {
-                    EmptyView()
-                  }
-                  .opacity(0.0)
-                  .buttonStyle(.plain)
-                  FavoriteCardView(favorite: favorite, condition: condition ?? "sunny")
-                }
+                FavoriteCardView(favorite: favorite)
                 .listRowSeparator(.hidden)
                 .listRowBackground(Color.clear)
+//                .listRowInsets(.none)
               }
               .onDelete { idx in
                 self.viewModel.deleteItems(idx)
@@ -48,7 +41,11 @@ struct FavoritesView: View {
                 UITableView.appearance().tableFooterView = UIView()
               }
             }
+            .padding(
+              EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
+            )
             .listStyle(.plain)
+
             .refreshable {
               viewModel.fetch()
             }
@@ -62,6 +59,7 @@ struct FavoritesView: View {
       if !query.isEmpty {
         LocationSearchView(searchModel: searchViewModel, selectedItem: $selectedItem, query: self.query)
           .onChange(of: self.selectedItem) { location in
+            hideKeyboard()
             if let place = location?.placemark {
               self.viewModel.save(
                 city: place.title ?? "saved_location".localized(),
@@ -72,7 +70,7 @@ struct FavoritesView: View {
       }
     }
     // Note: ios 16+
-//    .toolbarBackground((condition != nil) ? Color(condition!) : Color.clear, for: .navigationBar)
+    // .toolbarBackground((condition != nil) ? Color(condition!) : Color.clear, for: .navigationBar)
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         Menu {
@@ -98,7 +96,7 @@ struct FavoritesView: View {
         }
       }
     }
-    .navigationBarTitle("favorites_screen_title".localized(), displayMode: .large)
+    .navigationBarTitle("favorites_screen_title".localized(), displayMode: .automatic)
     .searchable(
       text: $query,
       placement: .navigationBarDrawer(displayMode: .always),

@@ -2,28 +2,34 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="21G320" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Current" representedClassName="CurrentWeather" syncable="YES">
         <attribute name="dt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="timezone" optional="YES" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="main" maxCount="1" deletionRule="Nullify" destinationEntity="Main" inverseName="current" inverseEntity="Main"/>
-        <relationship name="weather" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Weather" inverseName="current" inverseEntity="Weather"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="timezone" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="main" maxCount="1" deletionRule="Cascade" destinationEntity="Main" inverseName="current" inverseEntity="Main"/>
+        <relationship name="weather" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Weather" inverseName="current" inverseEntity="Weather"/>
     </entity>
     <entity name="FavoriteLocation" representedClassName="FavoriteLocation" syncable="YES">
         <attribute name="city" optional="YES" attributeType="String"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
-    <entity name="Main" representedClassName="Main" syncable="YES">
-        <attribute name="feels_like" optional="YES" attributeType="Double" defaultValueString="0.0"/>
+    <entity name="Main" representedClassName="MainCurrent" syncable="YES">
+        <attribute name="feels_like" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="humidity" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="pressure" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="pressure" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="temp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="temp_max" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="temp_min" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="current" maxCount="1" deletionRule="Nullify" destinationEntity="Current" inverseName="main" inverseEntity="Current"/>
+        <relationship name="current" maxCount="1" deletionRule="No Action" destinationEntity="Current" inverseName="main" inverseEntity="Current"/>
     </entity>
     <entity name="Weather" representedClassName="WeatherCurrent" syncable="YES">
         <attribute name="icon" optional="YES" attributeType="String"/>
         <attribute name="main" optional="YES" attributeType="String"/>
         <attribute name="main_description" optional="YES" attributeType="String"/>
-        <relationship name="current" maxCount="1" deletionRule="Nullify" destinationEntity="Current" inverseName="weather" inverseEntity="Current"/>
+        <attribute name="weather_id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="current" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="Current" inverseName="weather" inverseEntity="Current"/>
+    </entity>
+    <entity name="WeatherForecast" representedClassName="WeatherForecast" syncable="YES">
+        <attribute name="lastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="list" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Current"/>
     </entity>
 </model>

@@ -17,3 +17,9 @@ extension View {
   }
 }
 #endif
+
+extension View {
+  func setAppBackgroundColor(_ color: Binding<Color>) -> some View {
+    environment(\.appBackgroundColor, color)
+  }
+}

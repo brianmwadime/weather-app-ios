@@ -11,7 +11,10 @@ import SwiftUI
 struct WeatherApp: App {
   @Environment(\.scenePhase) private var scenePhase
   let weatherService = WeatherService(network: DefaultNetworkService())
+  let coreDataRepository = CoreDataRepository()
+
   @StateObject var locationService = LocationService()
+  @State var backgroundColor: Color = .black
 
   init() {
     applyNavigationStyling()
@@ -21,11 +24,18 @@ struct WeatherApp: App {
     WindowGroup {
       ContentView(
         currentViewModel: CurrentViewModel(
-        weatherService: weatherService),
+          weatherService: weatherService,
+          repository: coreDataRepository),
         forecastViewModel: ForecastViewModel(weatherService: weatherService),
-        favoritesViewModel: FavoritesViewModel(repository: FavoriteLocationsRepository(), locationService: locationService))
+        favoritesViewModel: FavoritesViewModel(
+          repository: coreDataRepository,
+          locationService: locationService))
       .environmentObject(locationService)
       .preferredColorScheme(.light)
+      .environment(\.appBackgroundColor, $backgroundColor)
+      .onAppear {
+        self.locationService.start()
+      }
     }
     // use onChange to detect when the scenePhase changes and when the app becomes
     // active, so check for location permissions.
@@ -55,6 +65,9 @@ struct WeatherApp: App {
     appearance.titleTextAttributes = [
       NSAttributedString.Key.foregroundColor: UIColor.white
     ]
+
+    appearance.shadowImage = UIImage()
+    appearance.shadowColor = .clear
 
     // In the following two lines you make sure that you apply the style for good
     UINavigationBar.appearance().scrollEdgeAppearance = appearance

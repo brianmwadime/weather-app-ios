@@ -6,8 +6,11 @@
 //
 
 import CoreData
+
 public class PersistentContainer {
 
+  /// CoreData context object
+  ///
   public static var context: NSManagedObjectContext {
     return persistentContainer.viewContext
   }
@@ -15,6 +18,7 @@ public class PersistentContainer {
   private init() {}
 
   /// Core Data stack
+  ///
   public static var persistentContainer: NSPersistentContainer = {
     let container = NSPersistentContainer(name: "Weather")
     container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -28,6 +32,7 @@ public class PersistentContainer {
   }()
 
   /// Core Data Saving support
+  /// 
   public static func saveContext () {
     let context = persistentContainer.viewContext
     if context.hasChanges {

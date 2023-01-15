@@ -1,5 +1,5 @@
 //
-//  FavoriteLocationRepositoryTests.swift
+//  CoreDataRepositoryTests.swift
 //  WeatherTests
 //
 //  Created by Brian Mwakima on 1/4/23.
@@ -9,13 +9,13 @@ import XCTest
 import CoreData
 @testable import Weather
 
-final class FavoriteLocationRepositoryTests: XCTestCase {
+final class CoreDataRepositoryTests: XCTestCase {
 
-  var sut: FavoriteLocationsRepository!
+  var sut: CoreDataRepository!
 
   override func setUpWithError() throws {
     try super.setUpWithError()
-    sut = FavoriteLocationsRepository()
+    sut = CoreDataRepository()
     sut.persistentContainer = {
       let container = NSPersistentContainer(name: "Weather")
 

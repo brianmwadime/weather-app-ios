@@ -11,12 +11,13 @@ import CoreLocation
 
 final class MapAnnotationTests: XCTestCase {
 
-  func test_mapannotation_has_name_coordinates() {
+  func test_MapAnnotation_has_name_coordinates() {
 
-    let annotation = MapAnnotation(name: "name", coordinate: CLLocationCoordinate2D(latitude: 0.01, longitude: 31.2))
+    let sut = MapAnnotation(name: "name", coordinate: CLLocationCoordinate2D(latitude: 0.01, longitude: 31.2))
 
-    XCTAssertNotNil(annotation.name)
-    XCTAssertNotNil(annotation.coordinate)
+    XCTAssertNotNil(sut)
+    XCTAssertNotNil(sut.name)
+    XCTAssertNotNil(sut.coordinate)
   }
 
 }

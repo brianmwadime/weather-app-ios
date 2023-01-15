@@ -65,5 +65,6 @@ struct CurrentMainView_Previews: PreviewProvider {
           humidity: 1012,
           sea_level: 100,
           grnd_level: 0))
+        .background(Color.blue)
     }
 }
