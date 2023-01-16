@@ -51,15 +51,22 @@ module Fastlane
       end
 
       def self.publish_to_github(message, commit_sha)
+
+        payload = {
+          'state': 'success',
+          'description': "#{message}",
+          'context': "Code coverage"
+        }
+
         GithubApiAction.run(
           server_url: "https://api.github.com",
           api_token: ENV['GITHUB_API_TOKEN'],
           http_method: "POST",
           path: "/repos/brianmwadime/weather-app-ios/statuses/#{commit_sha}",
-          raw_body:"{\"state\":\"success\", \"description\": \"#{message}\", \"context\": \"coverage\"}",
+          body: payload,
           error_handlers: {
             404 => proc do |result|
-              UI.message("Couldn't find resource: #{result[:json]}")
+              UI.message("Couldn't find resource: #{result[:body]}")
             end,
             '*' => proc do |result|
               UI.message("Unknown error: #{result[:json]}")
