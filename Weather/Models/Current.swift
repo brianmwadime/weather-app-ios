@@ -28,7 +28,7 @@ struct Current: Codable {
 
 extension Current: Equatable {
   static func == (lhs: Current, rhs: Current) -> Bool {
-    return Date(timeIntervalSince1970: lhs.dt).dayOfTheWeek == Date(timeIntervalSince1970: rhs.dt).dayOfTheWeek
+    return lhs.date.dayOfTheWeek == rhs.date.dayOfTheWeek
   }
 }
 
