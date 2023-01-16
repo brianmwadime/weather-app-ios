@@ -88,7 +88,6 @@
 		75C7C2442972B89F004E266D /* WeatherForecast+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C7C23A2972B89F004E266D /* WeatherForecast+CoreDataProperties.swift */; };
 		75C7C2462972C8D0004E266D /* SchemaMigration.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 75C7C2452972C8D0004E266D /* SchemaMigration.xcmappingmodel */; };
 		75C7C2482972E489004E266D /* ModelV5MigrationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C7C2472972E488004E266D /* ModelV5MigrationPolicy.swift */; };
-		75C7C24B2972FB67004E266D /* TMLPersistentContainer in Frameworks */ = {isa = PBXBuildFile; productRef = 75C7C24A2972FB67004E266D /* TMLPersistentContainer */; };
 		75F3B11529660611008B0D7A /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F3B11429660611008B0D7A /* StringExtensionsTests.swift */; };
 		75F3B11C29661CDF008B0D7A /* LocationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F3B11B29661CDF008B0D7A /* LocationSearchViewModel.swift */; };
 		75F3B11E29662ACA008B0D7A /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F3B11D29662ACA008B0D7A /* ViewExtensions.swift */; };
@@ -218,7 +217,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75C7C24B2972FB67004E266D /* TMLPersistentContainer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,7 +562,6 @@
 			);
 			name = Weather;
 			packageProductDependencies = (
-				75C7C24A2972FB67004E266D /* TMLPersistentContainer */,
 			);
 			productName = Weather;
 			productReference = 75042716295DFD8B00F04A5E /* Weather.app */;
@@ -639,7 +636,6 @@
 			);
 			mainGroup = 7504270D295DFD8B00F04A5E;
 			packageReferences = (
-				75C7C2492972FB67004E266D /* XCRemoteSwiftPackageReference "TMLPersistentContainer" */,
 			);
 			productRefGroup = 75042717295DFD8B00F04A5E /* Products */;
 			projectDirPath = "";
@@ -1148,25 +1144,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		75C7C2492972FB67004E266D /* XCRemoteSwiftPackageReference "TMLPersistentContainer" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/johnfairh/TMLPersistentContainer";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		75C7C24A2972FB67004E266D /* TMLPersistentContainer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 75C7C2492972FB67004E266D /* XCRemoteSwiftPackageReference "TMLPersistentContainer" */;
-			productName = TMLPersistentContainer;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		75042724295DFDA100F04A5E /* Weather.xcdatamodeld */ = {
