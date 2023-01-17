@@ -13,5 +13,5 @@ protocol ModelConvertible {
   associatedtype ModelType: Codable
 
   /// Converts a conforming instance to `ModelType` instance
-  func toModel() -> ModelType?
+  func toModel() -> ModelType
 }

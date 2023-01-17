@@ -13,5 +13,5 @@ protocol NSManagedObjectConvertible {
   /// Should be an `NSManagedObject` subclass.
   associatedtype ObjectType: NSManagedObject
   /// Converts Model to  specified `NSManagedObject` subclass
-  func toNSManagedObject(in context: NSManagedObjectContext) -> ObjectType?
+  func toNSManagedObject(in context: NSManagedObjectContext) -> ObjectType
 }
