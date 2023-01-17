@@ -141,11 +141,8 @@ extension Current {
 }
 
 extension Current: NSManagedObjectConvertible {
-  func toNSManagedObject(in context: NSManagedObjectContext) -> CurrentWeather? {
-    guard let entityDescription = NSEntityDescription.entity(forEntityName: "Current", in: context) else {
-      NSLog("Can't create entity Current")
-      return nil
-    }
+  func toNSManagedObject(in context: NSManagedObjectContext) -> CurrentWeather {
+    let entityDescription = CurrentWeather.entity()
 
     let object = CurrentWeather(entity: entityDescription, insertInto: context)
 
@@ -153,10 +150,7 @@ extension Current: NSManagedObjectConvertible {
       object.timezone = timezone
     }
 
-    guard let weatherDescription = NSEntityDescription.entity(forEntityName: "Weather", in: context) else {
-      NSLog("Can't create entity Weather")
-      return nil
-    }
+    let weatherDescription = WeatherCurrent.entity()
 
     for weather in self.weather {
 
@@ -168,10 +162,7 @@ extension Current: NSManagedObjectConvertible {
       object.addToWeather(weatherEntity)
     }
 
-    guard let mainDescription = NSEntityDescription.entity(forEntityName: "Main", in: context) else {
-      NSLog("Can't create entity Main")
-      return nil
-    }
+    let mainDescription = MainCurrent.entity()
 
     let mainEntity = MainCurrent(entity: mainDescription, insertInto: context)
     mainEntity.temp = main.temp

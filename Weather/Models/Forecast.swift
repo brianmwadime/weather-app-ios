@@ -44,16 +44,13 @@ struct Forecast: Codable {
 }
 
 extension Forecast: NSManagedObjectConvertible {
-  func toNSManagedObject(in context: NSManagedObjectContext) -> WeatherForecast? {
+  func toNSManagedObject(in context: NSManagedObjectContext) -> WeatherForecast {
     let entityDescription = WeatherForecast.entity()
 
     let forecastEntity = WeatherForecast(entity: entityDescription, insertInto: context)
 
     for current in self.list {
-
-      if let currentEntity = current.toNSManagedObject(in: context) {
-        forecastEntity.addToList(currentEntity)
-      }
+      forecastEntity.addToList(current.toNSManagedObject(in: context))
     }
 
     forecastEntity.lastUpdated = Date.now
