@@ -12,7 +12,7 @@ import CoreData
 extension MainCurrent {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<MainCurrent> {
-        return NSFetchRequest<MainCurrent>(entityName: "Main")
+        return NSFetchRequest<MainCurrent>(entityName: "MainCurrent")
     }
 
     @NSManaged public var feels_like: Double
@@ -30,9 +30,7 @@ extension MainCurrent: Identifiable {
 }
 
 extension MainCurrent: ModelConvertible {
-  typealias ModelType = Current.Main
-
-  func toModel() -> Current.Main? {
+  func toModel() -> Current.Main {
     return Current.Main(
       temp: self.temp,
       feels_like: self.feels_like,

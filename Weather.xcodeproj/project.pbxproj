@@ -204,6 +204,7 @@
 		75C7C23A2972B89F004E266D /* WeatherForecast+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherForecast+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		75C7C2452972C8D0004E266D /* SchemaMigration.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = SchemaMigration.xcmappingmodel; sourceTree = "<group>"; };
 		75C7C2472972E488004E266D /* ModelV5MigrationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelV5MigrationPolicy.swift; sourceTree = "<group>"; };
+		75C7C24C2976E39D004E266D /* Weather 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Weather 6.xcdatamodel"; sourceTree = "<group>"; };
 		75F3B11429660611008B0D7A /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
 		75F3B11B29661CDF008B0D7A /* LocationSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchViewModel.swift; sourceTree = "<group>"; };
 		75F3B11D29662ACA008B0D7A /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
@@ -1149,13 +1150,14 @@
 		75042724295DFDA100F04A5E /* Weather.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				75C7C24C2976E39D004E266D /* Weather 6.xcdatamodel */,
 				7531142C296F1A0100A692B9 /* Weather 5.xcdatamodel */,
 				75311427296EFA6B00A692B9 /* Weather 4.xcdatamodel */,
 				75B672A4296C4902003E73F1 /* Weather 3.xcdatamodel */,
 				75F3B12B2966D0C0008B0D7A /* Weather 2.xcdatamodel */,
 				75042725295DFDA100F04A5E /* Weather.xcdatamodel */,
 			);
-			currentVersion = 7531142C296F1A0100A692B9 /* Weather 5.xcdatamodel */;
+			currentVersion = 75C7C24C2976E39D004E266D /* Weather 6.xcdatamodel */;
 			path = Weather.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
