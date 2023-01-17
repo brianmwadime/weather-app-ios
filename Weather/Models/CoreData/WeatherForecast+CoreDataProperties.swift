@@ -42,8 +42,6 @@ extension WeatherForecast: Identifiable {
 }
 
 extension WeatherForecast: ModelConvertible {
-  typealias ModelType = Forecast
-
   func toModel() -> Forecast? {
     let forecasts = self.list.array(of: CurrentWeather.self)
 

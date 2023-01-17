@@ -46,8 +46,6 @@ extension CurrentWeather: Identifiable {
 }
 
 extension CurrentWeather: ModelConvertible {
-  typealias ModelType = Current
-
   func toModel() -> Current? {
     let weathers = self.weather.array(of: WeatherCurrent.self)
 
@@ -67,6 +65,7 @@ extension CurrentWeather: ModelConvertible {
       rain: nil,
       wind: Current.Wind.empty(),
       clouds: Current.Clouds.empty(),
-      timezone: self.timezone)
+      timezone: self.timezone,
+      lastUpdated: self.lastUpdated)
   }
 }

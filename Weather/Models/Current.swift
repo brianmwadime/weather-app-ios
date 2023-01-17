@@ -24,6 +24,7 @@ struct Current: Codable {
   /// Date object
   var date: Date { Date(timeIntervalSince1970: dt) }
   let timezone: Double?
+  let lastUpdated: Date?
 }
 
 extension Current: Equatable {
@@ -55,7 +56,7 @@ extension Current {
   struct Rain: Codable {
     let last1h: Double?
     let last3h: Double?
-
+    /// Returns empty instance
     enum CodingKeys: String, CodingKey {
       case last1h = "1h"
       case last3h = "3h"
@@ -69,7 +70,7 @@ extension Current {
     let speed: Double?
     let deg: Int?
     let gust: Double?
-
+    /// Returns empty instance
     static func empty() -> Self {
       return Wind(
         speed: 0,
@@ -83,7 +84,7 @@ extension Current {
   /// Clouds object
   struct Clouds: Codable {
     let all: Int
-
+    /// Returns empty instance
     static func empty() -> Self {
       return Clouds(all: 0)
     }
@@ -102,6 +103,7 @@ extension Current {
     let sea_level: Int?
     let grnd_level: Int?
 
+    /// Returns empty instance
     static func empty() -> Self {
       return Main(
         temp: 0,
@@ -117,6 +119,7 @@ extension Current {
 }
 
 extension Current {
+  /// Returns empty instance
   static func empty() -> Self {
     return Current(
       dt: 0,
@@ -132,7 +135,8 @@ extension Current {
       rain: nil,
       wind: Wind.empty(),
       clouds: Clouds(all: 0),
-      timezone: 0)
+      timezone: 0,
+      lastUpdated: nil)
   }
 }
 
@@ -178,6 +182,7 @@ extension Current: NSManagedObjectConvertible {
 
     object.main = mainEntity
     object.dt = Date(timeIntervalSince1970: dt)
+    object.lastUpdated = Date.now
 
     return object
   }

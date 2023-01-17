@@ -14,6 +14,7 @@ struct Forecast: Codable {
   /// List of `Current` for the weather forecast
   let list: [Current]
 
+  /// Returns a five day forcast parsed from the `list` of 3 hour intervals  `Current` object.
   var fiveDayForcast: [Current] {
     var result: [Current] = []
     guard var before = list.first else {
@@ -34,6 +35,7 @@ struct Forecast: Codable {
     return result
   }
 
+  /// Returns an empty instance
   static func empty() -> Self {
     return Forecast(
       message: 0,
@@ -53,6 +55,8 @@ extension Forecast: NSManagedObjectConvertible {
         forecastEntity.addToList(currentEntity)
       }
     }
+
+    forecastEntity.lastUpdated = Date.now
 
     return forecastEntity
   }

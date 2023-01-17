@@ -9,9 +9,9 @@ import Foundation
 import CoreData
 
 protocol ModelConvertible {
-  /// The Model to convert to
-  associatedtype ModelType
+  /// The Model to convert to that conforms to Codable
+  associatedtype ModelType: Codable
 
-  /// converts a confroming instance to `ModelType` instance
+  /// Converts a conforming instance to `ModelType` instance
   func toModel() -> ModelType?
 }
