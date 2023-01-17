@@ -114,8 +114,10 @@ class FavoritesViewModel: ObservableObject {
 
   func clearForcast() {
     do {
+      try repository.deleteAll(WeatherCurrent.fetchRequest())
       try repository.deleteAll(CurrentWeather.fetchRequest())
       try repository.deleteAll(WeatherForecast.fetchRequest())
+      try repository.deleteAll(MainCurrent.fetchRequest())
     } catch {
       print("\(error.localizedDescription)")
     }
