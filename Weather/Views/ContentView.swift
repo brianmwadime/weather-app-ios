@@ -16,7 +16,6 @@ struct ContentView: View {
   @StateObject var favoritesViewModel: FavoritesViewModel
   @State var isFavoriteLocations: Bool = false
   @EnvironmentObject var locationService: LocationService
-  @EnvironmentObject var connectivity: Connectivity
   @Environment(\.openURL) var openURL
   @Environment(\.appBackgroundColor) var appBackgroundColor
 
