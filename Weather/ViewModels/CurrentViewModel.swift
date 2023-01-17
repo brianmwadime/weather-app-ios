@@ -24,6 +24,10 @@ class CurrentViewModel: ObservableObject {
     current?.timezone ?? 0
   }
 
+  var lastUpdated: Date? {
+    current?.lastUpdated
+  }
+
   var weather: Current.Weather? {
     current?.weather[safe: 0]
   }
