@@ -55,9 +55,7 @@ class ForecastViewModel: ObservableObject {
       try repository?.deleteAll(WeatherForecast.fetchRequest())
 
       guard let context = repository?.context else {return}
-      if let currentEntity = forecast.toNSManagedObject(in: context) {
-        try repository?.create(currentEntity)
-      }
+      try repository?.create(forecast.toNSManagedObject(in: context))
     } catch {
       print("\(error.localizedDescription)")
     }
