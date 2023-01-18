@@ -18,7 +18,7 @@ struct FavoritesView: View {
   var body: some View {
     ZStack {
       Color.black
-        .ignoresSafeArea(.all)
+        .ignoresSafeArea()
       if query.isEmpty {
         ZStack {
           if viewModel.getAnnotations().isEmpty {

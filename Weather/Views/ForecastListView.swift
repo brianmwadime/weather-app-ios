@@ -15,7 +15,7 @@ struct ForecastListView: View {
   var body: some View {
     ZStack {
       appBackgroundColor.wrappedValue
-        .ignoresSafeArea(.all)
+        .ignoresSafeArea()
       VStack(spacing: 0) {
         Divider()
           .frame(height: 16)

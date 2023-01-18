@@ -19,7 +19,8 @@ struct WeatherFactory {
       rain: createRain(),
       wind: createWind(),
       clouds: createClouds(),
-      timezone: 0)
+      timezone: 0,
+      lastUpdated: nil)
   }
 
   static func createForecast(with coordinates: Current.Coordinates) -> Forecast {

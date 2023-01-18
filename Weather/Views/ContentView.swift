@@ -26,7 +26,7 @@ struct ContentView: View {
           ProgressView()
         } else {
           appBackgroundColor.wrappedValue
-            .ignoresSafeArea(.all)
+            .ignoresSafeArea()
           ScrollView {
             VStack {
               CurrentView(vm: currentViewModel)
