@@ -119,7 +119,9 @@ class FavoritesViewModel: ObservableObject {
       try repository.deleteAll(WeatherForecast.fetchRequest())
       try repository.deleteAll(MainCurrent.fetchRequest())
     } catch {
-      print("\(error.localizedDescription)")
+        #if DEBUG
+          print("\(error.localizedDescription)")
+        #endif
     }
   }
 

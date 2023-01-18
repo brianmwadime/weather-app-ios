@@ -55,7 +55,9 @@ class LocationSearchViewModel: NSObject, ObservableObject, MKLocalSearchComplete
         }
       }
       if let error = error {
-        print("Error: \(error)")
+        #if DEBUG
+          print("\(error.localizedDescription)")
+        #endif
       }
     }
   }
@@ -78,7 +80,9 @@ class LocationSearchViewModel: NSObject, ObservableObject, MKLocalSearchComplete
   }
 
   func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-    print("Completer failed with some error: \(error)")
+    #if DEBUG
+      print("Completer failed with some error: \(error)")
+    #endif
     isSearching = false
     self.error = error
   }

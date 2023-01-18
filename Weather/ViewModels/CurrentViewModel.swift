@@ -94,7 +94,9 @@ class CurrentViewModel: ObservableObject {
       guard let context = repository?.context else {return}
       try repository?.create(current.toNSManagedObject(in: context))
     } catch {
-      print("\(error.localizedDescription)")
+      #if DEBUG
+        print("\(error.localizedDescription)")
+      #endif
     }
   }
 }
