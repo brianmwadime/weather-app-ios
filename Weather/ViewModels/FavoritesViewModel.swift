@@ -82,13 +82,12 @@ class FavoritesViewModel: ObservableObject {
 
     request.fetchLimit = 1
 
-    if let result = try? repository.context.fetch(request),
-       let favoriteLocation = result.first {
-      do {
-        try repository.delete(favoriteLocation)
-      } catch {
+    do {
+      let result = try repository.context.fetch(request)
+      guard let favoriteLocation = result.first else {return}
+      try repository.delete(favoriteLocation)
+    } catch {
 
-      }
     }
   }
 
