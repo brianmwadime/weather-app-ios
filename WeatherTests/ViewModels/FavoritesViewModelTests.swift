@@ -9,6 +9,7 @@ import Foundation
 import XCTest
 import Combine
 import CoreData
+import CoreLocation
 @testable import Weather
 
 final class FavoritesViewModelTests: XCTestCase {
@@ -86,4 +87,37 @@ final class FavoritesViewModelTests: XCTestCase {
     XCTAssertNotNil(annotations)
   }
 
+  func test_FavouritesViewModel_delete_FavoriteLocation() {
+    let city = "That Place"
+    let latitude = 1.2345
+    let longitude = 32.234
+
+    guard let favoriteSaved = sut?.save(city: city, latitude: latitude, longitude: longitude) else {
+      XCTFail("Failed to create FavoriteLocation")
+      return
+    }
+
+    let annotation = MapAnnotation(
+      id: favoriteSaved.favoriteID,
+      name: favoriteSaved.city,
+      coordinate: CLLocationCoordinate2D(
+        latitude: favoriteSaved.latitude,
+        longitude: favoriteSaved.longitude)
+    )
+
+    sut?.delete(annotation)
+
+    let expectation = XCTestExpectation(description: "Should have 0 favorite locations")
+
+    sut?.$favorites
+    // Drop first to ignore the initial value
+      .dropFirst()
+      .sink { favorites in
+        XCTAssertEqual(favorites.count, 0)
+        expectation.fulfill()
+      }.store(in: &cancellables)
+    sut?.fetch()
+
+    wait(for: [expectation], timeout: 1)
+  }
 }

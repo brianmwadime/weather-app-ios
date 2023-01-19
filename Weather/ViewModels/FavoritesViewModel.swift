@@ -64,14 +64,6 @@ class FavoritesViewModel: ObservableObject {
     }
   }
 
-  func delete(_ location: FavoriteLocation) {
-    do {
-      try repository.delete(location)
-    } catch {
-
-    }
-  }
-
   func delete(_ favorite: MapAnnotation) {
     let request = FavoriteLocation.fetchRequest()
     request.predicate = NSPredicate(
@@ -89,18 +81,6 @@ class FavoritesViewModel: ObservableObject {
     } catch {
 
     }
-  }
-
-  func deleteItems(_ offsets: IndexSet) {
-    offsets.map { favorites[$0] }.forEach { toDelete in
-      do {
-        try repository.delete(toDelete)
-      } catch {
-
-      }
-    }
-
-    favorites.remove(atOffsets: offsets)
   }
 
   func removeAll() {
