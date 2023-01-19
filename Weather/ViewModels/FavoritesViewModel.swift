@@ -82,13 +82,12 @@ class FavoritesViewModel: ObservableObject {
 
     request.fetchLimit = 1
 
-    if let result = try? repository.context.fetch(request),
-       let favoriteLocation = result.first {
-      do {
-        try repository.delete(favoriteLocation)
-      } catch {
+    do {
+      let result = try repository.context.fetch(request)
+      guard let favoriteLocation = result.first else {return}
+      try repository.delete(favoriteLocation)
+    } catch {
 
-      }
     }
   }
 
@@ -114,10 +113,14 @@ class FavoritesViewModel: ObservableObject {
 
   func clearForcast() {
     do {
+      try repository.deleteAll(WeatherCurrent.fetchRequest())
       try repository.deleteAll(CurrentWeather.fetchRequest())
       try repository.deleteAll(WeatherForecast.fetchRequest())
+      try repository.deleteAll(MainCurrent.fetchRequest())
     } catch {
-      print("\(error.localizedDescription)")
+        #if DEBUG
+          print("\(error.localizedDescription)")
+        #endif
     }
   }
 

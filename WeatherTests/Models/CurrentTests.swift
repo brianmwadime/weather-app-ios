@@ -41,7 +41,6 @@ class CurrentTests: XCTestCase {
 
     XCTAssertEqual(coord.lat, 44.34)
     XCTAssertEqual(coord.lon, 10.99)
-
   }
 
   func test_current_has_weather_array() {
@@ -106,13 +105,24 @@ class CurrentTests: XCTestCase {
     XCTAssertNotNil(current.timezone)
   }
 
-  func test_current_return_FavoriteCurrent() {
-    let context = getCoreDataContext()
+  func test_Current_returns_empty() {
+    XCTAssertNotNil(Current.empty())
+  }
 
-    let dataObject = current.toNSManagedObject(in: context)
+  func test_CurrentMain_returns_empty() {
+    XCTAssertNotNil(Current.Main.empty())
+  }
 
-    XCTAssertNotNil(dataObject)
-    XCTAssert((dataObject as Any) is CurrentWeather)
+  func test_CurrentWeather_returns_empty() {
+    XCTAssertNotNil(Current.Weather.empty())
+  }
+
+  func test_CurrentClouds_returns_empty() {
+    XCTAssertNotNil(Current.Clouds.empty())
+  }
+
+  func test_CurrentWind_returns_empty() {
+    XCTAssertNotNil(Current.Wind.empty())
   }
 }
 

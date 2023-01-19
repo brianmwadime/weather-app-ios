@@ -36,7 +36,7 @@ struct ConditionType {
   }
 
   /// Weather condition type
-  enum Condition: String {
+  @frozen enum Condition: String {
     case sunny
     case cloudy
     case rainy

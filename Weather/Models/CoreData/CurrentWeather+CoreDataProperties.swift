@@ -12,11 +12,11 @@ import CoreData
 extension CurrentWeather {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<CurrentWeather> {
-        return NSFetchRequest<CurrentWeather>(entityName: "Current")
+        return NSFetchRequest<CurrentWeather>(entityName: "CurrentWeather")
     }
 
     @NSManaged public var dt: Date
-    @NSManaged public var lastUpdated: Date
+    @NSManaged public var lastUpdated: Date?
     @NSManaged public var timezone: Double
     @NSManaged public var main: MainCurrent
     @NSManaged public var weather: NSSet?
@@ -46,16 +46,14 @@ extension CurrentWeather: Identifiable {
 }
 
 extension CurrentWeather: ModelConvertible {
-  typealias ModelType = Current
-
-  func toModel() -> Current? {
+  func toModel() -> Current {
     let weathers = self.weather.array(of: WeatherCurrent.self)
 
     var weatherArray: [Current.Weather] = []
 
     for weather in weathers {
       weatherArray.append(
-        weather.toModel()!
+        weather.toModel()
       )
     }
 
@@ -63,10 +61,11 @@ extension CurrentWeather: ModelConvertible {
       dt: self.dt.timeIntervalSince1970,
       coord: nil,
       weather: weatherArray,
-      main: self.main.toModel()!,
+      main: self.main.toModel(),
       rain: nil,
       wind: Current.Wind.empty(),
       clouds: Current.Clouds.empty(),
-      timezone: self.timezone)
+      timezone: self.timezone,
+      lastUpdated: self.lastUpdated)
   }
 }

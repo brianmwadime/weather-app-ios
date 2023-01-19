@@ -24,11 +24,12 @@ struct Current: Codable {
   /// Date object
   var date: Date { Date(timeIntervalSince1970: dt) }
   let timezone: Double?
+  let lastUpdated: Date?
 }
 
 extension Current: Equatable {
   static func == (lhs: Current, rhs: Current) -> Bool {
-    return Date(timeIntervalSince1970: lhs.dt).dayOfTheWeek == Date(timeIntervalSince1970: rhs.dt).dayOfTheWeek
+    return lhs.date.dayOfTheWeek == rhs.date.dayOfTheWeek
   }
 }
 
@@ -47,6 +48,15 @@ extension Current {
     let main: String
     let description: String
     let icon: String
+    /// Returns empty instance
+    static func empty() -> Self {
+      return Weather(
+        id: 0,
+        main: "",
+        description: "",
+        icon: ""
+      )
+    }
   }
 }
 
@@ -55,7 +65,7 @@ extension Current {
   struct Rain: Codable {
     let last1h: Double?
     let last3h: Double?
-
+    /// Returns empty instance
     enum CodingKeys: String, CodingKey {
       case last1h = "1h"
       case last3h = "3h"
@@ -69,7 +79,7 @@ extension Current {
     let speed: Double?
     let deg: Int?
     let gust: Double?
-
+    /// Returns empty instance
     static func empty() -> Self {
       return Wind(
         speed: 0,
@@ -83,7 +93,7 @@ extension Current {
   /// Clouds object
   struct Clouds: Codable {
     let all: Int
-
+    /// Returns empty instance
     static func empty() -> Self {
       return Clouds(all: 0)
     }
@@ -102,6 +112,7 @@ extension Current {
     let sea_level: Int?
     let grnd_level: Int?
 
+    /// Returns empty instance
     static func empty() -> Self {
       return Main(
         temp: 0,
@@ -117,6 +128,7 @@ extension Current {
 }
 
 extension Current {
+  /// Returns empty instance
   static func empty() -> Self {
     return Current(
       dt: 0,
@@ -132,16 +144,14 @@ extension Current {
       rain: nil,
       wind: Wind.empty(),
       clouds: Clouds(all: 0),
-      timezone: 0)
+      timezone: 0,
+      lastUpdated: nil)
   }
 }
 
 extension Current: NSManagedObjectConvertible {
-  func toNSManagedObject(in context: NSManagedObjectContext) -> CurrentWeather? {
-    guard let entityDescription = NSEntityDescription.entity(forEntityName: "Current", in: context) else {
-      NSLog("Can't create entity Current")
-      return nil
-    }
+  func toNSManagedObject(in context: NSManagedObjectContext) -> CurrentWeather {
+    let entityDescription = CurrentWeather.entity()
 
     let object = CurrentWeather(entity: entityDescription, insertInto: context)
 
@@ -149,10 +159,7 @@ extension Current: NSManagedObjectConvertible {
       object.timezone = timezone
     }
 
-    guard let weatherDescription = NSEntityDescription.entity(forEntityName: "Weather", in: context) else {
-      NSLog("Can't create entity Weather")
-      return nil
-    }
+    let weatherDescription = WeatherCurrent.entity()
 
     for weather in self.weather {
 
@@ -164,10 +171,7 @@ extension Current: NSManagedObjectConvertible {
       object.addToWeather(weatherEntity)
     }
 
-    guard let mainDescription = NSEntityDescription.entity(forEntityName: "Main", in: context) else {
-      NSLog("Can't create entity Main")
-      return nil
-    }
+    let mainDescription = MainCurrent.entity()
 
     let mainEntity = MainCurrent(entity: mainDescription, insertInto: context)
     mainEntity.temp = main.temp
@@ -178,6 +182,7 @@ extension Current: NSManagedObjectConvertible {
 
     object.main = mainEntity
     object.dt = Date(timeIntervalSince1970: dt)
+    object.lastUpdated = Date.now
 
     return object
   }

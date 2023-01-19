@@ -12,6 +12,7 @@ import CoreData
 struct CurrentView: View {
   @ObservedObject var vm: CurrentViewModel
   @EnvironmentObject var locationService: LocationService
+  @EnvironmentObject var connectivity: Connectivity
   @Environment(\.appBackgroundColor) var appBackgroundColor
 
   var body: some View {
@@ -37,6 +38,13 @@ struct CurrentView: View {
             .foregroundColor(.white)
             .fontWeight(.semibold)
             .font(.system(size: 30))
+          if let lastUpdated = vm.lastUpdated, !connectivity.isConnected {
+            Text("last_updated \(lastUpdated.format(to: "dd/MM/YYYY hh:mm a"))")
+              .foregroundColor(.white)
+              .fontWeight(.regular)
+              .font(.system(size: 14))
+              .multilineTextAlignment(.center)
+          }
         }
         .offset(y: -28)
       }

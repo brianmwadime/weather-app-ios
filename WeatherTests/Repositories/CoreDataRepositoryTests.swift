@@ -169,4 +169,55 @@ final class CoreDataRepositoryTests: XCTestCase {
     XCTAssertEqual(fetchedLocations.count, 3)
   }
 
+  func test_FavoriteLocationRepository_fetches_predicate_objects() throws {
+    let latitude = 1.2345
+    let longitude = 32.234
+
+    for city in ["That Place", "This Place", "Other Place", "No other Place"] {
+      let favoriteLocation = FavoriteLocation(context: sut.context)
+      favoriteLocation.favoriteID = UUID()
+      favoriteLocation.city = city
+      favoriteLocation.latitude = latitude
+      favoriteLocation.longitude = longitude
+
+      try sut.create(favoriteLocation)
+    }
+
+    let predicate = NSPredicate(
+      format: "%K == %@",
+      #keyPath(FavoriteLocation.city),
+      "That Place"
+    )
+
+    let result = sut.fetch(FavoriteLocation.self, predicate: predicate, limit: 1)
+
+    let fetchedLocations = try result.get()
+
+    XCTAssertNotNil(fetchedLocations)
+    XCTAssertEqual(fetchedLocations.count, 1)
+  }
+
+  func test_FavoriteLocationRepository_batch_delete_objects() throws {
+    let latitude = 1.2345
+    let longitude = 32.234
+
+    for city in ["That Place", "This Place", "Other Place", "No other Place"] {
+      let favoriteLocation = FavoriteLocation(context: sut.context)
+      favoriteLocation.favoriteID = UUID()
+      favoriteLocation.city = city
+      favoriteLocation.latitude = latitude
+      favoriteLocation.longitude = longitude
+
+      try sut.create(favoriteLocation)
+    }
+
+    try sut.deleteAll(FavoriteLocation.fetchRequest())
+
+    let result = sut.fetch(FavoriteLocation.self, predicate: nil, limit: nil)
+
+    let fetchedLocations = try result.get()
+
+    XCTAssertEqual(fetchedLocations.count, 0)
+  }
+
 }

@@ -9,8 +9,9 @@ import Foundation
 import CoreData
 
 protocol NSManagedObjectConvertible {
-
+  /// The CoreData model to convert to.
+  /// Should be an `NSManagedObject` subclass.
   associatedtype ObjectType: NSManagedObject
-
-  func toNSManagedObject(in context: NSManagedObjectContext) -> ObjectType?
+  /// Converts Model to  specified `NSManagedObject` subclass
+  func toNSManagedObject(in context: NSManagedObjectContext) -> ObjectType
 }

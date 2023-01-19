@@ -12,20 +12,22 @@ import Network
 ///
 final class Connectivity: ObservableObject {
   let monitor: NWPathMonitor = NWPathMonitor()
-  let queue: DispatchQueue = DispatchQueue(label: "Connectivity")
+  let queue: DispatchQueue = DispatchQueue(label: "Connectivity", qos: .background)
 
   /// Returns whether theres a network connection
   ///
   @Published var isConnected = true
 
-  /// Starts network connection monitoring
-  func start() {
+  init() {
     monitor.pathUpdateHandler = { [weak self] path in
       DispatchQueue.main.async {
-        self?.isConnected = path.status == .satisfied ? true : false
+        self?.isConnected = path.status == .satisfied
       }
     }
+  }
 
+  /// Starts network connection monitoring
+  func start() {
     monitor.start(queue: queue)
   }
 

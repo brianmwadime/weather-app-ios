@@ -51,7 +51,7 @@ final class ForecastViewModelTests: XCTestCase {
   func test_ForecastViewModel_should_generate_5DayForcast() {
 
     sut?.fetchForecast(for: WeatherFactory.createCLLocation())
-    XCTAssertNotNil(sut?.forecast?.fiveDayForcast)
+    XCTAssertNotNil(sut?.fiveDayForcast)
   }
 
   func test_ForecastViewModel_should_fetch_Error() {
