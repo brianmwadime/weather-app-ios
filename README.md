@@ -54,14 +54,14 @@
 
   - [Localization](docs/localization.md)
 
-- Design Patterns
-  - [Example](docs/example.md)
-    - [Example Section](docs/example.md#example-sections)
-- Quality & Testing
-  - [Issue Triage](docs/issue-triage.md)
 - Features
-  - [In-app Feedback](docs/in-app-feedback.md)
-  - [Card Present Payments](docs/card-present-payments.md)
+  - Get weather forecast based on users's current location.
+  - Uses [Open Weather](https://openweathermap.org/api) to fetch weather data.
+  - Background Image and color changes depending on the type of weather.
+  - Ability to manage a list of favourite locations as well as show current weather conditions.
+  - Offline mode - App shows cached forecast info when device is offline.
+  - A Map view for displaying favourite locations.
+  - Uses MapKit's [`MKLocalSearch`](https://developer.apple.com/documentation/mapkit/mklocalsearch) to search and return extra info for provided coordinates.
 
 ## Automation
 

@@ -38,9 +38,6 @@ struct MapView: View {
         viewModel.fetch()
       }
       .ignoresSafeArea()
-      VStack {
-        Spacer()
-      }
     }
   }
 }
