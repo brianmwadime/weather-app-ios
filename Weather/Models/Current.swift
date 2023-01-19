@@ -48,6 +48,15 @@ extension Current {
     let main: String
     let description: String
     let icon: String
+    /// Returns empty instance
+    static func empty() -> Self {
+      return Weather(
+        id: 0,
+        main: "",
+        description: "",
+        icon: ""
+      )
+    }
   }
 }
 

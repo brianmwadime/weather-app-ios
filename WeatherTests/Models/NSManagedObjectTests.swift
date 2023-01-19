@@ -10,7 +10,7 @@ import XCTest
 
 final class NSManagedObjectTests: XCTestCase {
 
-  func test_NSManagedObject_to_model() throws {
+  func test_NSManagedObject_to_model() {
     let context = getCoreDataContext()
 
     let sut = WeatherCurrent(context: context)
