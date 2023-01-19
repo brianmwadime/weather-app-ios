@@ -6,7 +6,6 @@
 //
 
 import CoreData
-import TMLPersistentContainer
 
 public class PersistentContainer {
 
