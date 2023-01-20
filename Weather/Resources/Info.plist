@@ -7,11 +7,11 @@
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIColorName</key>
-		<string>White</string>
+		<string>launchScreenBackground</string>
 		<key>UIImageName</key>
 		<string>LaunchIcon</string>
 		<key>UIImageRespectsSafeAreaInsets</key>
-		<true/>
+		<false/>
 	</dict>
 </dict>
 </plist>

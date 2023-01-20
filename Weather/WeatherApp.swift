@@ -45,7 +45,6 @@ struct WeatherApp: App {
           self.connectivity.start()
           self.locationService.start()
         case .inactive:
-          self.connectivity.stop()
           self.locationService.stop()
         default:
           // ignore
@@ -78,8 +77,6 @@ struct WeatherApp: App {
     UINavigationBar.appearance().tintColor = .white
     UINavigationBar.appearance().barTintColor = .white
 
-//    UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = .white
-//    UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .black
     UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
   }
 }

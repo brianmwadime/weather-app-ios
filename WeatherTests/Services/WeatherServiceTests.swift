@@ -17,13 +17,14 @@ final class WeatherServiceTests: XCTestCase {
     let sut = WeatherService(network: MockNetworkService(data: expectedResponseData.encode(), error: nil))
 
     sut.fetchCurrent(coordinates: WeatherFactory.createNairobiCoordinates()) { result in
-      guard let responseData = try? result.get() else {
-        XCTFail("Should return Current repsonse")
-        return
-      }
 
-      XCTAssertEqual(responseData, expectedResponseData)
-      expectation.fulfill()
+      do {
+        let responseData = try result.get()
+        XCTAssertEqual(responseData, expectedResponseData)
+        expectation.fulfill()
+      } catch {
+        XCTFail("Should return Current repsonse: \(error.localizedDescription)")
+      }
     }
 
     wait(for: [expectation], timeout: 0.1)
@@ -36,13 +37,13 @@ final class WeatherServiceTests: XCTestCase {
     let sut = WeatherService(network: MockNetworkService(data: expectedResponseData.encode(), error: nil))
 
     sut.fetchForecast(coordinates: WeatherFactory.createNairobiCoordinates()) { result in
-      guard let responseData = try? result.get() else {
-        XCTFail("Should return Forecast repsonse")
-        return
+      do {
+        let responseData = try result.get()
+        XCTAssertEqual(responseData, expectedResponseData)
+        expectation.fulfill()
+      } catch {
+        XCTFail("Should return Forecast repsonse: \(error.localizedDescription)")
       }
-
-      XCTAssertEqual(responseData, expectedResponseData)
-      expectation.fulfill()
     }
 
     wait(for: [expectation], timeout: 0.1)
@@ -52,7 +53,14 @@ final class WeatherServiceTests: XCTestCase {
 extension Current {
   func encode() -> Data? {
     let encoder = JSONEncoder()
-    return try? encoder.encode(self)
+
+    do {
+      return try encoder.encode(self)
+    } catch {
+
+    }
+
+    return  nil
   }
 }
 
@@ -63,6 +71,12 @@ extension Forecast: Equatable {
 
   func encode() -> Data? {
     let encoder = JSONEncoder()
-    return try? encoder.encode(self)
+    do {
+      return try encoder.encode(self)
+    } catch {
+
+    }
+
+    return  nil
   }
 }

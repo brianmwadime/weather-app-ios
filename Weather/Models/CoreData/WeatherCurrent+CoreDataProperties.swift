@@ -12,7 +12,7 @@ import CoreData
 extension WeatherCurrent {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<WeatherCurrent> {
-        return NSFetchRequest<WeatherCurrent>(entityName: "Weather")
+        return NSFetchRequest<WeatherCurrent>(entityName: "WeatherCurrent")
     }
 
     @NSManaged public var icon: String
@@ -30,7 +30,7 @@ extension WeatherCurrent: Identifiable {
 extension WeatherCurrent: ModelConvertible {
   typealias ModelType = Current.Weather
 
-  func toModel() -> Current.Weather? {
+  func toModel() -> Current.Weather {
     return Current.Weather(
       id: Int(self.weather_id),
       main: self.main,

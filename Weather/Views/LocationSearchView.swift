@@ -16,7 +16,7 @@ struct LocationSearchView: View {
 
   var body: some View {
     ZStack {
-      Color.clear.ignoresSafeArea(.all)
+      Color.clear.ignoresSafeArea()
       VStack(alignment: .center) {
         switch (searchModel.isSearching, searchModel.locations) {
           case (_, let locations) where !locations.isEmpty:

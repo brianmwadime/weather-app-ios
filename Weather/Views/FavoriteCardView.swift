@@ -22,17 +22,21 @@ struct FavoriteCardView: View {
       }
       Spacer()
       VStack(alignment: .trailing) {
-        Text(Date.now.format(with: currentViewModel.timeZone))
-          .foregroundColor(Color.white)
+        if currentViewModel.date != nil {
+          Text(Date.now.format(with: currentViewModel.timeZone))
+            .foregroundColor(Color.white)
+        }
         Spacer()
         HStack(alignment: .center, spacing: 4) {
-          Text("\(currentViewModel.feelsLike?.roundDouble() ?? "not_available".localized())°")
-            .foregroundColor(Color.white)
-          Image.iconFor(condition: currentViewModel.condition)?
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .foregroundColor(Color.white)
-            .frame(width: 32, height: 32, alignment: .center)
+          if currentViewModel.feelsLike != nil {
+            Text("\(currentViewModel.feelsLike?.roundDouble() ?? "not_available".localized())°")
+              .foregroundColor(Color.white)
+            Image.iconFor(condition: currentViewModel.condition)?
+              .resizable()
+              .aspectRatio(contentMode: .fit)
+              .foregroundColor(Color.white)
+              .frame(width: 32, height: 32, alignment: .center)
+          }
         }
       }
     }

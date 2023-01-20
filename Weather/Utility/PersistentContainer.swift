@@ -6,7 +6,6 @@
 //
 
 import CoreData
-import TMLPersistentContainer
 
 public class PersistentContainer {
 
@@ -15,8 +14,6 @@ public class PersistentContainer {
   public static var context: NSManagedObjectContext {
     return persistentContainer.viewContext
   }
-
-  private init() { }
 
   /// Core Data stack
   ///
@@ -34,6 +31,10 @@ public class PersistentContainer {
     container.viewContext.automaticallyMergesChangesFromParent = true
     return container
   }()
+
+  private init() {
+
+  }
 
   /// Core Data Saving support
   /// 

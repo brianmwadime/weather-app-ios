@@ -24,6 +24,10 @@ class CurrentViewModel: ObservableObject {
     current?.timezone ?? 0
   }
 
+  var lastUpdated: Date? {
+    current?.lastUpdated
+  }
+
   var weather: Current.Weather? {
     current?.weather[safe: 0]
   }
@@ -88,11 +92,11 @@ class CurrentViewModel: ObservableObject {
       try repository?.deleteAll(CurrentWeather.fetchRequest())
 
       guard let context = repository?.context else {return}
-      if let currentEntity = current.toNSManagedObject(in: context) {
-        try repository?.create(currentEntity)
-      }
+      try repository?.create(current.toNSManagedObject(in: context))
     } catch {
-      print("\(error.localizedDescription)")
+      #if DEBUG
+        print("\(error.localizedDescription)")
+      #endif
     }
   }
 }

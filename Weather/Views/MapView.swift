@@ -25,9 +25,10 @@ struct MapView: View {
       longitudeDelta: 0.5))
 
   var body: some View {
-    Map(coordinateRegion: $region, annotationItems: viewModel.getAnnotations()) { place in
-      MapMarker(coordinate: place.coordinate, tint: Color.red)
-    }
+    ZStack {
+      Map(coordinateRegion: $region, annotationItems: viewModel.getAnnotations()) { place in
+        MapMarker(coordinate: place.coordinate, tint: Color.red)
+      }
       .onAppear {
 
         if let coord = locationService.lastLocation?.coordinate {
@@ -36,6 +37,7 @@ struct MapView: View {
 
         viewModel.fetch()
       }
-      .ignoresSafeArea(.all)
+      .ignoresSafeArea()
+    }
   }
 }

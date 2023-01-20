@@ -20,3 +20,4 @@ saved_location = "Saved Location";
 my_location = "My Location";
 no_forecast = "Forecast not available.\nTry again later.";
 favorites_screen_title = "Weather";
+"last_updated %@" = "Last updated at \n %@";
