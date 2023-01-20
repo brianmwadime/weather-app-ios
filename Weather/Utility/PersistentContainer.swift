@@ -15,8 +15,6 @@ public class PersistentContainer {
     return persistentContainer.viewContext
   }
 
-  private init() { }
-
   /// Core Data stack
   ///
   public static var persistentContainer: NSPersistentContainer = {
@@ -33,6 +31,10 @@ public class PersistentContainer {
     container.viewContext.automaticallyMergesChangesFromParent = true
     return container
   }()
+
+  private init() {
+
+  }
 
   /// Core Data Saving support
   /// 
