@@ -35,10 +35,13 @@ final class ForecastViewModel: ObservableObject {
     }
 
     guard let coordinates = location?.coordinate else {return}
-    let currentCoordinates = Current.Coordinates(
-      lat: coordinates.latitude,
-      lon: coordinates.longitude)
-    weatherService.fetchForecast(coordinates: currentCoordinates) { result in
+    let params = [
+      "lat": "\(coordinates.latitude)",
+      "lon": "\(coordinates.latitude)",
+      "appid": Constants.openWeatherMapApi,
+      "units": Constants.UnitsType.getUnitsName(by: UserDefaults.standard.integer(forKey: "units"))
+    ]
+    weatherService.fetchForecast(params: params) { result in
       switch result {
         case .success(let forecast):
           self.saveToDatabase(forecast)
