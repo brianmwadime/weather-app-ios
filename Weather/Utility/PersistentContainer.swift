@@ -7,7 +7,7 @@
 
 import CoreData
 
-public class PersistentContainer {
+final class PersistentContainer {
 
   /// CoreData context object
   ///

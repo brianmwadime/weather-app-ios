@@ -7,7 +7,7 @@
 
 import Foundation
 
-class WeatherService: WeatherServiceProtocol {
+final class WeatherService: WeatherServiceProtocol {
 
   let network: NetworkService
 

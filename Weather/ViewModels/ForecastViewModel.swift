@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-class ForecastViewModel: ObservableObject {
+final class ForecastViewModel: ObservableObject {
   @Published var forecast: Forecast? = nil
   @Published var error: Error?
 

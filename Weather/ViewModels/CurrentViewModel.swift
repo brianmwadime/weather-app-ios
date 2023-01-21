@@ -8,7 +8,7 @@ import Foundation
 import CoreLocation
 import SwiftUI
 
-class CurrentViewModel: ObservableObject {
+final class CurrentViewModel: ObservableObject {
   @Published var current: Current? = nil
   @Published var error: Error?
 

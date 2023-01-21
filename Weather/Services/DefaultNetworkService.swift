@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class DefaultNetworkService: NetworkService {
+final class DefaultNetworkService: NetworkService {
   public init() {}
   func execute<T>(with request: URLRequest, model: T.Type, completion: @escaping (Result<T, Error>) -> Void) where T: Decodable {
     URLSession.shared.dataTask(with: request) { data, response, error in
