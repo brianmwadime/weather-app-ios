@@ -18,7 +18,7 @@ struct SelectLocationContent: View {
           self.action()
         }
         .padding()
-        .background(Color.green)
+//        .background(Color.)
         .cornerRadius(10)
       }
     }

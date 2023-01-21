@@ -13,10 +13,10 @@ struct WelcomeView: View {
   var body: some View {
     VStack {
       VStack {
-        Image("LaunchIcon")
-          .resizable()
-          .scaledToFit()
-          .padding()
+//        Image("LaunchIcon")
+//          .resizable()
+//          .scaledToFit()
+//          .padding()
         Text("Weather")
           .font(.system(size: 28, weight: .bold, design: .rounded))
       }

@@ -12,14 +12,17 @@ protocol WeatherServiceProtocol: AnyObject {
   /// Fetches  `Current` weather object
   ///
   /// - Parameters:
-  ///  - coordinates: `Current.Coordinates` for location
+  ///  - params: `Dictionary` of parameters
   ///  - completion: Completion object with `Result<Current, Error>`
-  func fetchCurrent(coordinates: Current.Coordinates, completion: @escaping (Result<Current, Error>) -> Void)
+  func fetchCurrent(params: [String: String?], completion: @escaping (Result<Current, Error>) -> Void)
 
   /// Fetches  `Forecast` weather object
   /// 
   /// - Parameters:
-  ///  - coordinates: `Current.Coordinates` for location
+  ///  - params: `Dictionary` of parameters
   ///  - completion: Completion object with `Result<Forecast, Error>`
-  func fetchForecast(coordinates: Current.Coordinates, completion: @escaping (Result<Forecast, Error>)  -> Void)
+  func fetchForecast(params: [String: String?], completion: @escaping (Result<Forecast, Error>)  -> Void)
+
+  /// Build `URL` resource
+  func buildURL(base: String, params: [String: String?]) -> URL?
 }

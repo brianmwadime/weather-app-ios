@@ -44,7 +44,6 @@ struct FavoriteCardView: View {
       EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
     )
     .background(Color(currentViewModel.condition))
-    .border(.white, width: 2)
     .onAppear {
       currentViewModel.fetchCurrent(
         for: CLLocation(latitude: favorite.coordinate.latitude, longitude: favorite.coordinate.longitude))

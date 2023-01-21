@@ -17,13 +17,12 @@ struct FavoritesView: View {
 
   var body: some View {
     ZStack {
-      Color.black
-        .ignoresSafeArea()
+//      Color.primary
+//        .ignoresSafeArea()
       if query.isEmpty {
         ZStack {
           if viewModel.getAnnotations().isEmpty {
             Text("search_prompt".localized())
-              .foregroundColor(Color.white)
           }
 
           if let favorites = viewModel.getAnnotations() {
