@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import CoreLocation
 
-class FavoritesViewModel: ObservableObject {
+final class FavoritesViewModel: ObservableObject {
   @Published var favorites: [FavoriteLocation] = []
   @Published var error: Error?
 

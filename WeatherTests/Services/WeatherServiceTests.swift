@@ -16,7 +16,11 @@ final class WeatherServiceTests: XCTestCase {
 
     let sut = WeatherService(network: MockNetworkService(data: expectedResponseData.encode(), error: nil))
 
-    sut.fetchCurrent(coordinates: WeatherFactory.createNairobiCoordinates()) { result in
+    let params = buildParams(
+      lat: WeatherFactory.createNairobiCoordinates().lat,
+      lon: WeatherFactory.createNairobiCoordinates().lon)
+
+    sut.fetchCurrent(params: params) { result in
 
       do {
         let responseData = try result.get()
@@ -36,7 +40,11 @@ final class WeatherServiceTests: XCTestCase {
 
     let sut = WeatherService(network: MockNetworkService(data: expectedResponseData.encode(), error: nil))
 
-    sut.fetchForecast(coordinates: WeatherFactory.createNairobiCoordinates()) { result in
+    let params = buildParams(
+      lat: WeatherFactory.createNairobiCoordinates().lat,
+      lon: WeatherFactory.createNairobiCoordinates().lon)
+
+    sut.fetchForecast(params: params) { result in
       do {
         let responseData = try result.get()
         XCTAssertEqual(responseData, expectedResponseData)
@@ -47,6 +55,14 @@ final class WeatherServiceTests: XCTestCase {
     }
 
     wait(for: [expectation], timeout: 0.1)
+  }
+
+  private func buildParams(lat: Double, lon: Double) -> [String: String?] {
+
+    return [
+      "lat": "\(lat)",
+      "lon": "\(lon)"
+    ]
   }
 }
 

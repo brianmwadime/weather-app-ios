@@ -36,7 +36,7 @@ final class LocationService: NSObject, ObservableObject, CLLocationManagerDelega
   func start() {
     locationManager.delegate = self
 
-    locationManager.requestLocation()
+    locationManager.requestWhenInUseAuthorization()
     locationManager.startUpdatingLocation()
   }
 
@@ -54,6 +54,7 @@ final class LocationService: NSObject, ObservableObject, CLLocationManagerDelega
       }
     } else if manager.authorizationStatus == .denied || manager.authorizationStatus == .restricted {
       status = .denied
+      lastLocation = nil
     } else if manager.authorizationStatus == .notDetermined {
       status = .waiting
       manager.requestWhenInUseAuthorization()
@@ -85,15 +86,8 @@ final class LocationService: NSObject, ObservableObject, CLLocationManagerDelega
     let geocoder = CLGeocoder()
 
     geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
-      if let _ = error {
-        self.lastLocation = location
-        self.status = .available
-      }
-
-      if let _ = placemarks {
-        self.lastLocation = location
-        self.status = .available
-      }
+      self.lastLocation = location
+      self.status = .available
     }
   }
 

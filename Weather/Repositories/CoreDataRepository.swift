@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class CoreDataRepository: RepositoryType {
+final class CoreDataRepository: RepositoryType {
 
   var context: NSManagedObjectContext { persistentContainer.viewContext }
 

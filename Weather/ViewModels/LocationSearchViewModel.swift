@@ -10,7 +10,7 @@ import MapKit
 
 /// Location searching viewmodel
 ///
-class LocationSearchViewModel: NSObject, ObservableObject, MKLocalSearchCompleterDelegate {
+final class LocationSearchViewModel: NSObject, ObservableObject, MKLocalSearchCompleterDelegate {
   /// Locations returned from search
   ///
   @Published var locations: [String] = [String]()

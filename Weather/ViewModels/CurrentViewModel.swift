@@ -8,7 +8,7 @@ import Foundation
 import CoreLocation
 import SwiftUI
 
-class CurrentViewModel: ObservableObject {
+final class CurrentViewModel: ObservableObject {
   @Published var current: Current? = nil
   @Published var error: Error?
 
@@ -75,7 +75,13 @@ class CurrentViewModel: ObservableObject {
     let currentCoordinates = Current.Coordinates(
       lat: coordinates.latitude,
       lon: coordinates.longitude)
-    weatherService.fetchCurrent(coordinates: currentCoordinates) { result in
+    let params = [
+      "lat": "\(coordinates.latitude)",
+      "lon": "\(coordinates.latitude)",
+      "appid": Constants.openWeatherMapApi,
+      "units": Constants.UnitsType.getUnitsName(by: UserDefaults.standard.integer(forKey: "units"))
+    ]
+    weatherService.fetchCurrent(params: params) { result in
       switch result {
         case .success(let current):
           self.saveToDatabase(current)

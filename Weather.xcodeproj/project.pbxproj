@@ -49,7 +49,6 @@
 		7585FF36296500170025058B /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7585FF35296500170025058B /* LocationService.swift */; };
 		7585FF382965008A0025058B /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7585FF372965008A0025058B /* StringExtensions.swift */; };
 		75AF91D12968D78B00EA4C54 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AF91D02968D78B00EA4C54 /* PersistentContainer.swift */; };
-		75AF91D32969FC0900EA4C54 /* MapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AF91D22969FC0900EA4C54 /* MapAnnotationView.swift */; };
 		75AF91D9296AEC0500EA4C54 /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AF91D8296AEC0500EA4C54 /* MapAnnotation.swift */; };
 		75AF91DD296B094200EA4C54 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AF91DC296B094200EA4C54 /* LocationManager.swift */; };
 		75AF91DF296B21E900EA4C54 /* MapAnnotationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AF91DE296B21E900EA4C54 /* MapAnnotationTests.swift */; };
@@ -165,7 +164,6 @@
 		7585FF35296500170025058B /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		7585FF372965008A0025058B /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		75AF91D02968D78B00EA4C54 /* PersistentContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentContainer.swift; sourceTree = "<group>"; };
-		75AF91D22969FC0900EA4C54 /* MapAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationView.swift; sourceTree = "<group>"; };
 		75AF91D8296AEC0500EA4C54 /* MapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		75AF91DC296B094200EA4C54 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		75AF91DE296B21E900EA4C54 /* MapAnnotationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationTests.swift; sourceTree = "<group>"; };
@@ -347,7 +345,6 @@
 				7512A3F62965B6B7005D7311 /* LocationSearchView.swift */,
 				75F3B1382966E4B1008B0D7A /* FavoriteCardView.swift */,
 				7505240B29687C34001928C4 /* MapView.swift */,
-				75AF91D22969FC0900EA4C54 /* MapAnnotationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -746,7 +743,6 @@
 				75C7C2412972B89F004E266D /* WeatherCurrent+CoreDataClass.swift in Sources */,
 				75C7C22D2971F5AD004E266D /* ImageExtensions.swift in Sources */,
 				7512A3F72965B6B7005D7311 /* LocationSearchView.swift in Sources */,
-				75AF91D32969FC0900EA4C54 /* MapAnnotationView.swift in Sources */,
 				75B12DA52962043000BD905B /* DoubleExtensions.swift in Sources */,
 				75C7C2402972B89F004E266D /* CurrentWeather+CoreDataProperties.swift in Sources */,
 				75AFC511296449A200CE8F9C /* DefaultNetworkService.swift in Sources */,
@@ -967,7 +963,6 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UIUserInterfaceStyle = dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1003,7 +998,6 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UIUserInterfaceStyle = dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

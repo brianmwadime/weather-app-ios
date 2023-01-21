@@ -13,8 +13,7 @@ import CoreData
 extension XCTestCase {
 
   func getCoreDataContext() -> NSManagedObjectContext {
-    var sut: CoreDataRepository!
-    sut = CoreDataRepository()
+    let sut = CoreDataRepository()
     sut.persistentContainer = {
       let container = NSPersistentContainer(name: "Weather")
 
