@@ -24,7 +24,6 @@ struct LocationSearchView: View {
               VStack(alignment: .leading) {
                 Text(term)
                   .font(.headline)
-                  .foregroundColor(Color.white)
               }
               .listRowBackground(Color.clear)
               .listRowSeparator(.hidden)
@@ -41,12 +40,10 @@ struct LocationSearchView: View {
           case (let isSearching, let locations) where isSearching == true && locations.isEmpty:
             VStack(alignment: .center, spacing: 0) {
               Text("no_results".localized())
-                .foregroundColor(Color.white)
                 .font(.headline)
                 .padding(.horizontal)
               Text("no_results_description \(query)")
                 .multilineTextAlignment(.center)
-                .foregroundColor(Color.white)
                 .font(.body)
                 .padding(.horizontal)
             }
@@ -54,12 +51,10 @@ struct LocationSearchView: View {
             if let error = searchModel.error {
               VStack(alignment: .center, spacing: 0) {
                 Text("no_search".localized())
-                  .foregroundColor(Color.white)
                   .font(.title)
                   .padding(.horizontal)
                 Text(error.localizedDescription)
                   .multilineTextAlignment(.center)
-                  .foregroundColor(Color.white)
                   .font(.body)
                   .padding(.horizontal)
               }

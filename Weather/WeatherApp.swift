@@ -35,7 +35,7 @@ struct WeatherApp: App {
       .environmentObject(locationService)
       .environmentObject(connectivity)
       .environment(\.appBackgroundColor, $backgroundColor)
-      .preferredColorScheme(.dark)
+//      .preferredColorScheme(.dark)
     }
     // use onChange to detect when the scenePhase changes and when the app becomes
     // active, so check for location permissions.
@@ -58,13 +58,13 @@ struct WeatherApp: App {
 
     appearance.configureWithTransparentBackground()
 
-    appearance.largeTitleTextAttributes = [
-      NSAttributedString.Key.foregroundColor: UIColor.white
-    ]
-
-    appearance.titleTextAttributes = [
-      NSAttributedString.Key.foregroundColor: UIColor.white
-    ]
+//    appearance.largeTitleTextAttributes = [
+//      NSAttributedString.Key.foregroundColor: UIColor.white
+//    ]
+//
+//    appearance.titleTextAttributes = [
+//      NSAttributedString.Key.foregroundColor: UIColor.white
+//    ]
 
     appearance.shadowImage = UIImage()
     appearance.shadowColor = .clear
@@ -73,9 +73,9 @@ struct WeatherApp: App {
     UINavigationBar.appearance().standardAppearance = appearance
     UINavigationBar.appearance().compactScrollEdgeAppearance = appearance
 
-    UINavigationBar.appearance().tintColor = .white
-    UINavigationBar.appearance().barTintColor = .white
+//    UINavigationBar.appearance().tintColor = .white
+//    UINavigationBar.appearance().barTintColor = .white
 
-    UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
+//    UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
   }
 }

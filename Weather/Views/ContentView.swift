@@ -16,6 +16,7 @@ struct ContentView: View {
   @StateObject var favoritesViewModel: FavoritesViewModel
   @State var isFavoriteLocations: Bool = false
   @EnvironmentObject var locationService: LocationService
+  @Environment(\.colorScheme) var colorScheme
   @Environment(\.openURL) var openURL
   @Environment(\.appBackgroundColor) var appBackgroundColor
 
@@ -67,7 +68,7 @@ struct ContentView: View {
       .navigationTitle("")
       .animation(Animation.easeInOut.speed(0.25), value: appBackgroundColor.wrappedValue)
     }
-    .accentColor(.white)
+    .accentColor(colorScheme == .dark ? .white : .black)
   }
 
   private var weatherView: some View {
