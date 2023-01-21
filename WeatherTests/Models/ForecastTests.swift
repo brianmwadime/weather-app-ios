@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import CoreData
 @testable import Weather
 
 final class ForecastTests: XCTestCase {
@@ -34,6 +35,11 @@ final class ForecastTests: XCTestCase {
   func test_forecast_has_fiveDayForcast() {
     XCTAssertNotNil(forecast.fiveDayForcast)
   }
+
+  func test_CurrentWind_returns_empty() {
+    XCTAssertNotNil(Forecast.empty())
+  }
+
 }
 
 private extension ForecastTests {
