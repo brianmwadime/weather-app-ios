@@ -20,7 +20,7 @@ final class MockWeatherService: WeatherServiceProtocol {
     completion(forecastResult)
   }
 
-  func buildURL(base: String, params: [String : String?]) -> URL? {
+  func buildURL(base: String, params: [String: String?]) -> URL? {
     return URLComponents(string: Constants.baseURL)?.url
   }
 }
