@@ -47,7 +47,6 @@ struct WeatherApp: App {
         case .inactive:
           self.locationService.stop()
         default:
-          // ignore
           break
       }
     }

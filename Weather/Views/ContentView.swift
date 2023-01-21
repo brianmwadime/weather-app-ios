@@ -22,26 +22,39 @@ struct ContentView: View {
   var body: some View {
     NavigationView {
       ZStack {
-        if locationService.status == .waiting {
-          ProgressView()
-        } else {
-          appBackgroundColor.wrappedValue
-            .ignoresSafeArea()
-          ScrollView {
-            VStack {
-              CurrentView(vm: currentViewModel)
-              Spacer()
-              ForecastListView(vm: forecastViewModel)
+        appBackgroundColor.wrappedValue
+          .ignoresSafeArea()
+      switch locationService.status {
+          case .waiting:
+            ProgressView()
+          case .denied:
+            if currentViewModel.current != nil {
+              weatherView
+            } else {
+              SelectLocationContent(action: {
+                openURL(URL(string: UIApplication.openSettingsURLString)!)
+              })
             }
-          }
-          .edgesIgnoringSafeArea(.top)
+          case .available:
+            if currentViewModel.current != nil {
+              weatherView
+            } else {
+              SelectLocationContent(action: {
+                openURL(URL(string: UIApplication.openSettingsURLString)!)
+              })
+            }
         }
-
-//        if locationService.status == .denied && currentViewModel.current == nil {
-//          SelectLocationContent(action: {
-//            openURL(URL(string: UIApplication.openSettingsURLString)!)
-//          })
-//        }
+      }
+      .onChange(of: locationService.lastLocation, perform: { newValue in
+        currentViewModel.fetchCurrent(for: newValue)
+        forecastViewModel.fetchForecast(for: newValue)
+      })
+      .onChange(of: currentViewModel.condition, perform: { newValue in
+        appBackgroundColor.wrappedValue = Color(newValue)
+      })
+      .onAppear {
+        currentViewModel.fetchCurrent(for: locationService.lastLocation)
+        forecastViewModel.fetchForecast(for: locationService.lastLocation)
       }
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
@@ -55,6 +68,17 @@ struct ContentView: View {
       .animation(Animation.easeInOut.speed(0.25), value: appBackgroundColor.wrappedValue)
     }
     .accentColor(.white)
+  }
+
+  private var weatherView: some View {
+    ScrollView {
+      VStack {
+        CurrentView(vm: currentViewModel)
+        Spacer()
+        ForecastListView(vm: forecastViewModel)
+      }
+    }
+    .edgesIgnoringSafeArea(.top)
   }
 
   private var addButton: some View {

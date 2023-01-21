@@ -50,15 +50,6 @@ struct CurrentView: View {
       }
       TemperatureView(main: vm.current?.main)
     }
-    .onChange(of: vm.condition, perform: { newValue in
-        appBackgroundColor.wrappedValue = Color(newValue)
-    })
-    .onChange(of: locationService.lastLocation, perform: { newValue in
-      vm.fetchCurrent(for: newValue)
-    })
-    .onAppear {
-//      vm.fetchCurrent(for: locationService.lastLocation)
-    }
     .animation(Animation.easeInOut.speed(0.25), value: appBackgroundColor.wrappedValue)
     .edgesIgnoringSafeArea(.top)
   }
